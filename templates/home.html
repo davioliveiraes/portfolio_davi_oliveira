@@ -27,12 +27,12 @@
                         <div class="line"></div>
                         <h4>{{ about.short_description }}</h4>
                         <p>{{ about.description }}</p>
-                        <a href="images/about/cv.jpg" download>Download CV&nbsp;<i class="fa fa-download"></i></a>
+                        <a href="media/about/cv-davi-oliveira.pdf" download>Download CV&nbsp;<i class="fa fa-download"></i></a>
                     </div>
                 </div>
                 <div class="col-md-5 visible-md visible-lg wow fadeInDown" data-wow-delay="0.6s">
                     <div class="profile">
-                        <img src="{{ about.image.url }}" alt="Profile image" class="img-responsive">
+                        <img src="{{ about.image.url }}" alt="Profile image" class="img-responsive" style="width: 100%; height: auto; border-radius: 5%">
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
 
                     <div class="col-md-4 col-sm-4">
                         <div class="single-service wow fadeInDown" data-wow-delay="0.2s">
-                            <i class="icon icon-wallet"></i>
+                            <i class="icon-laptop"></i>
                             <h2>{{ service.name }}</h2>
                             <p>{{ service.description }}</p>
                         </div>
