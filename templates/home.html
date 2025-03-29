@@ -39,4 +39,126 @@
         </div>
     </div>
 
+    <div id="services" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-header text-center">
+                        <h2>Tecnologias</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for service in services %}
+
+                    <div class="col-md-4 col-sm-4">
+                        <div class="single-service wow fadeInDown" data-wow-delay="0.2s">
+                            <i class="icon icon-wallet"></i>
+                            <h2>{{ service.name }}</h2>
+                            <p>{{ service.description }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div id="portfolio" class="portfolio-area section-padding">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-header">
+                        <h2>Projetos</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for work in works %}
+                    <div class="col-md-4 col-sm-4 col-xs-12 no-padding">
+                        <div class="gallery-items">
+                            <a class="view img" href="{{ work.image.url }}">
+                                <img src="{{ work.image.url }}" alt="work image">
+                            </a>
+
+                            <div class="gallery-text">
+                                <h2>{{ work.title }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="invitation-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="single-invite text-center">
+                    <h2>Você tem algum projeto que precisa ser feito?</h2>
+                    <p>Ofereço serviços de desenvolvimento de software como freelancer, criando soluções em Python e Nodejs para web, automações e APIs. Estou em busca da minha primeira oportunidade como programador, entre em contato para transformar a sua ideia em realidade.</p>
+                    <a href="#contact" class="my-btn-3">Começa aqui</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact" class="contact-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-header text-center">
+                        <h2>Entre em contato comigo.</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 box-contact-form">
+
+                    <form id="contact-form" method="post" action="#">
+
+                        <div class="messages"></div>
+
+                        <div class="controls">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group wow fadeInDown" data-wow-delay="0.2s">
+                                        <input id="form_name" type="text" name="name" class="form-control"
+                                               placeholder="Enter your full name *" required="required"
+                                               data-error="Fullname is required.">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group wow fadeInDown" data-wow-delay="0.4s">
+                                        <input id="form_email" type="email" name="email" class="form-control"
+                                               placeholder="Enter your email *" required="required"
+                                               data-error="Valid email is required.">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group wow fadeInUp" data-wow-delay="0.6s">
+                                        <textarea id="form_message" name="message" class="form-control"
+                                                  placeholder="Your Message *" rows="4" required="required"
+                                                  data-error="Leave a message for me"></textarea>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="btn btn-send" value="">Enviar Mensagem</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
