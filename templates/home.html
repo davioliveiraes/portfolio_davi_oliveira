@@ -114,8 +114,8 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 box-contact-form">
 
-                    <form id="contact-form" method="post" action="#">
-
+                    <form id="contact-form" method="post" action="{% url 'contato' %}">
+                        {% csrf_token %}
                         <div class="messages"></div>
 
                         <div class="controls">
@@ -124,16 +124,16 @@
                                 <div class="col-md-6">
                                     <div class="form-group wow fadeInDown" data-wow-delay="0.2s">
                                         <input id="form_name" type="text" name="name" class="form-control"
-                                               placeholder="Enter your full name *" required="required"
-                                               data-error="Fullname is required.">
+                                               placeholder="Diga o seu nome completo *" required="required"
+                                               data-error="O nome completo é necessário.">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group wow fadeInDown" data-wow-delay="0.4s">
                                         <input id="form_email" type="email" name="email" class="form-control"
-                                               placeholder="Enter your email *" required="required"
-                                               data-error="Valid email is required.">
+                                               placeholder="Digite o seu email *" required="required"
+                                               data-error="É necessário um email válido.">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
@@ -142,14 +142,21 @@
                                 <div class="col-md-12">
                                     <div class="form-group wow fadeInUp" data-wow-delay="0.6s">
                                         <textarea id="form_message" name="message" class="form-control"
-                                                  placeholder="Your Message *" rows="4" required="required"
-                                                  data-error="Leave a message for me"></textarea>
+                                                  placeholder="Sua mensagem *" rows="4" required="required"
+                                                  data-error="Deixe uma mensagem para mim"></textarea>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <button class="btn btn-send" value="">Enviar Mensagem</button>
+                                    <button class="btn btn-send" type="submit">Enviar Mensagem</button>
                                 </div>
+                                {% if message %}
+                                    <ul class="messages">
+                                        {% for message in messages %}
+                                            <li>{{ message }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </div>
                         </div>
 
@@ -160,5 +167,26 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById("contact-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+    
+        let formData = new FormData(this);
+
+        fetch("{% url 'contato' %}", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert("Mensagem enviada com sucesso!");
+        })
+        .catch(error => {
+            alert("Erro ao enviar mensagem.");
+            console.error(error);
+            });
+        });
+    </script>
 
 {% endblock %}
