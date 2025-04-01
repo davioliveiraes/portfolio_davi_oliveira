@@ -22,6 +22,7 @@ class Service(models.Model):
 class RecentWork(models.Model):
    title = models.CharField(max_length=100, verbose_name="Work title")
    image = models.ImageField(upload_to="works")
+   github_link = models.URLField(verbose_name="GitHub Repository", blank=True, null=True)
 
    def __str__(self):
       return self.title

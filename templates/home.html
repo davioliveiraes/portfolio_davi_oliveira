@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="welcome-text">
-                        <div class="name-area wow fadeInDown" data-wow-delay="0.2s">Olá, meu nome é Davi Oliveira</div>
+                        <div class="name-area wow fadeInDown" data-wow-delay="0.2s">Olá, meu nome é Davi de Lima Oliveira</div>
                         <h1 class="wow fadeInDown" data-wow-delay="0.4s">Graduando em Engenharia de Software</h1>
                         <a href="#about" class="my-btn-1 wow fadeInDown" data-wow-delay="0.6s">Saiba mais</a>
                         <a href="#contact" class="my-btn-2 wow fadeInDown" data-wow-delay="0.8s">Entre em contato</a>
@@ -76,9 +76,11 @@
                 {% for work in works %}
                     <div class="col-md-4 col-sm-4 col-xs-12 no-padding">
                         <div class="gallery-items">
-                            <a class="view img" href="{{ work.image.url }}">
+                            <a class="view img" href="{{ work.image.url }}" target="_blank">
                                 <img src="{{ work.image.url }}" alt="work image">
                             </a>
+                            <p><a href="{{ work.github_link }}" target="_blank">VER REPOSITÓRIO</a></p>
+
 
                             <div class="gallery-text">
                                 <h2>{{ work.title }}</h2>
@@ -95,7 +97,7 @@
             <div class="row">
                 <div class="single-invite text-center">
                     <h2>Você tem algum projeto que precisa ser feito?</h2>
-                    <p>Ofereço serviços de desenvolvimento de software como freelancer, criando soluções em Python e Nodejs para web, automações e APIs. Estou em busca da minha primeira oportunidade como programador, entre em contato para transformar a sua ideia em realidade.</p>
+                    <p>Estou apto a participar de projetos freelancer e em busca da minha primeira oportunidade no mercado de programação. Entre em contato para transformar sua ideia em realidade.</p>
                     <a href="#contact" class="my-btn-3">Começa aqui</a>
                 </div>
             </div>
