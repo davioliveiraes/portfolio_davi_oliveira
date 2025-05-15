@@ -3,7 +3,7 @@ from django.db import models
 class About(models.Model):
    short_description = models.TextField()
    description = models.TextField()
-   image = models.ImageField(upload_to="about")
+   image = models.ImageField(upload_to="about/")
 
    class Meta:
       verbose_name = "About me"
