@@ -1,9 +1,9 @@
-<h1 align="center">Portfolio - Davi Oliveira</h1>
+<h1 align="center">Portfólio - Davi Oliveira</h1>
 
 <p align="center">
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-principais-bibliotecas">Principais Bibliotecas</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 
 ## 🚀 Tecnologias
@@ -37,4 +37,4 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-  O sistema de portfolio que desvolvi é uma aplicação web completa contruída sobre o framework Django, aproveitando a robustez e flexibilidade que Python oferece. A plataforma permite gerenciar e exibir sobre mim, habilidades técnicas (Tecnologias), projetos feitos, informações de contato e prestação de serviço.
+  O sistema de portfolio que desvolvi é uma aplicação web completa contruída sobre o framework Django, aproveitando a robustez e flexibilidade que Python oferece. A plataforma permite gerenciar e exibir sobre mim, habilidades técnicas (Tecnologias), projetos feitos, informações de contato e prestação de serviço. Acesse: https://portfolio-davi-oliveira.onrender.com/
