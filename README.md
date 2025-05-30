@@ -37,4 +37,4 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-  O sistema de portfolio que desvolvi é uma aplicação web completa contruída sobre o framework Django, aproveitando a robustez e flexibilidade que Python oferece. A plataforma permite gerenciar e exibir sobre mim, habilidades técnicas (Tecnologias), projetos feitos, informações de contato e prestação de serviço. Acesse: https://portfolio-davi-oliveira.onrender.com/
+  O sistema de portfolio que desvolvi é uma aplicação web completa contruída sobre o framework Django, aproveitando a robustez e flexibilidade que Python oferece. A plataforma permite gerenciar e exibir sobre mim, habilidades técnicas (Tecnologias), projetos feitos, informações de contato e prestação de serviço. Acesse: <a href="https://portfolio-davi-oliveira.onrender.com/" target="__blank">Link Portfólio.</a>
