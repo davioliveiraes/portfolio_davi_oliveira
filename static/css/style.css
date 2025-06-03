@@ -439,14 +439,56 @@ h6 {
 
 /*--- 7. Portfolio starts css starts---*/
 
+/*--- 7. Portfolio starts css starts---*/
+
+.portfolio-area {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 120px 0;
+}
+
+/* Container com espaçamento adequado */
+.portfolio-area .container-fluid {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+/* Row com margem negativa para compensar o padding dos cols */
+.portfolio-area .row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+/* Colunas com padding interno */
+.portfolio-area .col-md-4,
+.portfolio-area .col-sm-4,
+.portfolio-area .col-xs-12 {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 30px;
+}
+
 .gallery-items {
     position: relative;
     text-align: center;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: #fff;
+    height: 100%; /* Para manter altura uniforme */
+}
+
+.gallery-items:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
 }
 
 .gallery-items .img {
     display: block;
     position: relative;
+    overflow: hidden;
+    border-radius: 15px 15px 0 0;
 }
 
 .gallery-items .img:before {
@@ -457,106 +499,220 @@ h6 {
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(255, 69, 0, 0.7); /* Vermelho/laranja */
+    background: linear-gradient(45deg, rgba(255, 0, 0, 0.8), rgba(255, 126, 96, 0.8));
     opacity: 0;
-    transition: .7s;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 2;
 }
 
 .gallery-items .img img {
     width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-items:hover .img img {
+    transform: scale(1.1);
 }
 
 .gallery-items:hover .img::before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    bottom: 10px;
-    left: 10px;
     opacity: 1;
 }
 
 .gallery-items:hover .gallery-text {
     opacity: 1;
-    color: orangered; /* Muda para vermelho/laranja ao passar o mouse */
-    transition: .9s;
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .gallery-text {
     opacity: 0;
-    color: black; /* Texto preto por padrão */
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0.8);
     max-width: 80%;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    z-index: 3;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.gallery-text i {
-    font-size: 2em;
-    cursor: pointer;
-}
-
-.gallery-text h3 {
-    text-transform: uppercase;
-    margin-bottom: 5px;
-    padding-top: 15px;
-    font-size: 17px;
-    letter-spacing: 2px;
-    color: black; /* Preto por padrão */
-}
-
-.gallery-text h3:after {
-    height: 3px;
-}
-
-/* Ajuste para o título dentro da imagem */
 .gallery-text h2 {
-    font-size: 16px;
-    letter-spacing: 5px;
+    font-size: 18px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    font-weight: bold;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: slideInUp 0.6s ease forwards;
 }
 
 /* Estilização do botão "VER REPOSITÓRIO" */
 .gallery-items p {
-    margin-top: 10px;
+    margin: 0;
+    padding: 20px;
+    background: #fff;
+    border-radius: 0 0 15px 15px;
 }
 
 .gallery-items p a {
     display: inline-block;
-    padding: 10px 15px;
-    background-color: black; /* Cor padrão preta */
+    padding: 12px 25px;
+    background: linear-gradient(45deg, #333, #555);
     color: white;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 12px;
     text-transform: uppercase;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
+    border-radius: 25px;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Mudança de cor no hover */
+.gallery-items p a:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #FF0000, #FF7E60);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.gallery-items p a:hover:before {
+    left: 0;
+}
+
 .gallery-items p a:hover {
-    background-color: orangered;
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.3);
 }
 
-/* Ajuste na descrição do portfólio */
-.portfolio-mini-desc p {
-    margin: 0;
-    text-transform: capitalize;
-    font-size: 14px;
-    letter-spacing: .05em;
-    font-weight: 300;
+/* Animações */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
+/* Responsividade melhorada */
+@media (max-width: 1200px) {
+    .portfolio-area .container-fluid {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
 
+@media (max-width: 768px) {
+    .portfolio-area .container-fluid {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .portfolio-area .col-md-4,
+    .portfolio-area .col-sm-4,
+    .portfolio-area .col-xs-12 {
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .gallery-items .img img {
+        height: 200px;
+    }
+    
+    .gallery-text h2 {
+        font-size: 16px;
+        letter-spacing: 1px;
+    }
+    
+    .gallery-items p a {
+        padding: 10px 20px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .portfolio-area .container-fluid {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .portfolio-area .col-md-4,
+    .portfolio-area .col-sm-4,
+    .portfolio-area .col-xs-12 {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    
+    .gallery-items .img img {
+        height: 180px;
+    }
+    
+    .gallery-text h2 {
+        font-size: 14px;
+    }
+}
+
+/* Section header (mantendo o estilo corrigido) */
+.section-header {
+    margin-bottom: 100px;
+    text-align: center;
+    position: relative;
+}
+
+.section-header h2 {
+    font-size: 27px;
+    line-height: 37px;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    font-weight: 600;
+    color: #333333;
+    position: relative;
+    display: inline-block;
+}
+
+.section-header h2::before {
+    position: absolute;
+    content: "";
+    height: 2px;
+    width: 80px;
+    left: 50%;
+    bottom: -15px;
+    background: #FF0000;
+    margin-left: -40px;
+    z-index: 1;
+}
+
+.section-header h2::after {
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    left: 50%;
+    bottom: -22px;
+    background: #FF0000;
+    margin-left: -7px;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    z-index: 2;
+}
 
 /*---portfolio ends---*/
 
