@@ -12,7 +12,7 @@
   
   <p>
     <a href="#-sobre-o-projeto">Sobre</a> •
-    <a href="#-tecnologias">Tecnologias</a> •
+    <a href="#️-tecnologias">Tecnologias</a> •
     <a href="#-principais-dependências">Principais Dependências</a> •
     <a href="#-funcionalidades">Funcionalidades</a> •
     <a href="#-deploy">Deploy</a> •
