@@ -13,8 +13,11 @@
   <p>
     <a href="#-sobre-o-projeto">Sobre</a> •
     <a href="#-tecnologias">Tecnologias</a> •
+    <a href="#-principais-dependências">Principais Dependências</a> •
     <a href="#-funcionalidades">Funcionalidades</a> •
-    <a href="#-deploy">Deploy</a> 
+    <a href="#-deploy">Deploy</a> •
+    <a href="#-estrutura-do-projeto">Estrutura do Projeto</a> •
+    <a href="#-contribuição">Contribuição</a>
   </p>
 
   <a href="https://portfolio-davi-oliveira.onrender.com/" target="_blank">
