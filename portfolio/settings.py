@@ -2,13 +2,15 @@ from pathlib import Path
 
 from decouple import Csv, config
 
+# Build paths inside the project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Security
 SECRET_KEY = config("SECRET_KEY")
-DEBUG = config("DEBUG", dafault=False, cast=bool)
+DEBUG = config("DEBUG", default=False, cast=bool)
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="", cast=Csv())
 
-# Apps
+# Application definition
 DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -20,6 +22,10 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     "debug_toolbar",
+]
+
+LOCAL_APPS = [
+    "apps.core",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
