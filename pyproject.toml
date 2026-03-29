@@ -1,0 +1,40 @@
+[tool.black]
+line-length = 88
+target-version = ['py311', 'py312']
+exclude = '''
+/(
+    \.venv
+  | venv
+  | migrations
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 88
+known_django = "django"
+known_first_party = "portfolio,apps"
+sections = ["FUTURE", "STDLIB", "DJANGO", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+skip = [".venv", "venv", "migrations"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "portfolio.settings"
+python_files = ["test_*.py", "*_test.py"]
+addopts = ["-ra", "--strict-markers"]
+testpaths = ["apps"]
+
+[tool.pylint.master]
+ignore = ["migrations", "venv"]
+load-plugins = ["pylint_django"]
+django-settings-module = "portfolio.settings"
+
+[tool.pylint.messages_control]
+disable = [
+    "missing-module-docstring",
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "too-few-public-methods",
+]
+
+[tool.pylint.format]
+max-line-length = 88

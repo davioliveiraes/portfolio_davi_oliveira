@@ -1,0 +1,28 @@
+# Core
+Django>=5.1,<5.2
+python-decouple>=3.8
+
+# Database
+psycopg2-binary>=2.9
+
+# Production Server
+gunicorn>=21.0
+
+# Code Quality
+pylint>=3.0
+black>=24.0
+isort>=5.13
+
+# Pre-commit
+pre-commit>=3.6
+
+# Testing
+pytest>=8.0
+pytest-django>=4.8
+pytest-cov>=4.1
+
+# Debug
+django-debug-toolbar>=4.3
+
+# Production extras
+whitenoise>=6.6
