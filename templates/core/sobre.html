@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Sobre - Davi Oliveira{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <div class="quote-highlight">
+        <p>"Código limpo, soluções reais, impacto concreto."</p>
+    </div>
+
+    <div class="about-layout">
+        <div class="about-photo">
+            <img src="{% static 'images/profile.jpg' %}" alt="Foto de Davi Oliveira">
+        </div>
+        <div class="about-bio">
+            <h1>Sobre Mim</h1>
+            <p>
+                Sou Desenvolvedor Backend com foco em Python e Django. Tenho paixão por construir
+                sistemas robustos, escaláveis e bem estruturados que resolvem problemas reais.
+            </p>
+            <p>
+                Minha jornada na programação começou pela curiosidade de entender como as coisas
+                funcionam por trás das telas. Desde então, venho me aprofundando em boas práticas
+                de desenvolvimento, arquitetura de software e DevOps.
+            </p>
+            <p>
+                Quando não estou codando, estou estudando novas tecnologias, contribuindo com
+                projetos open source ou compartilhando conhecimento com a comunidade.
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}

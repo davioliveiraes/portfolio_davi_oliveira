@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Contato - Davi Oliveira{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <div class="section-header">
+        <h1>Contato</h1>
+        <p>Vamos conversar sobre seu próximo projeto</p>
+        <div class="section-divider"></div>
+    </div>
+
+    <div class="contact-layout">
+        <div class="contact-form-wrapper">
+            <form class="contact-form" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Nome</label>
+                    <input type="text" id="name" name="name" placeholder="Seu nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensagem</label>
+                    <textarea id="message" name="message" rows="6" placeholder="Escreva sua mensagem..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Enviar Mensagem</button>
+            </form>
+        </div>
+
+        <div class="contact-info">
+            <h2>Informações de Contato</h2>
+            <div class="info-item">
+                <i class="fas fa-envelope"></i>
+                <div>
+                    <h3>Email</h3>
+                    <a href="mailto:seu@email.com">seu@email.com</a>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                    <h3>Localização</h3>
+                    <p>Brasil</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="fab fa-github"></i>
+                <div>
+                    <h3>GitHub</h3>
+                    <a href="https://github.com/seu-usuario" target="_blank" rel="noopener">github.com/seu-usuario</a>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="fab fa-linkedin-in"></i>
+                <div>
+                    <h3>LinkedIn</h3>
+                    <a href="https://linkedin.com/in/seu-usuario" target="_blank" rel="noopener">linkedin.com/in/seu-usuario</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

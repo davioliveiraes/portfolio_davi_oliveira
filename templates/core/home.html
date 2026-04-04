@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Davi Oliveira - Desenvolvedor Backend Python{% endblock %}
+
+{% block content %}
+<section id="hero">
+    <div class="hero-content">
+        <div class="hero-photo">
+            <img src="{% static 'images/profile.jpg' %}" alt="Foto de Davi Oliveira">
+        </div>
+        <div class="hero-text">
+            <p class="greeting">Olá, bem-vindo ao meu portfólio</p>
+            <h1>Eu sou <span class="highlight">Davi Oliveira</span></h1>
+            <p class="subtitle">Desenvolvedor Backend focado em criar soluções eficientes e escaláveis com Python e Django.</p>
+            <div class="tech-stack">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Django</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">Docker</span>
+                <span class="tech-tag">PostgreSQL</span>
+            </div>
+            <div class="cta-buttons">
+                <a href="{% url 'core:projetos' %}" class="btn btn-primary">Ver Projetos</a>
+                <a href="{% url 'core:contato' %}" class="btn btn-secondary">Entrar em Contato</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

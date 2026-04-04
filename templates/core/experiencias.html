@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Experiências - Davi Oliveira{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <div class="section-header">
+        <h1>Experiências Profissionais</h1>
+        <p>Minha trajetória profissional</p>
+        <div class="section-divider"></div>
+    </div>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <div class="timeline-header">
+                    <h3>Desenvolvedor Backend</h3>
+                    <span class="timeline-company">Empresa XYZ</span>
+                </div>
+                <span class="timeline-period"><i class="far fa-calendar-alt"></i> Jan 2024 - Presente</span>
+                <ul class="timeline-details">
+                    <li>Desenvolvimento de APIs RESTful com Django e FastAPI</li>
+                    <li>Implementação de testes automatizados com Pytest</li>
+                    <li>Containerização de aplicações com Docker</li>
+                    <li>Manutenção e otimização de banco de dados PostgreSQL</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <div class="timeline-header">
+                    <h3>Desenvolvedor Python Jr.</h3>
+                    <span class="timeline-company">Empresa ABC</span>
+                </div>
+                <span class="timeline-period"><i class="far fa-calendar-alt"></i> Jun 2023 - Dez 2023</span>
+                <ul class="timeline-details">
+                    <li>Desenvolvimento de scripts de automação em Python</li>
+                    <li>Integração de sistemas via APIs REST</li>
+                    <li>Colaboração em projetos utilizando Git e metodologias ágeis</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
