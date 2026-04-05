@@ -1,4 +1,8 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.shortcuts import redirect, render
+
+from .forms import ContactForm
 
 
 def home(request):
@@ -26,4 +30,27 @@ def formacao(request):
 
 
 def contato(request):
-    return render(request, "core/contato.html")
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            send_mail(
+                subject=f"[Portfólio] Nova mensagem de {form.cleaned_data['name']}",
+                message=f"Nome: {form.cleaned_data['name']}\n"
+                f"Email: {form.cleaned_data['email']}\n\n"
+                f"{form.cleaned_data['message']}",
+                from_email=None,
+                recipient_list=["seu@email.com"],
+                fail_silently=True,
+            )
+            messages.success(
+                request, "Mensagem enviada com sucesso! Obrigado pelo contato."
+            )
+            return redirect("core:contato")
+        else:
+            messages.error(
+                request, "Erro ao enviar. Verifique os campos e tente novamente."
+            )
+    else:
+        form = ContactForm()
+    return render(request, "core/contato.html", {"form": form})

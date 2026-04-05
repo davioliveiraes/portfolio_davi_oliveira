@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Davi Oliveira - Desenvolvedor Backend Python{% endblock %}
+{% block title %}Davi Oliveira{% endblock %}
 
 {% block content %}
 <section id="hero">
@@ -12,17 +12,19 @@
         <div class="hero-text">
             <p class="greeting">Olá, bem-vindo ao meu portfólio</p>
             <h1>Eu sou <span class="highlight">Davi Oliveira</span></h1>
-            <p class="subtitle">Desenvolvedor Backend focado em criar soluções eficientes e escaláveis com Python e Django.</p>
+            <p class="subtitle">Desenvolvedor Backend Python com graduação em Engenharia de Software (UNOPAR, 2025) e formação técnica em Informática. Experiência prática no desenvolvimento de APIs RESTful com FastAPI, Flask e Django, aplicando Clean Architecture, SOLID e testes automatizados com Pytest. Atuo com PostgreSQL, Docker e Git no dia a dia, e tenho interesse crescente na integração de Inteligência Artificial em sistemas backend — automação de processos, LLMs e soluções inteligentes orientadas a negócios.</p>
             <div class="tech-stack">
                 <span class="tech-tag">Python</span>
                 <span class="tech-tag">Django</span>
                 <span class="tech-tag">FastAPI</span>
                 <span class="tech-tag">Docker</span>
                 <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">Inteligência Artificial</span>
             </div>
             <div class="cta-buttons">
                 <a href="{% url 'core:projetos' %}" class="btn btn-primary">Ver Projetos</a>
                 <a href="{% url 'core:contato' %}" class="btn btn-secondary">Entrar em Contato</a>
+                <a href="{% static 'docs/curriculo.pdf' %}" class="btn btn-outline" download><i class="fas fa-download"></i> Baixar Currículo</a>
             </div>
         </div>
     </div>
