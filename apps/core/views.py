@@ -39,9 +39,9 @@ def contato(request):
                 message=f"Nome: {form.cleaned_data['name']}\n"
                 f"Email: {form.cleaned_data['email']}\n\n"
                 f"{form.cleaned_data['message']}",
-                from_email=None,
-                recipient_list=["seu@email.com"],
-                fail_silently=True,
+                from_email="davioliveiraes7@gmail.com",
+                recipient_list=["davioliveiraes7@gmail.com"],
+                fail_silently=False,
             )
             messages.success(
                 request, "Mensagem enviada com sucesso! Obrigado pelo contato."
