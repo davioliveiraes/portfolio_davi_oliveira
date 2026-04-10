@@ -1,14 +1,6 @@
 from django.contrib import admin
 
-from .models import Contact, Project
-
-
-@admin.register(Project)
-class ProjectAdmin(admin.ModelAdmin):
-    list_display = ("title", "technologies", "featured", "created_at")
-    list_filter = ("featured", "created_at")
-    search_fields = ("title", "description", "technologies")
-    list_editable = ("featured",)
+from .models import Contact
 
 
 @admin.register(Contact)
