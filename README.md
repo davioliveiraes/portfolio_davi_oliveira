@@ -43,3 +43,4 @@ Construir um portfolio pessoal completo e funcional, desde o desenvolvimento ate
 ## Referencias
 
 - [AckerCode](https://www.ackercode.com/)
+- [Pabloaa](https://www.pabloaa.com/)
