@@ -1,11 +1,11 @@
+{% load static i18n %}
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Davi Oliveira">
-    <title>{% block title %}Davi Oliveira - Portfólio{% endblock %}</title>
-    {% load static %}
+    <title>{% block title %}{% trans "Davi Oliveira - Portfólio" %}{% endblock %}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -20,31 +20,48 @@
             <div class="logo">
                 <a href="{% url 'core:home' %}">Davi Oliveira</a>
             </div>
-            <button class="menu-toggle" aria-label="Abrir menu">
+            <button class="menu-toggle" aria-label="{% trans 'Abrir menu' %}">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
             <ul class="nav-links">
-                <li><a href="{% url 'core:sobre' %}" class="{% if request.resolver_match.url_name == 'sobre' %}active{% endif %}">Sobre</a></li>
-                <li><a href="{% url 'core:competencias' %}" class="{% if request.resolver_match.url_name == 'competencias' %}active{% endif %}">Competências</a></li>
-                <li><a href="{% url 'core:projetos' %}" class="{% if request.resolver_match.url_name == 'projetos' %}active{% endif %}">Projetos</a></li>
-                <li><a href="{% url 'core:experiencias' %}" class="{% if request.resolver_match.url_name == 'experiencias' %}active{% endif %}">Experiências</a></li>
-                <li><a href="{% url 'core:formacao' %}" class="{% if request.resolver_match.url_name == 'formacao' %}active{% endif %}">Formação</a></li>
-                <li><a href="{% url 'core:contato' %}" class="{% if request.resolver_match.url_name == 'contato' %}active{% endif %}">Contato</a></li>
+                <li><a href="{% url 'core:sobre' %}" class="{% if request.resolver_match.url_name == 'sobre' %}active{% endif %}">{% trans "Sobre" %}</a></li>
+                <li><a href="{% url 'core:competencias' %}" class="{% if request.resolver_match.url_name == 'competencias' %}active{% endif %}">{% trans "Competências" %}</a></li>
+                <li><a href="{% url 'core:projetos' %}" class="{% if request.resolver_match.url_name == 'projetos' %}active{% endif %}">{% trans "Projetos" %}</a></li>
+                <li><a href="{% url 'core:experiencias' %}" class="{% if request.resolver_match.url_name == 'experiencias' %}active{% endif %}">{% trans "Experiências" %}</a></li>
+                <li><a href="{% url 'core:formacao' %}" class="{% if request.resolver_match.url_name == 'formacao' %}active{% endif %}">{% trans "Formação" %}</a></li>
+                <li><a href="{% url 'core:contato' %}" class="{% if request.resolver_match.url_name == 'contato' %}active{% endif %}">{% trans "Contato" %}</a></li>
             </ul>
-            <button class="palette-trigger" id="paletteTrigger" aria-label="Buscar (Ctrl+K)">
-                <i class="fas fa-search"></i>
-            </button>
+            <div class="header-actions">
+                <div class="lang-switcher">
+                    {% language 'pt-br' %}{% url request.resolver_match.view_name as pt_url %}{% endlanguage %}
+                    {% language 'en' %}{% url request.resolver_match.view_name as en_url %}{% endlanguage %}
+                    <form action="{% url 'set_language' %}" method="post" class="lang-form">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ pt_url }}">
+                        <button type="submit" name="language" value="pt-br" class="lang-btn {% if LANGUAGE_CODE == 'pt-br' %}active{% endif %}" aria-label="Português">PT</button>
+                    </form>
+                    <span class="lang-divider">|</span>
+                    <form action="{% url 'set_language' %}" method="post" class="lang-form">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ en_url }}">
+                        <button type="submit" name="language" value="en" class="lang-btn {% if LANGUAGE_CODE == 'en' %}active{% endif %}" aria-label="English">EN</button>
+                    </form>
+                </div>
+                <button class="palette-trigger" id="paletteTrigger" aria-label="{% trans 'Buscar (Ctrl+K)' %}">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
         </nav>
     </header>
 
     <!-- Command Palette -->
     <div class="palette-overlay" id="paletteOverlay">
-        <div class="palette" role="dialog" aria-label="Paleta de comandos">
+        <div class="palette" role="dialog" aria-label="{% trans 'Paleta de comandos' %}">
             <div class="palette-input-wrapper">
                 <i class="fas fa-search"></i>
-                <input type="text" id="paletteInput" placeholder="Buscar páginas, ações..." autocomplete="off">
+                <input type="text" id="paletteInput" placeholder="{% trans 'Buscar páginas, ações...' %}" autocomplete="off">
                 <kbd>ESC</kbd>
             </div>
             <ul class="palette-results" id="paletteResults"></ul>
@@ -62,6 +79,7 @@
                 <a href="https://github.com/davioliveiraes" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i><span>GitHub</span></a>
                 <a href="https://www.linkedin.com/in/davioliveiraes/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i><span>LinkedIn</span></a>
                 <a href="https://instagram.com/davioliveiraes" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i><span>Instagram</span></a>
+                <a href="https://www.youtube.com/@davioliveiraES" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i><span>YouTube</span></a>
             </div>
         </div>
     </footer>

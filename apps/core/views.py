@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
+from django.utils.translation import gettext as _
 
 from .forms import ContactForm
 
@@ -44,12 +45,12 @@ def contato(request):
                 fail_silently=False,
             )
             messages.success(
-                request, "Mensagem enviada com sucesso! Obrigado pelo contato."
+                request, _("Mensagem enviada com sucesso! Obrigado pelo contato.")
             )
             return redirect("core:contato")
         else:
             messages.error(
-                request, "Erro ao enviar. Verifique os campos e tente novamente."
+                request, _("Erro ao enviar. Verifique os campos e tente novamente.")
             )
     else:
         form = ContactForm()

@@ -1,37 +1,37 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
-{% block title %}Sobre - Davi Oliveira{% endblock %}
+{% block title %}{% trans "Sobre" %} - Davi Oliveira{% endblock %}
 
 {% block content %}
 <section class="page-section">
     <div class="quote-highlight">
-        <p>"O mesmo esforço que forja um bom sistema, forja uma boa versão de mim."</p>
+        <p>{% trans '"O mesmo esforço que forja um bom sistema, forja uma boa versão de mim."' %}</p>
     </div>
 
     <div class="about-layout">
         <div class="about-photo">
-            <img src="{% static 'images/profile.jpg' %}" alt="Foto de Davi Oliveira">
+            <img src="{% static 'images/profile.jpg' %}" alt="{% trans 'Foto de Davi Oliveira' %}">
         </div>
         <div class="about-bio">
-            <h1>Sobre Mim</h1>
+            <h1>{% trans "Sobre Mim" %}</h1>
             <p>
-                Minha jornada na tecnologia começou com um curso técnico em Informática, onde tive meu primeiro contato com lógica de programação, sistemas e a curiosidade de entender como tudo funcionava por trás das telas. Esse interesse evoluiu naturalmente e me levou a cursar o bacharelado em Engenharia de Software, onde aprofundei minha base e desenvolvi uma visão mais estruturada sobre como construir soluções tecnológicas de forma profissional.
+                {% trans "Minha jornada na tecnologia começou com um curso técnico em Informática, onde tive meu primeiro contato com lógica de programação, sistemas e a curiosidade de entender como tudo funcionava por trás das telas. Esse interesse evoluiu naturalmente e me levou a cursar o bacharelado em Engenharia de Software, onde aprofundei minha base e desenvolvi uma visão mais estruturada sobre como construir soluções tecnológicas de forma profissional." %}
             </p>
             <p>
-                Ao longo desse caminho, fui me direcionando para o desenvolvimento backend, com foco em Python, construindo aplicações e APIs que vão além de apenas "funcionar". Passei a desenvolver soluções com FastAPI e Django, criando APIs RESTful, integrando serviços externos e trabalhando com bancos de dados como PostgreSQL, sempre buscando escrever código limpo, organizado e sustentável.
+                {% trans 'Ao longo desse caminho, fui me direcionando para o desenvolvimento backend, com foco em Python, construindo aplicações e APIs que vão além de apenas "funcionar". Passei a desenvolver soluções com FastAPI e Django, criando APIs RESTful, integrando serviços externos e trabalhando com bancos de dados como PostgreSQL, sempre buscando escrever código limpo, organizado e sustentável.' %}
             </p>
             <p>
-                Com o tempo, percebi que backend não existe isolado — ele está diretamente conectado aos dados e ao impacto real no negócio. Isso me levou a aprofundar meus conhecimentos em análise de dados com Python, trabalhando na organização, tratamento e geração de insights a partir das informações. Essa visão ampliada me permite não apenas desenvolver sistemas, mas também entender o valor que eles entregam.
+                {% trans "Com o tempo, percebi que backend não existe isolado — ele está diretamente conectado aos dados e ao impacto real no negócio. Isso me levou a aprofundar meus conhecimentos em análise de dados com Python, trabalhando na organização, tratamento e geração de insights a partir das informações. Essa visão ampliada me permite não apenas desenvolver sistemas, mas também entender o valor que eles entregam." %}
             </p>
             <p>
-                Outro ponto importante da minha trajetória é o desenvolvimento de automações de processos, onde transformo tarefas manuais em soluções mais eficientes, reduzindo tempo e aumentando a organização dos fluxos. Essa prática reforçou ainda mais meu foco em resolver problemas reais com tecnologia.
+                {% trans "Outro ponto importante da minha trajetória é o desenvolvimento de automações de processos, onde transformo tarefas manuais em soluções mais eficientes, reduzindo tempo e aumentando a organização dos fluxos. Essa prática reforçou ainda mais meu foco em resolver problemas reais com tecnologia." %}
             </p>
             <p>
-                Atualmente, venho expandindo meus conhecimentos em Go (Golang) e Inteligência Artificial aplicada, buscando integrar backend, dados e automação em soluções modernas, performáticas e escaláveis.
+                {% trans "Atualmente, venho expandindo meus conhecimentos em Go (Golang) e Inteligência Artificial aplicada, buscando integrar backend, dados e automação em soluções modernas, performáticas e escaláveis." %}
             </p>
             <p>
-                Hoje, busco minha primeira oportunidade como desenvolvedor backend, com o objetivo de aplicar meus conhecimentos em um ambiente real, evoluir constantemente e contribuir com soluções bem estruturadas. Meu foco é claro: transformar lógica, dados e tecnologia em soluções que geram impacto real.
+                {% trans "Hoje, busco minha primeira oportunidade como desenvolvedor backend, com o objetivo de aplicar meus conhecimentos em um ambiente real, evoluir constantemente e contribuir com soluções bem estruturadas. Meu foco é claro: transformar lógica, dados e tecnologia em soluções que geram impacto real." %}
             </p>
         </div>
     </div>

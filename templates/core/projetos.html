@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Projetos - Davi Oliveira{% endblock %}
+{% block title %}{% trans "Projetos" %} - Davi Oliveira{% endblock %}
 
 {% block content %}
 <section class="page-section">
     <div class="section-header">
-        <h1>Projetos</h1>
-        <p>Alguns dos projetos que desenvolvi</p>
+        <h1>{% trans "Projetos" %}</h1>
+        <p>{% trans "Alguns dos projetos que desenvolvi" %}</p>
         <div class="section-divider"></div>
     </div>
 
@@ -18,8 +19,8 @@
                     <a href="https://github.com/davioliveiraes/url_shortener_api" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 </div>
             </div>
-            <h3>API Encurtador de Links</h3>
-            <p>Sistema de encurtamento de URLs com tracking de cliques e geração de QR Codes. Interface administrativa para gerenciamento e análise de métricas de acesso.</p>
+            <h3>{% trans "API Encurtador de Links" %}</h3>
+            <p>{% trans "Sistema de encurtamento de URLs com tracking de cliques e geração de QR Codes. Interface administrativa para gerenciamento e análise de métricas de acesso." %}</p>
             <div class="project-tags">
                 <span>Django REST Framework</span>
                 <span>PostgreSQL</span>
@@ -34,12 +35,12 @@
                     <a href="https://github.com/davioliveiraes/banking_system_api" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 </div>
             </div>
-            <h3>API de Sistema Bancário</h3>
-            <p>API REST com operações de cadastro, saque e extrato para PF e PJ. Clean Architecture, testes unitários com Pytest e validações de regras de negócio.</p>
+            <h3>{% trans "API de Sistema Bancário" %}</h3>
+            <p>{% trans "API REST com operações de cadastro, saque e extrato para PF e PJ. Clean Architecture, testes unitários com Pytest e validações de regras de negócio." %}</p>
             <div class="project-tags">
                 <span>Flask</span>
                 <span>SQLite</span>
-                <span>Arquitetura MVC</span>
+                <span>{% trans "Arquitetura MVC" %}</span>
                 <span>Pytest</span>
             </div>
         </div>
@@ -51,12 +52,12 @@
                     <a href="https://github.com/davioliveiraes/daily_diet_api" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 </div>
             </div>
-            <h3>API Dieta Diária</h3>
-            <p>API RESTful completa (CRUD) com cálculo automático de métricas nutricionais. Suite de testes unitários com 95% de cobertura de código.</p>
+            <h3>{% trans "API Dieta Diária" %}</h3>
+            <p>{% trans "API RESTful completa (CRUD) com cálculo automático de métricas nutricionais. Suite de testes unitários com 95% de cobertura de código." %}</p>
             <div class="project-tags">
                 <span>Flask</span>
                 <span>SQLite</span>
-                <span>Pytest — 95% cobertura</span>
+                <span>{% trans "Pytest — 95% cobertura" %}</span>
             </div>
         </div>
 
@@ -67,8 +68,8 @@
                     <a href="https://github.com/davioliveiraes/pet_adoption_api" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 </div>
             </div>
-            <h3>API de Adoção de Pets</h3>
-            <p>Aplicação de Clean Architecture e padrão MVC para gestão completa de adoções. Separação clara de responsabilidades: Controllers, Use Cases, Repositories.</p>
+            <h3>{% trans "API de Adoção de Pets" %}</h3>
+            <p>{% trans "Aplicação de Clean Architecture e padrão MVC para gestão completa de adoções. Separação clara de responsabilidades: Controllers, Use Cases, Repositories." %}</p>
             <div class="project-tags">
                 <span>Flask</span>
                 <span>Clean Architecture</span>
@@ -84,8 +85,8 @@
                     <a href="https://github.com/davioliveiraes/flask_realtime_chat_socket" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 </div>
             </div>
-            <h3>Chat em Tempo Real</h3>
-            <p>Sistema de mensagens instantâneas bidirecionais com WebSockets.</p>
+            <h3>{% trans "Chat em Tempo Real" %}</h3>
+            <p>{% trans "Sistema de mensagens instantâneas bidirecionais com WebSockets." %}</p>
             <div class="project-tags">
                 <span>Flask-SocketIO</span>
                 <span>WebSockets</span>
@@ -99,8 +100,8 @@
                     <a href="https://github.com/davioliveiraes/portfolio_davi_oliveira" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 </div>
             </div>
-            <h3>Portfólio Pessoal</h3>
-            <p>Site de portfólio profissional com tema dark, Command Palette, formulário de contato e design responsivo.</p>
+            <h3>{% trans "Portfólio Pessoal" %}</h3>
+            <p>{% trans "Site de portfólio profissional com tema dark, Command Palette, formulário de contato e design responsivo." %}</p>
             <div class="project-tags">
                 <span>Python</span>
                 <span>Django</span>

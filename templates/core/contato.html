@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Contato - Davi Oliveira{% endblock %}
+{% block title %}{% trans "Contato" %} - Davi Oliveira{% endblock %}
 
 {% block content %}
 <section class="page-section">
     <div class="section-header">
-        <h1>Contato</h1>
-        <p>Vamos conversar sobre seu próximo projeto</p>
+        <h1>{% trans "Contato" %}</h1>
+        <p>{% trans "Vamos conversar sobre seu próximo projeto" %}</p>
         <div class="section-divider"></div>
     </div>
 
@@ -33,12 +34,12 @@
                     {% endif %}
                 </div>
                 {% endfor %}
-                <button type="submit" class="btn btn-primary btn-full">Enviar Mensagem</button>
+                <button type="submit" class="btn btn-primary btn-full">{% trans "Enviar Mensagem" %}</button>
             </form>
         </div>
 
         <div class="contact-info">
-            <h2>Informações de Contato</h2>
+            <h2>{% trans "Informações de Contato" %}</h2>
             <div class="info-item">
                 <i class="fas fa-envelope"></i>
                 <div>
@@ -49,8 +50,8 @@
             <div class="info-item">
                 <i class="fas fa-map-marker-alt"></i>
                 <div>
-                    <h3>Localização</h3>
-                    <p>Morada Nova - CE, Brasil</p>
+                    <h3>{% trans "Localização" %}</h3>
+                    <p>{% trans "Morada Nova - CE, Brasil" %}</p>
                 </div>
             </div>
             <div class="info-item">

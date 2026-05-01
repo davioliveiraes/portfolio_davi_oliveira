@@ -119,6 +119,72 @@ nav {
     border-bottom-color: var(--color-primary-light);
 }
 
+/* Header Actions (right cluster) */
+.header-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-left: 1.25rem;
+}
+
+/* Language Switcher */
+.lang-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.1rem;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+}
+
+.lang-form {
+    display: inline-flex;
+    margin: 0;
+    padding: 0;
+}
+
+.lang-btn {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.45rem;
+    line-height: 1;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.lang-btn:hover {
+    color: var(--color-primary-light);
+}
+
+.lang-btn.active {
+    color: var(--color-primary-light);
+    background: var(--color-surface-light);
+}
+
+.lang-btn:focus-visible {
+    outline: 1px solid var(--color-primary-light);
+    outline-offset: 2px;
+}
+
+.lang-divider {
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    opacity: 0.4;
+    user-select: none;
+}
+
 /* Palette Trigger */
 .palette-trigger {
     background: var(--color-surface-light);
@@ -127,7 +193,6 @@ nav {
     color: var(--color-text-muted);
     padding: 0.4rem 0.6rem;
     cursor: pointer;
-    margin-left: 1.25rem;
     transition: var(--transition);
     display: flex;
     align-items: center;
@@ -674,6 +739,21 @@ nav {
     position: absolute;
     left: 0;
     color: var(--color-primary-light);
+}
+
+.timeline-skills {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(54, 117, 136, 0.15);
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.timeline-skills strong {
+    color: var(--color-text);
+    font-weight: 600;
+    letter-spacing: 0.02em;
 }
 
 /* ============================================

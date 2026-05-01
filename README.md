@@ -1,5 +1,7 @@
 # Portfolio - Davi Oliveira
 
+![Banner do Portfolio](static/images/banner_site.png)
+
 Portfolio profissional desenvolvido com Django, apresentando projetos, competencias, experiencias e formacao de um Desenvolvedor Backend Python.
 
 Acesse: [davioliveira.tech](https://davioliveira.tech)
