@@ -1204,8 +1204,44 @@ footer {
    ============================================ */
 @media (max-width: 768px) {
     /* Header */
+    header {
+        padding: 0.85rem 1.25rem;
+    }
+
+    nav {
+        gap: 0.5rem;
+    }
+
     .menu-toggle {
         display: flex;
+        order: 3;
+    }
+
+    .header-actions {
+        order: 2;
+        margin-left: 0;
+        gap: 0.5rem;
+    }
+
+    .lang-switcher {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+    }
+
+    .lang-form {
+        display: inline-flex;
+        flex: 0 0 auto;
+    }
+
+    .lang-btn {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.4rem;
+    }
+
+    .palette-trigger {
+        padding: 0.35rem 0.5rem;
+        font-size: 0.75rem;
     }
 
     .nav-links {
@@ -1229,6 +1265,32 @@ footer {
 
     .nav-links a {
         font-size: 0.95rem;
+    }
+
+    /* Footer */
+    footer {
+        padding: 1.25rem 1rem;
+    }
+
+    .social-links {
+        gap: 1.75rem;
+        flex-wrap: wrap;
+    }
+
+    .social-links a {
+        gap: 0;
+    }
+
+    .social-links a span {
+        display: none;
+    }
+
+    .social-links a i {
+        width: auto;
+        opacity: 1;
+        overflow: visible;
+        font-size: 1.4rem;
+        margin: 0;
     }
 
     /* Hero */
@@ -1313,6 +1375,27 @@ footer {
 }
 
 @media (max-width: 480px) {
+    header {
+        padding: 0.75rem 1rem;
+    }
+
+    .logo a {
+        font-size: 1rem;
+    }
+
+    .header-actions {
+        gap: 0.4rem;
+    }
+
+    .lang-btn {
+        font-size: 0.65rem;
+        padding: 0.25rem 0.3rem;
+    }
+
+    .palette-trigger {
+        padding: 0.3rem 0.45rem;
+    }
+
     .skills-grid {
         grid-template-columns: 1fr 1fr;
         gap: 0.75rem;
@@ -1324,5 +1407,13 @@ footer {
 
     .hero-text h1 {
         font-size: 1.85rem;
+    }
+
+    .social-links {
+        gap: 1.25rem;
+    }
+
+    .social-links a i {
+        font-size: 1.25rem;
     }
 }
