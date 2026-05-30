@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Davi Oliveira">
     <title>{% block title %}{% trans "Davi Oliveira - Portfólio" %}{% endblock %}</title>
+    <script>
+        (function () {
+            var saved = localStorage.getItem('theme');
+            var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -49,6 +56,10 @@
                         <button type="submit" name="language" value="en" class="lang-btn {% if LANGUAGE_CODE == 'en' %}active{% endif %}" aria-label="English">EN</button>
                     </form>
                 </div>
+                <button class="theme-toggle" id="themeToggle" aria-label="{% trans 'Alternar tema' %}">
+                    <i class="fas fa-moon theme-icon-dark"></i>
+                    <i class="fas fa-sun theme-icon-light"></i>
+                </button>
                 <button class="palette-trigger" id="paletteTrigger" aria-label="{% trans 'Buscar (Ctrl+K)' %}">
                     <i class="fas fa-search"></i>
                 </button>

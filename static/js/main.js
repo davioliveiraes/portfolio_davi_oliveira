@@ -1,4 +1,23 @@
 // ============================================
+// THEME TOGGLE (dark / light)
+// ============================================
+const themeToggle = document.getElementById('themeToggle');
+
+themeToggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+});
+
+// Sincroniza com mudança no sistema operacional (se o usuário não definiu manualmente)
+window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+        document.documentElement.setAttribute('data-theme', e.matches ? 'light' : 'dark');
+    }
+});
+
+// ============================================
 // MENU MOBILE
 // ============================================
 const menuToggle = document.querySelector('.menu-toggle');
