@@ -765,6 +765,18 @@ nav {
     font-size: 0.85rem;
 }
 
+.timeline-company a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(54, 117, 136, 0.5);
+    transition: var(--transition);
+}
+
+.timeline-company a:hover {
+    color: var(--color-text);
+    border-bottom-color: var(--color-primary-light);
+}
+
 .timeline-period {
     display: inline-block;
     font-family: var(--font-mono);
