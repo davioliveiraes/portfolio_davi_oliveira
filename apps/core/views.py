@@ -1,9 +1,13 @@
+import logging
+
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
 from django.utils.translation import gettext as _
 
 from .forms import ContactForm
+
+logger = logging.getLogger(__name__)
 
 
 def home(request):
@@ -35,15 +39,20 @@ def contato(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
-            send_mail(
-                subject=f"[Portfólio] Nova mensagem de {form.cleaned_data['name']}",
-                message=f"Nome: {form.cleaned_data['name']}\n"
-                f"Email: {form.cleaned_data['email']}\n\n"
-                f"{form.cleaned_data['message']}",
-                from_email="davioliveiraes7@gmail.com",
-                recipient_list=["davioliveiraes7@gmail.com"],
-                fail_silently=False,
-            )
+            try:
+                send_mail(
+                    subject=f"[Portfólio] Nova mensagem de {form.cleaned_data['name']}",
+                    message=f"Nome: {form.cleaned_data['name']}\n"
+                    f"Email: {form.cleaned_data['email']}\n\n"
+                    f"{form.cleaned_data['message']}",
+                    from_email="davioliveiraes7@gmail.com",
+                    recipient_list=["davioliveiraes7@gmail.com"],
+                    fail_silently=False,
+                )
+            except Exception:
+                # A mensagem já está salva no banco; falha no SMTP não deve
+                # quebrar a experiência do visitante.
+                logger.exception("Falha ao enviar email de notificação de contato")
             messages.success(
                 request, _("Mensagem enviada com sucesso! Obrigado pelo contato.")
             )

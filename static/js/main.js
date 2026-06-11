@@ -59,8 +59,8 @@ const palette = {
         { label: 'Experiências', desc: 'Experiências profissionais', icon: 'fas fa-briefcase', url: '/experiencias/' },
         { label: 'Formação', desc: 'Formação acadêmica', icon: 'fas fa-graduation-cap', url: '/formacao/' },
         { label: 'Contato', desc: 'Entre em contato', icon: 'fas fa-envelope', url: '/contato/' },
-        { label: 'GitHub', desc: 'Abrir perfil no GitHub', icon: 'fab fa-github', url: 'https://github.com/seu-usuario', external: true },
-        { label: 'LinkedIn', desc: 'Abrir perfil no LinkedIn', icon: 'fab fa-linkedin-in', url: 'https://linkedin.com/in/seu-usuario', external: true },
+        { label: 'GitHub', desc: 'Abrir perfil no GitHub', icon: 'fab fa-github', url: 'https://github.com/davioliveiraes', external: true },
+        { label: 'LinkedIn', desc: 'Abrir perfil no LinkedIn', icon: 'fab fa-linkedin-in', url: 'https://www.linkedin.com/in/davioliveiraes/', external: true },
     ],
 
     open() {

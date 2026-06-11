@@ -4,8 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Davi Oliveira">
+    <meta name="description" content="{% block meta_description %}{% trans 'Davi Oliveira — Engenheiro de Software backend com expertise em Python, Django e FastAPI. Clean Architecture, testes, automações e IA aplicada.' %}{% endblock %}">
     <title>{% block title %}{% trans "Davi Oliveira - Portfólio" %}{% endblock %}</title>
+
+    <!-- Open Graph / compartilhamento em redes sociais -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Davi Oliveira">
+    <meta property="og:title" content="{% trans 'Davi Oliveira — Engenheiro de Software' %}">
+    <meta property="og:description" content="{% trans 'Backend com Python, Django e FastAPI. Clean Architecture, testes, automações e IA aplicada.' %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/banner_site.png' %}">
+    <meta name="twitter:card" content="summary_large_image">
     <script>
         (function () {
             var saved = localStorage.getItem('theme');
@@ -18,7 +27,8 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="icon" type="image/x-icon" href="{% static 'images/icone_davi_oliveira.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/icone_davi_oliveira.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/icone_davi_oliveira.png' %}">
     {% block extra_css %}{% endblock %}
 </head>
 <body>

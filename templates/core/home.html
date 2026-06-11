@@ -10,7 +10,7 @@
             <img src="{% static 'images/profile.jpg' %}" alt="{% trans 'Foto de Davi Oliveira' %}">
         </div>
         <div class="hero-text">
-            <p class="greeting">{% trans "Última atualização" %}: 01/05/2026</p>
+            {% if last_update %}<p class="greeting">{% trans "Última atualização" %}: {{ last_update }}</p>{% endif %}
             <h1>{% trans "Olá, eu sou" %} <span class="highlight">Davi Oliveira</span></h1>
             <p class="subtitle">{% trans "Engenheiro de Software com expertise em backend (Python, FastAPI, Django) e forte atuação na intersecção com o ecossistema de dados, automações e IA. Priorizo a qualidade técnica utilizando Clean Architecture e Pytest, com vivência prática em PostgreSQL, Docker e Git. Atualmente expandindo meu portfólio de linguagens com Go (Golang)." %}</p>
             <div class="tech-stack">
