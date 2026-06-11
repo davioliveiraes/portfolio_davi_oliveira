@@ -18,6 +18,64 @@ window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e
 });
 
 // ============================================
+// TYPEWRITER (hero)
+// ============================================
+const typewriter = document.getElementById('typewriter');
+
+if (typewriter) {
+    const phrases = typewriter.dataset.phrases.split('|');
+    const textEl = document.getElementById('typewriterText');
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        textEl.textContent = phrases[0];
+    } else {
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let deleting = false;
+
+        (function tick() {
+            const phrase = phrases[phraseIndex];
+            charIndex += deleting ? -1 : 1;
+            textEl.textContent = phrase.slice(0, charIndex);
+
+            let delay = deleting ? 40 : 85;
+            if (!deleting && charIndex === phrase.length) {
+                deleting = true;
+                delay = 2200; // pausa com a frase completa
+            } else if (deleting && charIndex === 0) {
+                deleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                delay = 400;
+            }
+            setTimeout(tick, delay);
+        })();
+    }
+}
+
+// ============================================
+// ANIMAÇÃO DE ENTRADA NO SCROLL
+// ============================================
+const revealSelector = '.skill-card, .project-card, .timeline-card, .formation-card, .info-item, .section-header';
+
+if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll(revealSelector).forEach(el => {
+        const siblingIndex = Array.from(el.parentElement.children).indexOf(el);
+        el.style.transitionDelay = `${(siblingIndex % 4) * 70}ms`;
+        el.classList.add('reveal');
+        revealObserver.observe(el);
+    });
+}
+
+// ============================================
 // MENU MOBILE
 // ============================================
 const menuToggle = document.querySelector('.menu-toggle');

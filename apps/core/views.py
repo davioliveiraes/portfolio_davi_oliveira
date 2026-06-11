@@ -2,12 +2,19 @@ import logging
 
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.utils.translation import gettext as _
 
 from .forms import ContactForm
 
 logger = logging.getLogger(__name__)
+
+
+def robots_txt(request):
+    sitemap_url = request.build_absolute_uri("/sitemap.xml")
+    content = f"User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: {sitemap_url}\n"
+    return HttpResponse(content, content_type="text/plain")
 
 
 def home(request):

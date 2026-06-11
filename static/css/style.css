@@ -347,6 +347,49 @@ nav {
     color: var(--color-primary-light);
 }
 
+.typewriter {
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    color: var(--color-primary-light);
+    min-height: 1.7em;
+    margin-bottom: 1rem;
+    letter-spacing: 0.02em;
+}
+
+.typewriter-cursor {
+    animation: cursor-blink 1s step-end infinite;
+}
+
+@keyframes cursor-blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Animação de entrada no scroll (classes aplicadas via JS) */
+.reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .typewriter-cursor {
+        animation: none;
+    }
+}
+
 .subtitle {
     font-size: 1.1rem;
     color: var(--color-text-muted);

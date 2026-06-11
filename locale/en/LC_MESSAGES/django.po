@@ -1,8 +1,9 @@
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: portfolio-davi-oliveira 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-01 14:51-0300\n"
+"POT-Creation-Date: 2026-06-11 09:29-0300\n"
 "PO-Revision-Date: 2026-05-01 11:00-0300\n"
 "Last-Translator: Davi Oliveira <davioliveiraes7@gmail.com>\n"
 "Language-Team: English\n"
@@ -12,209 +13,176 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps/core/forms.py:12
 msgid "Seu nome"
 msgstr "Your name"
 
-#: apps/core/forms.py:13
 msgid "seu@email.com"
 msgstr "you@email.com"
 
-#: apps/core/forms.py:15
 msgid "Escreva sua mensagem..."
 msgstr "Write your message..."
 
-#: apps/core/models.py:6
 msgid "Nome"
 msgstr "Name"
 
-#: apps/core/models.py:7
 msgid "Email"
 msgstr "Email"
 
-#: apps/core/models.py:8 apps/core/models.py:13
 msgid "Mensagem"
 msgstr "Message"
 
-#: apps/core/models.py:9
 msgid "Lida"
 msgstr "Read"
 
-#: apps/core/models.py:10
 msgid "Enviado em"
 msgstr "Sent at"
 
-#: apps/core/models.py:14
 msgid "Mensagens"
 msgstr "Messages"
 
-#: apps/core/views.py:48
 msgid "Mensagem enviada com sucesso! Obrigado pelo contato."
 msgstr "Message sent successfully! Thank you for reaching out."
 
-#: apps/core/views.py:53
 msgid "Erro ao enviar. Verifique os campos e tente novamente."
 msgstr "Failed to send. Please check the fields and try again."
 
-#: templates/base.html:8
+msgid ""
+"Davi Oliveira — Engenheiro de Software backend com expertise em Python, "
+"Django e FastAPI. Clean Architecture, testes, automações e IA aplicada."
+msgstr ""
+"Davi Oliveira — Backend Software Engineer with expertise in Python, Django "
+"and FastAPI. Clean Architecture, testing, automation and applied AI."
+
 msgid "Davi Oliveira - Portfólio"
 msgstr "Davi Oliveira - Portfolio"
 
-#: templates/base.html:23
+msgid "Davi Oliveira — Engenheiro de Software"
+msgstr "Davi Oliveira — Software Engineer"
+
+msgid ""
+"Backend com Python, Django e FastAPI. Clean Architecture, testes, automações"
+" e IA aplicada."
+msgstr ""
+"Backend with Python, Django and FastAPI. Clean Architecture, testing, "
+"automation and applied AI."
+
 msgid "Abrir menu"
 msgstr "Open menu"
 
-#: templates/base.html:29 templates/core/sobre.html:4
 msgid "Sobre"
 msgstr "About"
 
-#: templates/base.html:30
 msgid "Competências"
 msgstr "Skills"
 
-#: templates/base.html:31 templates/core/projetos.html:4
-#: templates/core/projetos.html:9
 msgid "Projetos"
 msgstr "Projects"
 
-#: templates/base.html:32 templates/core/experiencias.html:4
 msgid "Experiências"
 msgstr "Experience"
 
-#: templates/base.html:33
 msgid "Formação"
 msgstr "Education"
 
-#: templates/base.html:34 templates/core/contato.html:4
-#: templates/core/contato.html:9
 msgid "Contato"
 msgstr "Contact"
 
-#: templates/base.html:52
+msgid "Alternar tema"
+msgstr "Toggle theme"
+
 msgid "Buscar (Ctrl+K)"
 msgstr "Search (Ctrl+K)"
 
-#: templates/base.html:61
 msgid "Paleta de comandos"
 msgstr "Command palette"
 
-#: templates/base.html:64
 msgid "Buscar páginas, ações..."
 msgstr "Search pages, actions..."
 
-#: templates/core/competencias.html:4 templates/core/competencias.html:9
 msgid "Competências Técnicas"
 msgstr "Technical Skills"
 
-#: templates/core/competencias.html:10
 msgid "Tecnologias e ferramentas que utilizo no dia a dia"
 msgstr "Technologies and tools I use day to day"
 
-#: templates/core/competencias.html:15
 msgid "Backend & Frameworks"
 msgstr "Backend & Frameworks"
 
-#: templates/core/competencias.html:25
 msgid "Em constante evolução"
 msgstr "Continuously learning"
 
-#: templates/core/competencias.html:29
 msgid "Design de APIs RESTful"
 msgstr "RESTful API Design"
 
-#: templates/core/competencias.html:37
 msgid "Integração de serviços externos"
 msgstr "External service integration"
 
-#: templates/core/competencias.html:43 templates/core/home.html:23
 msgid "Inteligência Artificial"
 msgstr "Artificial Intelligence"
 
-#: templates/core/competencias.html:47
 msgid "Inteligência Artificial & LLMs"
 msgstr "Artificial Intelligence & LLMs"
 
-#: templates/core/competencias.html:51
 msgid "Pipelines RAG"
 msgstr "RAG Pipelines"
 
-#: templates/core/competencias.html:55
 msgid "Modelos Clássicos de ML"
 msgstr "Classical ML Models"
 
-#: templates/core/competencias.html:59
 msgid "Automação de processos"
 msgstr "Process automation"
 
-#: templates/core/competencias.html:65
 msgid "Dados"
 msgstr "Data"
 
-#: templates/core/competencias.html:95
 msgid "Banco de Dados"
 msgstr "Databases"
 
-#: templates/core/competencias.html:113
 msgid "Docker & Conteinerização"
 msgstr "Docker & Containerization"
 
-#: templates/core/competencias.html:121
 msgid "Computação em Nuvem (AWS)"
 msgstr "Cloud Computing (AWS)"
 
-#: templates/core/competencias.html:125
 msgid "Linux & Linha de Comando"
 msgstr "Linux & Command Line"
 
-#: templates/core/competencias.html:131
 msgid "Qualidade & Versionamento"
 msgstr "Quality & Versioning"
 
-#: templates/core/competencias.html:135
 msgid "Testes Automatizados (Pytest)"
 msgstr "Automated Testing (Pytest)"
 
-#: templates/core/competencias.html:139
 msgid "Git & Controle de Versão"
 msgstr "Git & Version Control"
 
-#: templates/core/contato.html:10
 msgid "Vamos conversar sobre seu próximo projeto"
 msgstr "Let's talk about your next project"
 
-#: templates/core/contato.html:37
 msgid "Enviar Mensagem"
 msgstr "Send Message"
 
-#: templates/core/contato.html:42
 msgid "Informações de Contato"
 msgstr "Contact Information"
 
-#: templates/core/contato.html:53
 msgid "Localização"
 msgstr "Location"
 
-#: templates/core/contato.html:54
 msgid "Morada Nova - CE, Brasil"
 msgstr "Morada Nova - CE, Brazil"
 
-#: templates/core/experiencias.html:9
 msgid "Experiências Profissionais"
 msgstr "Professional Experience"
 
-#: templates/core/experiencias.html:10
 msgid "Minha trajetória profissional"
 msgstr "My professional journey"
 
-#: templates/core/experiencias.html:19
 msgid "Analista de E-commerce"
 msgstr "E-commerce Analyst"
 
-#: templates/core/experiencias.html:22
 msgid "Fev 2026 - Presente · Morada Nova, CE · Presencial"
 msgstr "Feb 2026 - Present · Morada Nova, CE · On-site"
 
-#: templates/core/experiencias.html:24
 msgid ""
 "Análise de resultados, experimentação e otimizações contínuas da loja "
 "NuvemShop"
@@ -222,19 +190,16 @@ msgstr ""
 "Results analysis, experimentation, and continuous optimizations for the "
 "NuvemShop store"
 
-#: templates/core/experiencias.html:25
 msgid ""
-"Customização do storefront via CSS/HTML avançado e integração com ERP "
-"GestãoClick"
+"Customização do storefront via CSS/HTML/JS/GoTemplate avançado e integração "
+"com ERP GestãoClick"
 msgstr ""
-"Storefront customization via advanced CSS/HTML and integration with "
-"GestãoClick ERP"
+"Storefront customization via advanced CSS/HTML/JS/GoTemplate and integration"
+" with GestãoClick ERP"
 
-#: templates/core/experiencias.html:26
 msgid "Monitoramento de KPIs, testes de performance e otimização de ROI"
 msgstr "KPI monitoring, performance testing, and ROI optimization"
 
-#: templates/core/experiencias.html:27
 msgid ""
 "Configuração de DNS, integração com Melhor Envio e alinhamento de SKUs com "
 "estoque"
@@ -242,45 +207,47 @@ msgstr ""
 "DNS configuration, integration with Melhor Envio, and SKU alignment with "
 "inventory"
 
-#: templates/core/experiencias.html:28
+msgid ""
+"Desenvolvimento do Ibeize Ecommerce Control — sistema interno fullstack "
+"(Django Ninja + React + Docker) para gestão de catálogo e finanças"
+msgstr ""
+"Development of Ibeize Ecommerce Control — internal fullstack system (Django "
+"Ninja + React + Docker) for catalog and finance management"
+
 msgid "Suporte em ações comerciais e integração com operação logística"
 msgstr ""
 "Support for commercial actions and integration with logistics operations"
 
-#: templates/core/experiencias.html:30 templates/core/experiencias.html:48
-#: templates/core/experiencias.html:64 templates/core/experiencias.html:80
 msgid "Habilidades"
 msgstr "Skills"
 
-#: templates/core/experiencias.html:30
-msgid "NuvemShop, GestãoClick, CSS, HTML, KPIs, ROI, DNS, Melhor Envio"
-msgstr "NuvemShop, GestãoClick, CSS, HTML, KPIs, ROI, DNS, Melhor Envio"
+msgid ""
+"NuvemShop, GestãoClick, CSS, HTML, JavaScript, GoTemplate, Django Ninja, "
+"React, Docker, KPIs, ROI, DNS, Melhor Envio"
+msgstr ""
+"NuvemShop, GestãoClick, CSS, HTML, JavaScript, GoTemplate, Django Ninja, "
+"React, Docker, KPIs, ROI, DNS, Melhor Envio"
 
-#: templates/core/experiencias.html:38
 msgid "Assistente Administrativo"
 msgstr "Administrative Assistant"
 
-#: templates/core/experiencias.html:41
 msgid "2021 - 2025 · Morada Nova, CE · Presencial"
 msgstr "2021 - 2025 · Morada Nova, CE · On-site"
 
-#: templates/core/experiencias.html:43
 msgid ""
 "Desenvolvi dashboards automatizados em Excel, transformando dados brutos em "
 "insights de negócio"
 msgstr ""
 "Built automated Excel dashboards, turning raw data into business insights"
 
-#: templates/core/experiencias.html:44
 #, python-format
 msgid ""
-"Otimizei relatórios internos com lógica de processamento que reduziu o tempo "
-"de geração em até 60%%"
+"Otimizei relatórios internos com lógica de processamento que reduziu o tempo"
+" de geração em até 60%%"
 msgstr ""
 "Optimized internal reports with processing logic that reduced generation "
 "time by up to 60%%"
 
-#: templates/core/experiencias.html:45
 msgid ""
 "Automatizei análises e relatórios administrativos, melhorando a precisão e "
 "eficiência operacional"
@@ -288,27 +255,22 @@ msgstr ""
 "Automated administrative analyses and reports, improving accuracy and "
 "operational efficiency"
 
-#: templates/core/experiencias.html:46
 msgid ""
-"Prestei suporte técnico a sistemas e equipamentos, garantindo a continuidade "
-"operacional do SysPDV"
+"Prestei suporte técnico a sistemas e equipamentos, garantindo a continuidade"
+" operacional do SysPDV"
 msgstr ""
 "Provided technical support for systems and equipment, ensuring operational "
 "continuity of SysPDV"
 
-#: templates/core/experiencias.html:48
 msgid "Excel, Dashboards, Automação de Relatórios, SysPDV, Suporte Técnico"
 msgstr "Excel, Dashboards, Report Automation, SysPDV, Technical Support"
 
-#: templates/core/experiencias.html:56
 msgid "Jovem Aprendiz"
 msgstr "Young Apprentice"
 
-#: templates/core/experiencias.html:59
 msgid "2020 - 2021 · Morada Nova, CE · Presencial"
 msgstr "2020 - 2021 · Morada Nova, CE · On-site"
 
-#: templates/core/experiencias.html:61
 msgid ""
 "Organizei documentação fiscal e planilhas administrativas, aprimorando o "
 "controle de dados"
@@ -316,133 +278,116 @@ msgstr ""
 "Organized fiscal documentation and administrative spreadsheets, improving "
 "data control"
 
-#: templates/core/experiencias.html:62
 msgid "Desenvolvi atenção a detalhes e precisão em registros administrativos"
 msgstr "Developed attention to detail and accuracy in administrative records"
 
-#: templates/core/experiencias.html:64
 msgid "Documentação Fiscal, Planilhas Administrativas, Controle de Dados"
 msgstr "Tax Documentation, Administrative Spreadsheets, Data Control"
 
-#: templates/core/experiencias.html:72
 msgid "Estagiário"
 msgstr "Intern"
 
-#: templates/core/experiencias.html:75
 msgid "2017 · Morada Nova, CE · Presencial"
 msgstr "2017 · Morada Nova, CE · On-site"
 
-#: templates/core/experiencias.html:77
 msgid "Iniciei contato com desenvolvimento web (HTML5, CSS3 e JavaScript)"
 msgstr "Started working with web development (HTML5, CSS3, and JavaScript)"
 
-#: templates/core/experiencias.html:78
 msgid ""
-"Ofereci suporte técnico e atendimento a clientes, fortalecendo comunicação e "
-"resolução de problemas"
+"Ofereci suporte técnico e atendimento a clientes, fortalecendo comunicação e"
+" resolução de problemas"
 msgstr ""
-"Provided technical support and customer service, strengthening communication "
-"and problem-solving skills"
+"Provided technical support and customer service, strengthening communication"
+" and problem-solving skills"
 
-#: templates/core/experiencias.html:80
 msgid "HTML5, CSS3, JavaScript, Suporte Técnico, Atendimento ao Cliente"
 msgstr "HTML5, CSS3, JavaScript, Technical Support, Customer Service"
 
-#: templates/core/formacao.html:4 templates/core/formacao.html:9
 msgid "Formação Acadêmica"
 msgstr "Academic Education"
 
-#: templates/core/formacao.html:10
 msgid "Minha jornada de aprendizado"
 msgstr "My learning journey"
 
-#: templates/core/formacao.html:20
 msgid "Bacharelado em Engenharia de Software"
 msgstr "Bachelor's Degree in Software Engineering"
 
-#: templates/core/formacao.html:21
 msgid "UNOPAR — Universidade Norte do Paraná"
 msgstr "UNOPAR — Universidade Norte do Paraná"
 
-#: templates/core/formacao.html:23 templates/core/formacao.html:35
 msgid "Concluído"
 msgstr "Completed"
 
-#: templates/core/formacao.html:32
 msgid "Técnico em Informática"
 msgstr "Technical Degree in Informatics"
 
-#: templates/core/formacao.html:41
 msgid "Certificações"
 msgstr "Certifications"
 
-#: templates/core/formacao.html:51
 msgid "Arquitetura de Software e Padrão MVC"
 msgstr "Software Architecture and MVC Pattern"
 
-#: templates/core/formacao.html:61
 msgid "Design do Código — SOLID e Testes"
 msgstr "Code Design — SOLID and Testing"
 
-#: templates/core/formacao.html:71
 msgid "Explorando Flask"
 msgstr "Exploring Flask"
 
-#: templates/core/formacao.html:81
 msgid "Fundamentos de Python"
 msgstr "Python Fundamentals"
 
-#: templates/core/formacao.html:91
 msgid "Python 3 Completo"
 msgstr "Complete Python 3"
 
-#: templates/core/home.html:10 templates/core/sobre.html:14
+msgid "Imersão Build & Automate — Desenvolvimento e Automação com IA"
+msgstr "Build & Automate Immersion — Development and Automation with AI"
+
+msgid "Logic Master — Lógica de Programação e Algoritmos com Python"
+msgstr "Logic Master — Programming Logic and Algorithms with Python"
+
+msgid "Autenticação JWT e Segurança"
+msgstr "JWT Authentication and Security"
+
 msgid "Foto de Davi Oliveira"
 msgstr "Photo of Davi Oliveira"
 
-#: templates/core/home.html:13
 msgid "Última atualização"
 msgstr "Last update"
 
-#: templates/core/home.html:14
 msgid "Olá, eu sou"
 msgstr "Hi, I'm"
 
-#: templates/core/home.html:15
 msgid ""
-"Engenheiro de Software com expertise em backend (Python, FastAPI, Django) e "
-"forte atuação na intersecção com o ecossistema de dados, automações e IA. "
-"Priorizo a qualidade técnica utilizando Clean Architecture e Pytest, com "
-"vivência prática em PostgreSQL, Docker e Git. Atualmente expandindo meu "
-"portfólio de linguagens com Go (Golang)."
+"Engenheiro de Software Backend|Python · Django · FastAPI|Clean Architecture "
+"&amp; Testes|Automações, Dados &amp; IA"
 msgstr ""
-"Software Engineer with backend expertise (Python, FastAPI, Django) and "
-"strong work at the intersection of the data, automation, and AI ecosystems. "
-"I prioritize technical quality using Clean Architecture and Pytest, with "
-"hands-on experience in PostgreSQL, Docker, and Git. Currently expanding my "
-"language toolkit with Go (Golang)."
+"Backend Software Engineer|Python · Django · FastAPI|Clean Architecture &amp;"
+" Testing|Automation, Data &amp; AI"
 
-#: templates/core/home.html:26
+msgid ""
+"Construo APIs, automações e soluções com IA em Python — com código limpo, "
+"testes e arquitetura preparada para crescer. Atualmente explorando Go "
+"(Golang)."
+msgstr ""
+"I build APIs, automations and AI-powered solutions in Python — with clean "
+"code, testing and an architecture ready to grow. Currently exploring Go "
+"(Golang)."
+
 msgid "Ver Projetos"
 msgstr "View Projects"
 
-#: templates/core/home.html:27
 msgid "Entrar em Contato"
 msgstr "Get in Touch"
 
-#: templates/core/home.html:28
 msgid "Baixar Currículo"
 msgstr "Download Resume"
 
-#: templates/core/projetos.html:10
 msgid "Alguns dos projetos que desenvolvi"
 msgstr "Some of the projects I have built"
 
-#: templates/core/projetos.html:22
 msgid "API Encurtador de Links"
 msgstr "URL Shortener API"
 
-#: templates/core/projetos.html:23
 msgid ""
 "Sistema de encurtamento de URLs com tracking de cliques e geração de QR "
 "Codes. Interface administrativa para gerenciamento e análise de métricas de "
@@ -451,11 +396,12 @@ msgstr ""
 "URL shortening system with click tracking and QR Code generation. "
 "Administrative interface for managing and analyzing access metrics."
 
-#: templates/core/projetos.html:38
+msgid "Código"
+msgstr "Code"
+
 msgid "API de Sistema Bancário"
 msgstr "Banking System API"
 
-#: templates/core/projetos.html:39
 msgid ""
 "API REST com operações de cadastro, saque e extrato para PF e PJ. Clean "
 "Architecture, testes unitários com Pytest e validações de regras de negócio."
@@ -464,33 +410,27 @@ msgstr ""
 "individuals and companies. Clean Architecture, unit tests with Pytest, and "
 "business-rule validations."
 
-#: templates/core/projetos.html:43
 msgid "Arquitetura MVC"
 msgstr "MVC Architecture"
 
-#: templates/core/projetos.html:55
 msgid "API Dieta Diária"
 msgstr "Daily Diet API"
 
-#: templates/core/projetos.html:56
 #, python-format
 msgid ""
-"API RESTful completa (CRUD) com cálculo automático de métricas nutricionais. "
-"Suite de testes unitários com 95%% de cobertura de código."
+"API RESTful completa (CRUD) com cálculo automático de métricas nutricionais."
+" Suite de testes unitários com 95%% de cobertura de código."
 msgstr ""
 "Complete RESTful API (CRUD) with automatic computation of nutritional "
 "metrics. Unit test suite with 95%% code coverage."
 
-#: templates/core/projetos.html:60
 #, python-format
 msgid "Pytest — 95%% cobertura"
 msgstr "Pytest — 95%% coverage"
 
-#: templates/core/projetos.html:71
 msgid "API de Adoção de Pets"
 msgstr "Pet Adoption API"
 
-#: templates/core/projetos.html:72
 msgid ""
 "Aplicação de Clean Architecture e padrão MVC para gestão completa de "
 "adoções. Separação clara de responsabilidades: Controllers, Use Cases, "
@@ -500,114 +440,169 @@ msgstr ""
 "management. Clear separation of responsibilities: Controllers, Use Cases, "
 "Repositories."
 
-#: templates/core/projetos.html:88
 msgid "Chat em Tempo Real"
 msgstr "Real-Time Chat"
 
-#: templates/core/projetos.html:89
 msgid "Sistema de mensagens instantâneas bidirecionais com WebSockets."
 msgstr "Bidirectional instant messaging system using WebSockets."
 
-#: templates/core/projetos.html:103
 msgid "Portfólio Pessoal"
 msgstr "Personal Portfolio"
 
-#: templates/core/projetos.html:104
 msgid ""
-"Site de portfólio profissional com tema dark, Command Palette, formulário de "
-"contato e design responsivo."
+"Site de portfólio profissional com tema dark, Command Palette, formulário de"
+" contato e design responsivo."
 msgstr ""
 "Professional portfolio website with dark theme, Command Palette, contact "
 "form, and responsive design."
 
-#: templates/core/sobre.html:9
-msgid ""
-"\"O mesmo esforço que forja um bom sistema, forja uma boa versão de mim.\""
+msgid "Ver site"
+msgstr "View site"
+
+msgid "\"O mesmo esforço que forja um bom sistema, forja uma boa versão de mim.\""
 msgstr ""
 "\"The same effort that forges a good system forges a better version of me.\""
 
-#: templates/core/sobre.html:17
 msgid "Sobre Mim"
 msgstr "About Me"
 
-#: templates/core/sobre.html:19
 msgid ""
-"Minha jornada na tecnologia começou com um curso técnico em Informática, "
-"onde tive meu primeiro contato com lógica de programação, sistemas e a "
-"curiosidade de entender como tudo funcionava por trás das telas. Esse "
-"interesse evoluiu naturalmente e me levou a cursar o bacharelado em "
-"Engenharia de Software, onde aprofundei minha base e desenvolvi uma visão "
-"mais estruturada sobre como construir soluções tecnológicas de forma "
-"profissional."
+"Minha trajetória na tecnologia começou com a formação técnica em "
+"Informática, onde tive meus primeiros contatos com lógica de programação e "
+"desenvolvimento de sistemas. A curiosidade de entender como a tecnologia "
+"funciona por trás das telas despertou o desejo de me aprofundar na área, o "
+"que me levou à graduação em Engenharia de Software. Foi nesse caminho que "
+"construí uma base sólida e desenvolvi uma visão mais estruturada sobre como "
+"criar soluções que realmente façam sentido para as pessoas e para os "
+"negócios."
 msgstr ""
-"My journey in technology began with a technical degree in Informatics, where "
-"I had my first contact with programming logic, systems, and the curiosity to "
-"understand how everything worked behind the screens. This interest evolved "
-"naturally and led me to a Bachelor's degree in Software Engineering, where I "
-"deepened my foundations and developed a more structured view of how to build "
-"technology solutions professionally."
+"My journey in technology began with a technical degree in Informatics, where"
+" I had my first contact with programming logic and systems development. The "
+"curiosity to understand how technology works behind the screens sparked the "
+"desire to go deeper into the field, which led me to a bachelor's degree in "
+"Software Engineering. It was along this path that I built a solid foundation"
+" and developed a more structured vision of how to create solutions that "
+"truly make sense for people and businesses."
 
-#: templates/core/sobre.html:22
 msgid ""
-"Ao longo desse caminho, fui me direcionando para o desenvolvimento backend, "
-"com foco em Python, construindo aplicações e APIs que vão além de apenas "
-"\"funcionar\". Passei a desenvolver soluções com FastAPI e Django, criando "
-"APIs RESTful, integrando serviços externos e trabalhando com bancos de dados "
-"como PostgreSQL, sempre buscando escrever código limpo, organizado e "
-"sustentável."
+"Hoje, atuo com foco no desenvolvimento backend em Python, criando APIs e "
+"aplicações utilizando frameworks como FastAPI e Django. Gosto de desenvolver"
+" soluções organizadas, integrando serviços, trabalhando com PostgreSQL e "
+"aplicando boas práticas que garantam código limpo, manutenção facilitada e "
+"evolução contínua dos sistemas. Mais do que fazer o software funcionar, "
+"busco construir aplicações confiáveis e preparadas para crescer."
 msgstr ""
-"Along the way, I gravitated toward backend development with a focus on "
-"Python, building applications and APIs that go beyond just \"working\". I "
-"started developing solutions with FastAPI and Django, building RESTful APIs, "
-"integrating external services, and working with databases like PostgreSQL, "
-"always aiming to write clean, organized, and sustainable code."
+"Today, I focus on backend development in Python, building APIs and "
+"applications with frameworks such as FastAPI and Django. I enjoy creating "
+"well-organized solutions, integrating services, working with PostgreSQL and "
+"applying best practices that ensure clean code, easy maintenance and "
+"continuous system evolution. More than making software work, I aim to build "
+"reliable applications that are ready to grow."
 
-#: templates/core/sobre.html:25
 msgid ""
-"Com o tempo, percebi que backend não existe isolado — ele está diretamente "
-"conectado aos dados e ao impacto real no negócio. Isso me levou a aprofundar "
-"meus conhecimentos em análise de dados com Python, trabalhando na "
-"organização, tratamento e geração de insights a partir das informações. Essa "
-"visão ampliada me permite não apenas desenvolver sistemas, mas também "
-"entender o valor que eles entregam."
+"Ao longo dessa jornada, percebi que backend não se resume apenas à lógica de"
+" negócio. Por isso, também aprofundei meus conhecimentos em análise de dados"
+" com Python e em automação de processos, transformando tarefas repetitivas "
+"em fluxos mais eficientes e utilizando dados para apoiar decisões e gerar "
+"valor. Essa visão mais ampla me permite enxergar a tecnologia como uma "
+"ferramenta para resolver problemas reais de forma prática e inteligente."
 msgstr ""
-"Over time, I realized that backend does not exist in isolation — it is "
-"directly connected to data and to real business impact. That led me to "
-"deepen my knowledge of data analysis with Python, working on organizing, "
-"processing, and generating insights from information. This broader view "
-"allows me not only to build systems, but also to understand the value they "
-"deliver."
+"Along this journey, I realized that backend is not just about business "
+"logic. That is why I also deepened my knowledge of data analysis with Python"
+" and process automation, turning repetitive tasks into more efficient "
+"workflows and using data to support decisions and generate value. This "
+"broader perspective allows me to see technology as a tool to solve real "
+"problems in a practical and intelligent way."
 
-#: templates/core/sobre.html:28
 msgid ""
-"Outro ponto importante da minha trajetória é o desenvolvimento de automações "
-"de processos, onde transformo tarefas manuais em soluções mais eficientes, "
-"reduzindo tempo e aumentando a organização dos fluxos. Essa prática reforçou "
-"ainda mais meu foco em resolver problemas reais com tecnologia."
+"Atualmente, atuo como Analista de E-commerce na iBeize, onde aplico "
+"desenvolvimento, automação e análise de dados em uma operação real — "
+"incluindo a construção de um sistema interno fullstack. Sigo expandindo meus"
+" conhecimentos em Go (Golang) e Inteligência Artificial aplicada, sempre "
+"movido pela vontade de aprender e evoluir, e estou em busca de novas "
+"oportunidades na área de desenvolvimento para contribuir com soluções bem "
+"estruturadas e crescer ao lado de equipes que valorizam qualidade, "
+"colaboração e inovação. Meu objetivo é transformar tecnologia, dados e boas "
+"ideias em impacto real."
 msgstr ""
-"Another important part of my journey is process automation, where I turn "
-"manual tasks into more efficient solutions, reducing time and improving "
-"workflow organization. This practice reinforced my focus on solving real "
-"problems with technology."
+"I currently work as an E-commerce Analyst at iBeize, where I apply "
+"development, automation and data analysis to a real operation — including "
+"building an internal fullstack system. I keep expanding my knowledge of Go "
+"(Golang) and applied Artificial Intelligence, always driven by the desire to"
+" learn and evolve, and I am looking for new opportunities in software "
+"development to contribute with well-structured solutions and grow alongside "
+"teams that value quality, collaboration and innovation. My goal is to turn "
+"technology, data and good ideas into real impact."
 
-#: templates/core/sobre.html:31
-msgid ""
-"Atualmente, venho expandindo meus conhecimentos em Go (Golang) e "
-"Inteligência Artificial aplicada, buscando integrar backend, dados e "
-"automação em soluções modernas, performáticas e escaláveis."
-msgstr ""
-"I am currently expanding my knowledge in Go (Golang) and applied Artificial "
-"Intelligence, aiming to integrate backend, data, and automation into modern, "
-"high-performance, and scalable solutions."
+#~ msgid ""
+#~ "Engenheiro de Software com expertise em backend (Python, FastAPI, Django) e "
+#~ "forte atuação na intersecção com o ecossistema de dados, automações e IA. "
+#~ "Priorizo a qualidade técnica utilizando Clean Architecture e Pytest, com "
+#~ "vivência prática em PostgreSQL, Docker e Git. Atualmente expandindo meu "
+#~ "portfólio de linguagens com Go (Golang)."
+#~ msgstr ""
+#~ "Software Engineer with backend expertise (Python, FastAPI, Django) and "
+#~ "strong work at the intersection of the data, automation, and AI ecosystems. "
+#~ "I prioritize technical quality using Clean Architecture and Pytest, with "
+#~ "hands-on experience in PostgreSQL, Docker, and Git. Currently expanding my "
+#~ "language toolkit with Go (Golang)."
 
-#: templates/core/sobre.html:34
-msgid ""
-"Hoje, busco minha primeira oportunidade como desenvolvedor backend, com o "
-"objetivo de aplicar meus conhecimentos em um ambiente real, evoluir "
-"constantemente e contribuir com soluções bem estruturadas. Meu foco é claro: "
-"transformar lógica, dados e tecnologia em soluções que geram impacto real."
-msgstr ""
-"Today, I am looking for my first opportunity as a backend developer, with "
-"the goal of applying my knowledge in a real-world environment, continuously "
-"growing, and contributing well-structured solutions. My focus is clear: "
-"turning logic, data, and technology into solutions that create real impact."
+#~ msgid ""
+#~ "Ao longo desse caminho, fui me direcionando para o desenvolvimento backend, "
+#~ "com foco em Python, construindo aplicações e APIs que vão além de apenas "
+#~ "\"funcionar\". Passei a desenvolver soluções com FastAPI e Django, criando "
+#~ "APIs RESTful, integrando serviços externos e trabalhando com bancos de dados"
+#~ " como PostgreSQL, sempre buscando escrever código limpo, organizado e "
+#~ "sustentável."
+#~ msgstr ""
+#~ "Along the way, I gravitated toward backend development with a focus on "
+#~ "Python, building applications and APIs that go beyond just \"working\". I "
+#~ "started developing solutions with FastAPI and Django, building RESTful APIs,"
+#~ " integrating external services, and working with databases like PostgreSQL, "
+#~ "always aiming to write clean, organized, and sustainable code."
+
+#~ msgid ""
+#~ "Com o tempo, percebi que backend não existe isolado — ele está diretamente "
+#~ "conectado aos dados e ao impacto real no negócio. Isso me levou a aprofundar"
+#~ " meus conhecimentos em análise de dados com Python, trabalhando na "
+#~ "organização, tratamento e geração de insights a partir das informações. Essa"
+#~ " visão ampliada me permite não apenas desenvolver sistemas, mas também "
+#~ "entender o valor que eles entregam."
+#~ msgstr ""
+#~ "Over time, I realized that backend does not exist in isolation — it is "
+#~ "directly connected to data and to real business impact. That led me to "
+#~ "deepen my knowledge of data analysis with Python, working on organizing, "
+#~ "processing, and generating insights from information. This broader view "
+#~ "allows me not only to build systems, but also to understand the value they "
+#~ "deliver."
+
+#~ msgid ""
+#~ "Outro ponto importante da minha trajetória é o desenvolvimento de automações"
+#~ " de processos, onde transformo tarefas manuais em soluções mais eficientes, "
+#~ "reduzindo tempo e aumentando a organização dos fluxos. Essa prática reforçou"
+#~ " ainda mais meu foco em resolver problemas reais com tecnologia."
+#~ msgstr ""
+#~ "Another important part of my journey is process automation, where I turn "
+#~ "manual tasks into more efficient solutions, reducing time and improving "
+#~ "workflow organization. This practice reinforced my focus on solving real "
+#~ "problems with technology."
+
+#~ msgid ""
+#~ "Atualmente, venho expandindo meus conhecimentos em Go (Golang) e "
+#~ "Inteligência Artificial aplicada, buscando integrar backend, dados e "
+#~ "automação em soluções modernas, performáticas e escaláveis."
+#~ msgstr ""
+#~ "I am currently expanding my knowledge in Go (Golang) and applied Artificial "
+#~ "Intelligence, aiming to integrate backend, data, and automation into modern,"
+#~ " high-performance, and scalable solutions."
+
+#~ msgid ""
+#~ "Hoje, busco minha primeira oportunidade como desenvolvedor backend, com o "
+#~ "objetivo de aplicar meus conhecimentos em um ambiente real, evoluir "
+#~ "constantemente e contribuir com soluções bem estruturadas. Meu foco é claro:"
+#~ " transformar lógica, dados e tecnologia em soluções que geram impacto real."
+#~ msgstr ""
+#~ "Today, I am looking for my first opportunity as a backend developer, with "
+#~ "the goal of applying my knowledge in a real-world environment, continuously "
+#~ "growing, and contributing well-structured solutions. My focus is clear: "
+#~ "turning logic, data, and technology into solutions that create real impact."
