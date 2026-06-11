@@ -7,6 +7,8 @@ from django.shortcuts import redirect, render
 from django.utils.translation import gettext as _
 
 from .forms import ContactForm
+from .models import Certification, Experience, Project, Skill, SkillCategory
+from .services import get_github_repos
 
 logger = logging.getLogger(__name__)
 
@@ -18,7 +20,13 @@ def robots_txt(request):
 
 
 def home(request):
-    return render(request, "core/home.html")
+    stats = {
+        "projects": Project.objects.count(),
+        "github_repos": len(get_github_repos()),
+        "certifications": Certification.objects.count(),
+        "skills": Skill.objects.count(),
+    }
+    return render(request, "core/home.html", {"stats": stats})
 
 
 def sobre(request):
@@ -26,19 +34,48 @@ def sobre(request):
 
 
 def competencias(request):
-    return render(request, "core/competencias.html")
+    categories = SkillCategory.objects.prefetch_related("skills")
+    return render(request, "core/competencias.html", {"categories": categories})
 
 
 def projetos(request):
-    return render(request, "core/projetos.html")
+    projects = list(Project.objects.all())
+
+    github_repos = get_github_repos()
+    for project in projects:
+        project.github = github_repos.get(project.repo_name)
+
+    # Filtros curados: label exibido + palavras-chave (separadas por |)
+    # comparadas, sem case, contra as tags de cada projeto.
+    filters = [
+        {"label": "Python", "keywords": "python"},
+        {"label": "Django", "keywords": "django"},
+        {"label": "FastAPI", "keywords": "fastapi"},
+        {"label": "Flask", "keywords": "flask"},
+        {"label": "GoLang", "keywords": "golang"},
+        {"label": "PostgreSQL", "keywords": "postgresql"},
+        {"label": "SQLite", "keywords": "sqlite"},
+        {"label": "Pytest", "keywords": "pytest"},
+        {"label": "PyJWT", "keywords": "pyjwt"},
+        {"label": "Bcrypt", "keywords": "bcrypt"},
+        {"label": _("Dados"), "keywords": "pandas|scikit|tensorflow|jupyter|numpy"},
+    ]
+
+    return render(
+        request,
+        "core/projetos.html",
+        {"projects": projects, "filters": filters},
+    )
 
 
 def experiencias(request):
-    return render(request, "core/experiencias.html")
+    experiences = Experience.objects.all()
+    return render(request, "core/experiencias.html", {"experiences": experiences})
 
 
 def formacao(request):
-    return render(request, "core/formacao.html")
+    certifications = Certification.objects.all()
+    return render(request, "core/formacao.html", {"certifications": certifications})
 
 
 def contato(request):

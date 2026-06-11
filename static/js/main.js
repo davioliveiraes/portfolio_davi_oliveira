@@ -76,6 +76,68 @@ if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-mot
 }
 
 // ============================================
+// CONTADOR ANIMADO (stats da home)
+// ============================================
+const statNumbers = document.querySelectorAll('.stat-number');
+
+if (statNumbers.length) {
+    const showFinal = el => { el.textContent = el.dataset.count; };
+
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        statNumbers.forEach(showFinal);
+    } else {
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                statsObserver.unobserve(entry.target);
+
+                const el = entry.target;
+                const target = parseInt(el.dataset.count, 10);
+                const duration = 1100;
+                const start = performance.now();
+
+                (function step(now) {
+                    const progress = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3); // ease-out
+                    el.textContent = Math.round(target * eased);
+                    if (progress < 1) requestAnimationFrame(step);
+                })(start);
+            });
+        }, { threshold: 0.4 });
+
+        statNumbers.forEach(el => statsObserver.observe(el));
+    }
+}
+
+// ============================================
+// FILTRO DE PROJETOS POR TECNOLOGIA
+// ============================================
+const projectFilters = document.getElementById('projectFilters');
+
+if (projectFilters) {
+    const filterButtons = projectFilters.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    const emptyMessage = document.getElementById('projectsEmpty');
+
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.dataset.filter;
+            let visible = 0;
+            projectCards.forEach(card => {
+                const tags = card.dataset.tags.toLowerCase();
+                const show = filter === 'all' || filter.split('|').some(k => tags.includes(k));
+                card.classList.toggle('filtered-out', !show);
+                if (show) visible++;
+            });
+            if (emptyMessage) emptyMessage.hidden = visible > 0;
+        });
+    });
+}
+
+// ============================================
 // MENU MOBILE
 // ============================================
 const menuToggle = document.querySelector('.menu-toggle');
@@ -179,7 +241,9 @@ const palette = {
 
     navigate(cmd) {
         this.close();
-        if (cmd.external) {
+        if (cmd.action) {
+            cmd.action();
+        } else if (cmd.external) {
             window.open(cmd.url, '_blank', 'noopener');
         } else {
             window.location.href = cmd.url;
@@ -238,3 +302,163 @@ document.getElementById('paletteTrigger').addEventListener('click', () => palett
 palette.overlay.addEventListener('click', (e) => {
     if (e.target === palette.overlay) palette.close();
 });
+
+// ============================================
+// TERMINAL (easter egg) — Ctrl+` ou via palette
+// ============================================
+const terminal = {
+    overlay: document.getElementById('terminalOverlay'),
+    output: document.getElementById('terminalOutput'),
+    input: document.getElementById('terminalInput'),
+    history: [],
+    historyIndex: -1,
+    booted: false,
+    isEN: (document.documentElement.lang || 'pt-br').startsWith('en'),
+
+    t(pt, en) {
+        return this.isEN ? en : pt;
+    },
+
+    pagePath(path) {
+        return this.isEN ? '/en' + path : path;
+    },
+
+    open() {
+        this.overlay.classList.add('open');
+        if (!this.booted) {
+            this.booted = true;
+            this.print(this.t(
+                'Bem-vindo ao portfólio de <span class="term-accent">Davi Oliveira</span>! 🎉\nVocê encontrou o terminal secreto. Digite <span class="term-accent">help</span> para ver os comandos.',
+                "Welcome to <span class=\"term-accent\">Davi Oliveira</span>'s portfolio! 🎉\nYou found the secret terminal. Type <span class=\"term-accent\">help</span> to see the commands."
+            ));
+        }
+        setTimeout(() => this.input.focus(), 50);
+    },
+
+    close() {
+        this.overlay.classList.remove('open');
+        this.input.blur();
+    },
+
+    print(html, cssClass = '') {
+        const line = document.createElement('div');
+        line.className = 'term-line' + (cssClass ? ' ' + cssClass : '');
+        line.innerHTML = html;
+        this.output.appendChild(line);
+        this.output.parentElement.scrollTop = this.output.parentElement.scrollHeight;
+    },
+
+    run(raw) {
+        const cmd = raw.trim().toLowerCase();
+        this.print(`<span class="term-accent">davi@portfolio:~$</span> <span class="term-cmd">${raw.replace(/</g, '&lt;')}</span>`);
+        if (!cmd) return;
+
+        this.history.push(raw);
+        this.historyIndex = this.history.length;
+
+        const go = (path) => {
+            this.print(this.t('Abrindo', 'Opening') + ' ' + path + '...');
+            setTimeout(() => { window.location.href = this.pagePath(path); }, 350);
+        };
+
+        const commands = {
+            help: () => this.print(this.t(
+                'Comandos disponíveis:\n  <span class="term-accent">sobre</span>        quem eu sou\n  <span class="term-accent">projetos</span>     o que eu construí\n  <span class="term-accent">skills</span>       tecnologias que uso\n  <span class="term-accent">experiencia</span>  minha trajetória\n  <span class="term-accent">formacao</span>     estudos e certificações\n  <span class="term-accent">contato</span>      vamos conversar\n  <span class="term-accent">github</span>       meu GitHub\n  <span class="term-accent">linkedin</span>     meu LinkedIn\n  <span class="term-accent">theme</span>        alternar dark/light\n  <span class="term-accent">whoami</span>       ?\n  <span class="term-accent">clear</span>        limpar a tela\n  <span class="term-accent">exit</span>         fechar o terminal',
+                'Available commands:\n  <span class="term-accent">about</span>        who I am\n  <span class="term-accent">projects</span>     what I have built\n  <span class="term-accent">skills</span>       technologies I use\n  <span class="term-accent">experience</span>   my journey\n  <span class="term-accent">education</span>    studies and certifications\n  <span class="term-accent">contact</span>      let\'s talk\n  <span class="term-accent">github</span>       my GitHub\n  <span class="term-accent">linkedin</span>     my LinkedIn\n  <span class="term-accent">theme</span>        toggle dark/light\n  <span class="term-accent">whoami</span>       ?\n  <span class="term-accent">clear</span>        clear the screen\n  <span class="term-accent">exit</span>         close the terminal'
+            )),
+            sobre: () => go('/sobre/'),
+            about: () => go('/sobre/'),
+            projetos: () => go('/projetos/'),
+            projects: () => go('/projetos/'),
+            skills: () => go('/competencias/'),
+            competencias: () => go('/competencias/'),
+            experiencia: () => go('/experiencias/'),
+            experiencias: () => go('/experiencias/'),
+            experience: () => go('/experiencias/'),
+            formacao: () => go('/formacao/'),
+            education: () => go('/formacao/'),
+            contato: () => go('/contato/'),
+            contact: () => go('/contato/'),
+            github: () => { window.open('https://github.com/davioliveiraes', '_blank', 'noopener'); this.print('GitHub ↗'); },
+            linkedin: () => { window.open('https://www.linkedin.com/in/davioliveiraes/', '_blank', 'noopener'); this.print('LinkedIn ↗'); },
+            theme: () => {
+                document.getElementById('themeToggle').click();
+                this.print(this.t('Tema alternado. 🎨', 'Theme toggled. 🎨'));
+            },
+            whoami: () => this.print(this.t(
+                'Um(a) visitante curioso(a) — e isso já diz muito sobre você. 👀\nCuriosidade é requisito da vaga, aliás.',
+                'A curious visitor — and that already says a lot about you. 👀\nCuriosity happens to be a job requirement.'
+            )),
+            ls: () => this.print('sobre/  projetos/  competencias/  experiencias/  formacao/  contato/'),
+            pwd: () => this.print('/home/davi/portfolio'),
+            date: () => this.print(new Date().toLocaleString(this.isEN ? 'en-US' : 'pt-BR')),
+            sudo: () => this.print(this.t(
+                'davi não está no arquivo sudoers. Este incidente será reportado. 😄',
+                'davi is not in the sudoers file. This incident will be reported. 😄'
+            ), 'term-error'),
+            clear: () => { this.output.innerHTML = ''; },
+            exit: () => this.close(),
+        };
+
+        if (commands[cmd]) {
+            commands[cmd]();
+        } else {
+            this.print(this.t(
+                `comando não encontrado: ${cmd}. Tente <span class="term-accent">help</span>.`,
+                `command not found: ${cmd}. Try <span class="term-accent">help</span>.`
+            ), 'term-error');
+        }
+    }
+};
+
+if (terminal.overlay) {
+    // Atalho Ctrl+` (crase)
+    document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && (e.key === '`' || e.key === "'")) {
+            e.preventDefault();
+            terminal.overlay.classList.contains('open') ? terminal.close() : terminal.open();
+        }
+        if (e.key === 'Escape' && terminal.overlay.classList.contains('open')) {
+            terminal.close();
+        }
+    });
+
+    terminal.input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            terminal.run(terminal.input.value);
+            terminal.input.value = '';
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (terminal.historyIndex > 0) {
+                terminal.historyIndex--;
+                terminal.input.value = terminal.history[terminal.historyIndex];
+            }
+        } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (terminal.historyIndex < terminal.history.length - 1) {
+                terminal.historyIndex++;
+                terminal.input.value = terminal.history[terminal.historyIndex];
+            } else {
+                terminal.historyIndex = terminal.history.length;
+                terminal.input.value = '';
+            }
+        }
+    });
+
+    document.getElementById('terminalClose').addEventListener('click', () => terminal.close());
+    terminal.overlay.addEventListener('click', (e) => {
+        if (e.target === terminal.overlay) terminal.close();
+    });
+    document.getElementById('terminalBody').addEventListener('click', () => terminal.input.focus());
+
+    // Entrada pela Command Palette
+    palette.commands.push({
+        label: 'Terminal',
+        desc: terminal.t('Modo terminal (easter egg)', 'Terminal mode (easter egg)'),
+        icon: 'fas fa-terminal',
+        action: () => terminal.open(),
+    });
+
+    // Dica para quem abre o DevTools
+    console.log('%c$ davi@portfolio:~  —  ' + terminal.t('aperte Ctrl+` para abrir o terminal secreto', 'press Ctrl+` to open the secret terminal'), 'font-family: monospace; color: #5fb3c9;');
+}

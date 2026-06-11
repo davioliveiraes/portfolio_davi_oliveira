@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: portfolio-davi-oliveira 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-11 13:42-0300\n"
+"POT-Creation-Date: 2026-06-11 17:07-0300\n"
 "PO-Revision-Date: 2026-05-01 11:00-0300\n"
 "Last-Translator: Davi Oliveira <davioliveiraes7@gmail.com>\n"
 "Language-Team: English\n"
@@ -40,6 +40,117 @@ msgstr "Sent at"
 msgid "Mensagens"
 msgstr "Messages"
 
+msgid "Nome (EN)"
+msgstr "Name (EN)"
+
+msgid "Ícone"
+msgstr "Icon"
+
+msgid "Ordem"
+msgstr "Order"
+
+msgid "Categoria de competência"
+msgstr "Skill category"
+
+msgid "Categorias de competências"
+msgstr "Skill categories"
+
+msgid "Categoria"
+msgstr "Category"
+
+msgid "Detalhe"
+msgstr "Detail"
+
+msgid "Detalhe (EN)"
+msgstr "Detail (EN)"
+
+msgid "Competência"
+msgstr "Skill"
+
+msgid "Competências"
+msgstr "Skills"
+
+msgid "Título"
+msgstr "Title"
+
+msgid "Título (EN)"
+msgstr "Title (EN)"
+
+msgid "Descrição"
+msgstr "Description"
+
+msgid "Descrição (EN)"
+msgstr "Description (EN)"
+
+msgid "Tags"
+msgstr "Tags"
+
+msgid "Tags (EN)"
+msgstr "Tags (EN)"
+
+msgid "URL do GitHub"
+msgstr "GitHub URL"
+
+msgid "URL do site no ar"
+msgstr "Live site URL"
+
+msgid "Projeto"
+msgstr "Project"
+
+msgid "Projetos"
+msgstr "Projects"
+
+msgid "Cargo"
+msgstr "Role"
+
+msgid "Cargo (EN)"
+msgstr "Role (EN)"
+
+msgid "Empresa"
+msgstr "Company"
+
+msgid "Site da empresa"
+msgstr "Company website"
+
+msgid "Período"
+msgstr "Period"
+
+msgid "Período (EN)"
+msgstr "Period (EN)"
+
+msgid "Atividades"
+msgstr "Activities"
+
+msgid "Atividades (EN)"
+msgstr "Activities (EN)"
+
+msgid "Habilidades"
+msgstr "Skills"
+
+msgid "Habilidades (EN)"
+msgstr "Skills (EN)"
+
+msgid "Experiência"
+msgstr "Experience"
+
+msgid "Experiências"
+msgstr "Experience"
+
+msgid "Instituição"
+msgstr "Institution"
+
+msgid "Carga horária (h)"
+msgstr "Workload (h)"
+
+msgid "Certificação"
+msgstr "Certification"
+
+msgid "Certificações"
+msgstr "Certifications"
+
+msgid "Dados"
+msgstr "Data"
+
 msgid "Mensagem enviada com sucesso! Obrigado pelo contato."
 msgstr "Message sent successfully! Thank you for reaching out."
 
@@ -72,15 +183,6 @@ msgstr "Open menu"
 msgid "Sobre"
 msgstr "About"
 
-msgid "Competências"
-msgstr "Skills"
-
-msgid "Projetos"
-msgstr "Projects"
-
-msgid "Experiências"
-msgstr "Experience"
-
 msgid "Formação"
 msgstr "Education"
 
@@ -99,62 +201,14 @@ msgstr "Command palette"
 msgid "Buscar páginas, ações..."
 msgstr "Search pages, actions..."
 
+msgid "Fechar terminal"
+msgstr "Close terminal"
+
 msgid "Competências Técnicas"
 msgstr "Technical Skills"
 
 msgid "Tecnologias e ferramentas que utilizo no dia a dia"
 msgstr "Technologies and tools I use day to day"
-
-msgid "Backend & Frameworks"
-msgstr "Backend & Frameworks"
-
-msgid "Em constante evolução"
-msgstr "Continuously learning"
-
-msgid "Design de APIs RESTful"
-msgstr "RESTful API Design"
-
-msgid "Integração de serviços externos"
-msgstr "External service integration"
-
-msgid "Inteligência Artificial"
-msgstr "Artificial Intelligence"
-
-msgid "Inteligência Artificial & LLMs"
-msgstr "Artificial Intelligence & LLMs"
-
-msgid "Pipelines RAG"
-msgstr "RAG Pipelines"
-
-msgid "Modelos Clássicos de ML"
-msgstr "Classical ML Models"
-
-msgid "Automação de processos"
-msgstr "Process automation"
-
-msgid "Dados"
-msgstr "Data"
-
-msgid "Banco de Dados"
-msgstr "Databases"
-
-msgid "Docker & Conteinerização"
-msgstr "Docker & Containerization"
-
-msgid "Computação em Nuvem (AWS)"
-msgstr "Cloud Computing (AWS)"
-
-msgid "Linux & Linha de Comando"
-msgstr "Linux & Command Line"
-
-msgid "Qualidade & Versionamento"
-msgstr "Quality & Versioning"
-
-msgid "Testes Automatizados (Pytest)"
-msgstr "Automated Testing (Pytest)"
-
-msgid "Git & Controle de Versão"
-msgstr "Git & Version Control"
 
 msgid "Vamos conversar sobre seu próximo projeto"
 msgstr "Let's talk about your next project"
@@ -177,132 +231,6 @@ msgstr "Professional Experience"
 msgid "Minha trajetória profissional"
 msgstr "My professional journey"
 
-msgid "Analista de E-commerce"
-msgstr "E-commerce Analyst"
-
-msgid "Fev 2026 - Presente · Morada Nova, CE · Presencial"
-msgstr "Feb 2026 - Present · Morada Nova, CE · On-site"
-
-msgid ""
-"Análise de resultados, experimentação e otimizações contínuas da loja "
-"NuvemShop"
-msgstr ""
-"Results analysis, experimentation, and continuous optimizations for the "
-"NuvemShop store"
-
-msgid ""
-"Customização do storefront via CSS/HTML/JS/GoTemplate avançado e integração "
-"com ERP GestãoClick"
-msgstr ""
-"Storefront customization via advanced CSS/HTML/JS/GoTemplate and integration"
-" with GestãoClick ERP"
-
-msgid "Monitoramento de KPIs, testes de performance e otimização de ROI"
-msgstr "KPI monitoring, performance testing, and ROI optimization"
-
-msgid ""
-"Configuração de DNS, integração com Melhor Envio e alinhamento de SKUs com "
-"estoque"
-msgstr ""
-"DNS configuration, integration with Melhor Envio, and SKU alignment with "
-"inventory"
-
-msgid ""
-"Desenvolvimento do Ibeize Ecommerce Control — sistema interno fullstack "
-"(Django Ninja + React + Docker) para gestão de catálogo e finanças"
-msgstr ""
-"Development of Ibeize Ecommerce Control — internal fullstack system (Django "
-"Ninja + React + Docker) for catalog and finance management"
-
-msgid "Suporte em ações comerciais e integração com operação logística"
-msgstr ""
-"Support for commercial actions and integration with logistics operations"
-
-msgid "Habilidades"
-msgstr "Skills"
-
-msgid ""
-"NuvemShop, GestãoClick, CSS, HTML, JavaScript, GoTemplate, Django Ninja, "
-"React, Docker, KPIs, ROI, DNS, Melhor Envio"
-msgstr ""
-"NuvemShop, GestãoClick, CSS, HTML, JavaScript, GoTemplate, Django Ninja, "
-"React, Docker, KPIs, ROI, DNS, Melhor Envio"
-
-msgid "Assistente Administrativo"
-msgstr "Administrative Assistant"
-
-msgid "2021 - 2025 · Morada Nova, CE · Presencial"
-msgstr "2021 - 2025 · Morada Nova, CE · On-site"
-
-msgid ""
-"Desenvolvi dashboards automatizados em Excel, transformando dados brutos em "
-"insights de negócio"
-msgstr ""
-"Built automated Excel dashboards, turning raw data into business insights"
-
-#, python-format
-msgid ""
-"Otimizei relatórios internos com lógica de processamento que reduziu o tempo"
-" de geração em até 60%%"
-msgstr ""
-"Optimized internal reports with processing logic that reduced generation "
-"time by up to 60%%"
-
-msgid ""
-"Automatizei análises e relatórios administrativos, melhorando a precisão e "
-"eficiência operacional"
-msgstr ""
-"Automated administrative analyses and reports, improving accuracy and "
-"operational efficiency"
-
-msgid ""
-"Prestei suporte técnico a sistemas e equipamentos, garantindo a continuidade"
-" operacional do SysPDV"
-msgstr ""
-"Provided technical support for systems and equipment, ensuring operational "
-"continuity of SysPDV"
-
-msgid "Excel, Dashboards, Automação de Relatórios, SysPDV, Suporte Técnico"
-msgstr "Excel, Dashboards, Report Automation, SysPDV, Technical Support"
-
-msgid "Jovem Aprendiz"
-msgstr "Young Apprentice"
-
-msgid "2020 - 2021 · Morada Nova, CE · Presencial"
-msgstr "2020 - 2021 · Morada Nova, CE · On-site"
-
-msgid ""
-"Organizei documentação fiscal e planilhas administrativas, aprimorando o "
-"controle de dados"
-msgstr ""
-"Organized fiscal documentation and administrative spreadsheets, improving "
-"data control"
-
-msgid "Desenvolvi atenção a detalhes e precisão em registros administrativos"
-msgstr "Developed attention to detail and accuracy in administrative records"
-
-msgid "Documentação Fiscal, Planilhas Administrativas, Controle de Dados"
-msgstr "Tax Documentation, Administrative Spreadsheets, Data Control"
-
-msgid "Estagiário"
-msgstr "Intern"
-
-msgid "2017 · Morada Nova, CE · Presencial"
-msgstr "2017 · Morada Nova, CE · On-site"
-
-msgid "Iniciei contato com desenvolvimento web (HTML5, CSS3 e JavaScript)"
-msgstr "Started working with web development (HTML5, CSS3, and JavaScript)"
-
-msgid ""
-"Ofereci suporte técnico e atendimento a clientes, fortalecendo comunicação e"
-" resolução de problemas"
-msgstr ""
-"Provided technical support and customer service, strengthening communication"
-" and problem-solving skills"
-
-msgid "HTML5, CSS3, JavaScript, Suporte Técnico, Atendimento ao Cliente"
-msgstr "HTML5, CSS3, JavaScript, Technical Support, Customer Service"
-
 msgid "Formação Acadêmica"
 msgstr "Academic Education"
 
@@ -320,33 +248,6 @@ msgstr "Completed"
 
 msgid "Técnico em Informática"
 msgstr "Technical Degree in Informatics"
-
-msgid "Certificações"
-msgstr "Certifications"
-
-msgid "Arquitetura de Software e Padrão MVC"
-msgstr "Software Architecture and MVC Pattern"
-
-msgid "Design do Código — SOLID e Testes"
-msgstr "Code Design — SOLID and Testing"
-
-msgid "Explorando Flask"
-msgstr "Exploring Flask"
-
-msgid "Fundamentos de Python"
-msgstr "Python Fundamentals"
-
-msgid "Python 3 Completo"
-msgstr "Complete Python 3"
-
-msgid "Imersão Build & Automate — Desenvolvimento e Automação com IA"
-msgstr "Build & Automate Immersion — Development and Automation with AI"
-
-msgid "Logic Master — Lógica de Programação e Algoritmos com Python"
-msgstr "Logic Master — Programming Logic and Algorithms with Python"
-
-msgid "Autenticação JWT e Segurança"
-msgstr "JWT Authentication and Security"
 
 msgid "Foto de Davi Oliveira"
 msgstr "Photo of Davi Oliveira"
@@ -373,6 +274,9 @@ msgstr ""
 "code, testing and an architecture ready to grow. Currently exploring Go "
 "(Golang)."
 
+msgid "Inteligência Artificial"
+msgstr "Artificial Intelligence"
+
 msgid "Ver Projetos"
 msgstr "View Projects"
 
@@ -382,130 +286,32 @@ msgstr "Get in Touch"
 msgid "Baixar Currículo"
 msgstr "Download Resume"
 
+msgid "Repositórios no GitHub"
+msgstr "GitHub repositories"
+
+msgid "Tecnologias"
+msgstr "Technologies"
+
 msgid "Alguns dos projetos que desenvolvi"
 msgstr "Some of the projects I have built"
 
-msgid "API Encurtador de Links"
-msgstr "URL Shortener API"
+msgid "Todos"
+msgstr "All"
 
-msgid ""
-"Sistema de encurtamento de URLs com tracking de cliques e geração de QR "
-"Codes. Interface administrativa para gerenciamento e análise de métricas de "
-"acesso."
-msgstr ""
-"URL shortening system with click tracking and QR Code generation. "
-"Administrative interface for managing and analyzing access metrics."
+msgid "Estrelas no GitHub"
+msgstr "GitHub stars"
+
+msgid "Último commit"
+msgstr "Last commit"
 
 msgid "Código"
 msgstr "Code"
 
-msgid "API de Sistema Bancário"
-msgstr "Banking System API"
-
-msgid ""
-"API REST com operações de cadastro, saque e extrato para PF e PJ. Clean "
-"Architecture, testes unitários com Pytest e validações de regras de negócio."
-msgstr ""
-"REST API with registration, withdrawal, and statement operations for "
-"individuals and companies. Clean Architecture, unit tests with Pytest, and "
-"business-rule validations."
-
-msgid "Arquitetura MVC"
-msgstr "MVC Architecture"
-
-msgid "API Dieta Diária"
-msgstr "Daily Diet API"
-
-#, python-format
-msgid ""
-"API RESTful completa (CRUD) com cálculo automático de métricas nutricionais."
-" Suite de testes unitários com 95%% de cobertura de código."
-msgstr ""
-"Complete RESTful API (CRUD) with automatic computation of nutritional "
-"metrics. Unit test suite with 95%% code coverage."
-
-#, python-format
-msgid "Pytest — 95%% cobertura"
-msgstr "Pytest — 95%% coverage"
-
-msgid "API de Adoção de Pets"
-msgstr "Pet Adoption API"
-
-msgid ""
-"Aplicação de Clean Architecture e padrão MVC para gestão completa de "
-"adoções. Separação clara de responsabilidades: Controllers, Use Cases, "
-"Repositories."
-msgstr ""
-"Application of Clean Architecture and the MVC pattern for full adoption "
-"management. Clear separation of responsibilities: Controllers, Use Cases, "
-"Repositories."
-
-msgid "Chat em Tempo Real"
-msgstr "Real-Time Chat"
-
-msgid "Sistema de mensagens instantâneas bidirecionais com WebSockets."
-msgstr "Bidirectional instant messaging system using WebSockets."
-
-msgid "API Bancária Segura com JWT"
-msgstr "JWT Secured Banking API"
-
-msgid ""
-"API REST bancária com autenticação JWT, criptografia de senhas com bcrypt e "
-"middleware de proteção de rotas. Clean Architecture em camadas, padrão "
-"Composer e testes unitários com Pytest."
-msgstr ""
-"Banking REST API with JWT authentication, bcrypt password hashing and route-"
-"protection middleware. Layered Clean Architecture, Composer pattern and unit"
-" tests with Pytest."
-
-msgid "API de Pedidos com JWT"
-msgstr "JWT Order API"
-
-msgid ""
-"API REST de pedidos com autenticação e autorização via JWT, onde cada "
-"usuário acessa apenas os próprios dados. Padrão MVC em camadas, injeção de "
-"dependências e cobertura completa de testes unitários."
-msgstr ""
-"Order REST API with JWT authentication and authorization, where each user "
-"can only access their own data. Layered MVC pattern, dependency injection "
-"and full unit test coverage."
-
-msgid "Portfólio Pessoal"
-msgstr "Personal Portfolio"
-
-msgid ""
-"Site de portfólio profissional com tema dark, Command Palette, formulário de"
-" contato e design responsivo."
-msgstr ""
-"Professional portfolio website with dark theme, Command Palette, contact "
-"form, and responsive design."
-
 msgid "Ver site"
 msgstr "View site"
 
-msgid "Projetos Python"
-msgstr "Python Projects"
-
-msgid ""
-"Coleção de projetos práticos e exercícios de backend em Python: APIs "
-"RESTful, aplicações web, microserviços, integrações com bancos de dados e "
-"automações, seguindo boas práticas de arquitetura de software."
-msgstr ""
-"A collection of hands-on backend projects and exercises in Python: RESTful "
-"APIs, web applications, microservices, database integrations and "
-"automations, following software architecture best practices."
-
-msgid "Projetos de Ciência de Dados"
-msgstr "Data Science Projects"
-
-msgid ""
-"Coleção de projetos práticos e exercícios de ciência de dados: análise "
-"exploratória, machine learning, deep learning e análise preditiva aplicados "
-"a problemas reais."
-msgstr ""
-"A collection of hands-on data science projects and exercises: exploratory "
-"data analysis, machine learning, deep learning and predictive analytics "
-"applied to real-world problems."
+msgid "Nenhum projeto com essa tecnologia ainda — em breve!"
+msgstr "No projects with this technology yet — coming soon!"
 
 msgid "\"O mesmo esforço que forja um bom sistema, forja uma boa versão de mim.\""
 msgstr ""
@@ -581,6 +387,314 @@ msgstr ""
 "development to contribute with well-structured solutions and grow alongside "
 "teams that value quality, collaboration and innovation. My goal is to turn "
 "technology, data and good ideas into real impact."
+
+#~ msgid "Backend & Frameworks"
+#~ msgstr "Backend & Frameworks"
+
+#~ msgid "Em constante evolução"
+#~ msgstr "Continuously learning"
+
+#~ msgid "Design de APIs RESTful"
+#~ msgstr "RESTful API Design"
+
+#~ msgid "Integração de serviços externos"
+#~ msgstr "External service integration"
+
+#~ msgid "Inteligência Artificial & LLMs"
+#~ msgstr "Artificial Intelligence & LLMs"
+
+#~ msgid "Pipelines RAG"
+#~ msgstr "RAG Pipelines"
+
+#~ msgid "Modelos Clássicos de ML"
+#~ msgstr "Classical ML Models"
+
+#~ msgid "Automação de processos"
+#~ msgstr "Process automation"
+
+#~ msgid "Banco de Dados"
+#~ msgstr "Databases"
+
+#~ msgid "Docker & Conteinerização"
+#~ msgstr "Docker & Containerization"
+
+#~ msgid "Computação em Nuvem (AWS)"
+#~ msgstr "Cloud Computing (AWS)"
+
+#~ msgid "Linux & Linha de Comando"
+#~ msgstr "Linux & Command Line"
+
+#~ msgid "Qualidade & Versionamento"
+#~ msgstr "Quality & Versioning"
+
+#~ msgid "Testes Automatizados (Pytest)"
+#~ msgstr "Automated Testing (Pytest)"
+
+#~ msgid "Git & Controle de Versão"
+#~ msgstr "Git & Version Control"
+
+#~ msgid "Analista de E-commerce"
+#~ msgstr "E-commerce Analyst"
+
+#~ msgid "Fev 2026 - Presente · Morada Nova, CE · Presencial"
+#~ msgstr "Feb 2026 - Present · Morada Nova, CE · On-site"
+
+#~ msgid ""
+#~ "Análise de resultados, experimentação e otimizações contínuas da loja "
+#~ "NuvemShop"
+#~ msgstr ""
+#~ "Results analysis, experimentation, and continuous optimizations for the "
+#~ "NuvemShop store"
+
+#~ msgid ""
+#~ "Customização do storefront via CSS/HTML/JS/GoTemplate avançado e integração "
+#~ "com ERP GestãoClick"
+#~ msgstr ""
+#~ "Storefront customization via advanced CSS/HTML/JS/GoTemplate and integration"
+#~ " with GestãoClick ERP"
+
+#~ msgid "Monitoramento de KPIs, testes de performance e otimização de ROI"
+#~ msgstr "KPI monitoring, performance testing, and ROI optimization"
+
+#~ msgid ""
+#~ "Configuração de DNS, integração com Melhor Envio e alinhamento de SKUs com "
+#~ "estoque"
+#~ msgstr ""
+#~ "DNS configuration, integration with Melhor Envio, and SKU alignment with "
+#~ "inventory"
+
+#~ msgid ""
+#~ "Desenvolvimento do Ibeize Ecommerce Control — sistema interno fullstack "
+#~ "(Django Ninja + React + Docker) para gestão de catálogo e finanças"
+#~ msgstr ""
+#~ "Development of Ibeize Ecommerce Control — internal fullstack system (Django "
+#~ "Ninja + React + Docker) for catalog and finance management"
+
+#~ msgid "Suporte em ações comerciais e integração com operação logística"
+#~ msgstr ""
+#~ "Support for commercial actions and integration with logistics operations"
+
+#~ msgid ""
+#~ "NuvemShop, GestãoClick, CSS, HTML, JavaScript, GoTemplate, Django Ninja, "
+#~ "React, Docker, KPIs, ROI, DNS, Melhor Envio"
+#~ msgstr ""
+#~ "NuvemShop, GestãoClick, CSS, HTML, JavaScript, GoTemplate, Django Ninja, "
+#~ "React, Docker, KPIs, ROI, DNS, Melhor Envio"
+
+#~ msgid "Assistente Administrativo"
+#~ msgstr "Administrative Assistant"
+
+#~ msgid "2021 - 2025 · Morada Nova, CE · Presencial"
+#~ msgstr "2021 - 2025 · Morada Nova, CE · On-site"
+
+#~ msgid ""
+#~ "Desenvolvi dashboards automatizados em Excel, transformando dados brutos em "
+#~ "insights de negócio"
+#~ msgstr ""
+#~ "Built automated Excel dashboards, turning raw data into business insights"
+
+#, python-format
+#~ msgid ""
+#~ "Otimizei relatórios internos com lógica de processamento que reduziu o tempo"
+#~ " de geração em até 60%%"
+#~ msgstr ""
+#~ "Optimized internal reports with processing logic that reduced generation "
+#~ "time by up to 60%%"
+
+#~ msgid ""
+#~ "Automatizei análises e relatórios administrativos, melhorando a precisão e "
+#~ "eficiência operacional"
+#~ msgstr ""
+#~ "Automated administrative analyses and reports, improving accuracy and "
+#~ "operational efficiency"
+
+#~ msgid ""
+#~ "Prestei suporte técnico a sistemas e equipamentos, garantindo a continuidade"
+#~ " operacional do SysPDV"
+#~ msgstr ""
+#~ "Provided technical support for systems and equipment, ensuring operational "
+#~ "continuity of SysPDV"
+
+#~ msgid "Excel, Dashboards, Automação de Relatórios, SysPDV, Suporte Técnico"
+#~ msgstr "Excel, Dashboards, Report Automation, SysPDV, Technical Support"
+
+#~ msgid "Jovem Aprendiz"
+#~ msgstr "Young Apprentice"
+
+#~ msgid "2020 - 2021 · Morada Nova, CE · Presencial"
+#~ msgstr "2020 - 2021 · Morada Nova, CE · On-site"
+
+#~ msgid ""
+#~ "Organizei documentação fiscal e planilhas administrativas, aprimorando o "
+#~ "controle de dados"
+#~ msgstr ""
+#~ "Organized fiscal documentation and administrative spreadsheets, improving "
+#~ "data control"
+
+#~ msgid "Desenvolvi atenção a detalhes e precisão em registros administrativos"
+#~ msgstr "Developed attention to detail and accuracy in administrative records"
+
+#~ msgid "Documentação Fiscal, Planilhas Administrativas, Controle de Dados"
+#~ msgstr "Tax Documentation, Administrative Spreadsheets, Data Control"
+
+#~ msgid "Estagiário"
+#~ msgstr "Intern"
+
+#~ msgid "2017 · Morada Nova, CE · Presencial"
+#~ msgstr "2017 · Morada Nova, CE · On-site"
+
+#~ msgid "Iniciei contato com desenvolvimento web (HTML5, CSS3 e JavaScript)"
+#~ msgstr "Started working with web development (HTML5, CSS3, and JavaScript)"
+
+#~ msgid ""
+#~ "Ofereci suporte técnico e atendimento a clientes, fortalecendo comunicação e"
+#~ " resolução de problemas"
+#~ msgstr ""
+#~ "Provided technical support and customer service, strengthening communication"
+#~ " and problem-solving skills"
+
+#~ msgid "HTML5, CSS3, JavaScript, Suporte Técnico, Atendimento ao Cliente"
+#~ msgstr "HTML5, CSS3, JavaScript, Technical Support, Customer Service"
+
+#~ msgid "Arquitetura de Software e Padrão MVC"
+#~ msgstr "Software Architecture and MVC Pattern"
+
+#~ msgid "Design do Código — SOLID e Testes"
+#~ msgstr "Code Design — SOLID and Testing"
+
+#~ msgid "Explorando Flask"
+#~ msgstr "Exploring Flask"
+
+#~ msgid "Fundamentos de Python"
+#~ msgstr "Python Fundamentals"
+
+#~ msgid "Python 3 Completo"
+#~ msgstr "Complete Python 3"
+
+#~ msgid "Imersão Build & Automate — Desenvolvimento e Automação com IA"
+#~ msgstr "Build & Automate Immersion — Development and Automation with AI"
+
+#~ msgid "Logic Master — Lógica de Programação e Algoritmos com Python"
+#~ msgstr "Logic Master — Programming Logic and Algorithms with Python"
+
+#~ msgid "Autenticação JWT e Segurança"
+#~ msgstr "JWT Authentication and Security"
+
+#~ msgid "API Encurtador de Links"
+#~ msgstr "URL Shortener API"
+
+#~ msgid ""
+#~ "Sistema de encurtamento de URLs com tracking de cliques e geração de QR "
+#~ "Codes. Interface administrativa para gerenciamento e análise de métricas de "
+#~ "acesso."
+#~ msgstr ""
+#~ "URL shortening system with click tracking and QR Code generation. "
+#~ "Administrative interface for managing and analyzing access metrics."
+
+#~ msgid "API de Sistema Bancário"
+#~ msgstr "Banking System API"
+
+#~ msgid ""
+#~ "API REST com operações de cadastro, saque e extrato para PF e PJ. Clean "
+#~ "Architecture, testes unitários com Pytest e validações de regras de negócio."
+#~ msgstr ""
+#~ "REST API with registration, withdrawal, and statement operations for "
+#~ "individuals and companies. Clean Architecture, unit tests with Pytest, and "
+#~ "business-rule validations."
+
+#~ msgid "Arquitetura MVC"
+#~ msgstr "MVC Architecture"
+
+#~ msgid "API Dieta Diária"
+#~ msgstr "Daily Diet API"
+
+#, python-format
+#~ msgid ""
+#~ "API RESTful completa (CRUD) com cálculo automático de métricas nutricionais."
+#~ " Suite de testes unitários com 95%% de cobertura de código."
+#~ msgstr ""
+#~ "Complete RESTful API (CRUD) with automatic computation of nutritional "
+#~ "metrics. Unit test suite with 95%% code coverage."
+
+#, python-format
+#~ msgid "Pytest — 95%% cobertura"
+#~ msgstr "Pytest — 95%% coverage"
+
+#~ msgid "API de Adoção de Pets"
+#~ msgstr "Pet Adoption API"
+
+#~ msgid ""
+#~ "Aplicação de Clean Architecture e padrão MVC para gestão completa de "
+#~ "adoções. Separação clara de responsabilidades: Controllers, Use Cases, "
+#~ "Repositories."
+#~ msgstr ""
+#~ "Application of Clean Architecture and the MVC pattern for full adoption "
+#~ "management. Clear separation of responsibilities: Controllers, Use Cases, "
+#~ "Repositories."
+
+#~ msgid "Chat em Tempo Real"
+#~ msgstr "Real-Time Chat"
+
+#~ msgid "Sistema de mensagens instantâneas bidirecionais com WebSockets."
+#~ msgstr "Bidirectional instant messaging system using WebSockets."
+
+#~ msgid "API Bancária Segura com JWT"
+#~ msgstr "JWT Secured Banking API"
+
+#~ msgid ""
+#~ "API REST bancária com autenticação JWT, criptografia de senhas com bcrypt e "
+#~ "middleware de proteção de rotas. Clean Architecture em camadas, padrão "
+#~ "Composer e testes unitários com Pytest."
+#~ msgstr ""
+#~ "Banking REST API with JWT authentication, bcrypt password hashing and route-"
+#~ "protection middleware. Layered Clean Architecture, Composer pattern and unit"
+#~ " tests with Pytest."
+
+#~ msgid "API de Pedidos com JWT"
+#~ msgstr "JWT Order API"
+
+#~ msgid ""
+#~ "API REST de pedidos com autenticação e autorização via JWT, onde cada "
+#~ "usuário acessa apenas os próprios dados. Padrão MVC em camadas, injeção de "
+#~ "dependências e cobertura completa de testes unitários."
+#~ msgstr ""
+#~ "Order REST API with JWT authentication and authorization, where each user "
+#~ "can only access their own data. Layered MVC pattern, dependency injection "
+#~ "and full unit test coverage."
+
+#~ msgid "Portfólio Pessoal"
+#~ msgstr "Personal Portfolio"
+
+#~ msgid ""
+#~ "Site de portfólio profissional com tema dark, Command Palette, formulário de"
+#~ " contato e design responsivo."
+#~ msgstr ""
+#~ "Professional portfolio website with dark theme, Command Palette, contact "
+#~ "form, and responsive design."
+
+#~ msgid "Projetos Python"
+#~ msgstr "Python Projects"
+
+#~ msgid ""
+#~ "Coleção de projetos práticos e exercícios de backend em Python: APIs "
+#~ "RESTful, aplicações web, microserviços, integrações com bancos de dados e "
+#~ "automações, seguindo boas práticas de arquitetura de software."
+#~ msgstr ""
+#~ "A collection of hands-on backend projects and exercises in Python: RESTful "
+#~ "APIs, web applications, microservices, database integrations and "
+#~ "automations, following software architecture best practices."
+
+#~ msgid "Projetos de Ciência de Dados"
+#~ msgstr "Data Science Projects"
+
+#~ msgid ""
+#~ "Coleção de projetos práticos e exercícios de ciência de dados: análise "
+#~ "exploratória, machine learning, deep learning e análise preditiva aplicados "
+#~ "a problemas reais."
+#~ msgstr ""
+#~ "A collection of hands-on data science projects and exercises: exploratory "
+#~ "data analysis, machine learning, deep learning and predictive analytics "
+#~ "applied to real-world problems."
 
 #~ msgid ""
 #~ "Engenheiro de Software com expertise em backend (Python, FastAPI, Django) e "

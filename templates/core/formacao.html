@@ -43,85 +43,17 @@
     </div>
 
     <div class="formation-grid">
+        {% for cert in certifications %}
         <div class="formation-card">
             <div class="formation-icon">
                 <i class="fas fa-certificate"></i>
             </div>
             <div class="formation-info">
-                <h3>{% trans "Arquitetura de Software e Padrão MVC" %}</h3>
-                <span class="formation-institution">Rocketseat · 10h</span>
+                <h3>{{ cert.name_i18n }}</h3>
+                <span class="formation-institution">{{ cert.institution }}{% if cert.hours %} · {{ cert.hours }}h{% endif %}</span>
             </div>
         </div>
-
-        <div class="formation-card">
-            <div class="formation-icon">
-                <i class="fas fa-certificate"></i>
-            </div>
-            <div class="formation-info">
-                <h3>{% trans "Design do Código — SOLID e Testes" %}</h3>
-                <span class="formation-institution">Rocketseat · 6h</span>
-            </div>
-        </div>
-
-        <div class="formation-card">
-            <div class="formation-icon">
-                <i class="fas fa-certificate"></i>
-            </div>
-            <div class="formation-info">
-                <h3>{% trans "Explorando Flask" %}</h3>
-                <span class="formation-institution">Rocketseat · 10h</span>
-            </div>
-        </div>
-
-        <div class="formation-card">
-            <div class="formation-icon">
-                <i class="fas fa-certificate"></i>
-            </div>
-            <div class="formation-info">
-                <h3>{% trans "Fundamentos de Python" %}</h3>
-                <span class="formation-institution">Rocketseat · 10h</span>
-            </div>
-        </div>
-
-        <div class="formation-card">
-            <div class="formation-icon">
-                <i class="fas fa-certificate"></i>
-            </div>
-            <div class="formation-info">
-                <h3>{% trans "Python 3 Completo" %}</h3>
-                <span class="formation-institution">Curso em Vídeo · 80h</span>
-            </div>
-        </div>
-
-        <div class="formation-card">
-            <div class="formation-icon">
-                <i class="fas fa-certificate"></i>
-            </div>
-            <div class="formation-info">
-                <h3>{% trans "Imersão Build & Automate — Desenvolvimento e Automação com IA" %}</h3>
-                <span class="formation-institution">Rocketseat · 5h</span>
-            </div>
-        </div>
-
-        <div class="formation-card">
-            <div class="formation-icon">
-                <i class="fas fa-certificate"></i>
-            </div>
-            <div class="formation-info">
-                <h3>{% trans "Logic Master — Lógica de Programação e Algoritmos com Python" %}</h3>
-                <span class="formation-institution">PyCodeBR Treinamentos · 5h</span>
-            </div>
-        </div>
-
-        <div class="formation-card">
-            <div class="formation-icon">
-                <i class="fas fa-certificate"></i>
-            </div>
-            <div class="formation-info">
-                <h3>{% trans "Autenticação JWT e Segurança" %}</h3>
-                <span class="formation-institution">Rocketseat · 7h</span>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 </section>
 {% endblock %}

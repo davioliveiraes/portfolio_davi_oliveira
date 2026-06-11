@@ -12,71 +12,31 @@
     </div>
 
     <div class="timeline">
+        {% for experience in experiences %}
         <div class="timeline-item">
             <div class="timeline-card">
                 <div class="timeline-header">
-                    <h3>{% trans "Analista de E-commerce" %}</h3>
-                    <span class="timeline-company"><a href="https://www.ibeize.com.br" target="_blank" rel="noopener">iBeize</a></span>
+                    <h3>{{ experience.role_i18n }}</h3>
+                    <span class="timeline-company">
+                        {% if experience.company_url %}
+                        <a href="{{ experience.company_url }}" target="_blank" rel="noopener">{{ experience.company }}</a>
+                        {% else %}
+                        {{ experience.company }}
+                        {% endif %}
+                    </span>
                 </div>
-                <span class="timeline-period"><i class="far fa-calendar-alt"></i> {% trans "Fev 2026 - Presente · Morada Nova, CE · Presencial" %}</span>
+                <span class="timeline-period"><i class="far fa-calendar-alt"></i> {{ experience.period_i18n }}</span>
                 <ul class="timeline-details">
-                    <li>{% trans "Análise de resultados, experimentação e otimizações contínuas da loja NuvemShop" %}</li>
-                    <li>{% trans "Customização do storefront via CSS/HTML/JS/GoTemplate avançado e integração com ERP GestãoClick" %}</li>
-                    <li>{% trans "Monitoramento de KPIs, testes de performance e otimização de ROI" %}</li>
-                    <li>{% trans "Configuração de DNS, integração com Melhor Envio e alinhamento de SKUs com estoque" %}</li>
-                    <li>{% trans "Desenvolvimento do Ibeize Ecommerce Control — sistema interno fullstack (Django Ninja + React + Docker) para gestão de catálogo e finanças" %}</li>
-                    <li>{% trans "Suporte em ações comerciais e integração com operação logística" %}</li>
+                    {% for detail in experience.details_list %}
+                    <li>{{ detail }}</li>
+                    {% endfor %}
                 </ul>
-                <p class="timeline-skills"><strong>{% trans "Habilidades" %}:</strong> {% trans "NuvemShop, GestãoClick, CSS, HTML, JavaScript, GoTemplate, Django Ninja, React, Docker, KPIs, ROI, DNS, Melhor Envio" %}</p>
+                {% if experience.skills %}
+                <p class="timeline-skills"><strong>{% trans "Habilidades" %}:</strong> {{ experience.skills_i18n }}</p>
+                {% endif %}
             </div>
         </div>
-
-        <div class="timeline-item">
-            <div class="timeline-card">
-                <div class="timeline-header">
-                    <h3>{% trans "Assistente Administrativo" %}</h3>
-                    <span class="timeline-company">Hiper Morada Nova</span>
-                </div>
-                <span class="timeline-period"><i class="far fa-calendar-alt"></i> {% trans "2021 - 2025 · Morada Nova, CE · Presencial" %}</span>
-                <ul class="timeline-details">
-                    <li>{% trans "Desenvolvi dashboards automatizados em Excel, transformando dados brutos em insights de negócio" %}</li>
-                    <li>{% trans "Otimizei relatórios internos com lógica de processamento que reduziu o tempo de geração em até 60%" %}</li>
-                    <li>{% trans "Automatizei análises e relatórios administrativos, melhorando a precisão e eficiência operacional" %}</li>
-                    <li>{% trans "Prestei suporte técnico a sistemas e equipamentos, garantindo a continuidade operacional do SysPDV" %}</li>
-                </ul>
-                <p class="timeline-skills"><strong>{% trans "Habilidades" %}:</strong> {% trans "Excel, Dashboards, Automação de Relatórios, SysPDV, Suporte Técnico" %}</p>
-            </div>
-        </div>
-
-        <div class="timeline-item">
-            <div class="timeline-card">
-                <div class="timeline-header">
-                    <h3>{% trans "Jovem Aprendiz" %}</h3>
-                    <span class="timeline-company">Betânia Lácteos</span>
-                </div>
-                <span class="timeline-period"><i class="far fa-calendar-alt"></i> {% trans "2020 - 2021 · Morada Nova, CE · Presencial" %}</span>
-                <ul class="timeline-details">
-                    <li>{% trans "Organizei documentação fiscal e planilhas administrativas, aprimorando o controle de dados" %}</li>
-                    <li>{% trans "Desenvolvi atenção a detalhes e precisão em registros administrativos" %}</li>
-                </ul>
-                <p class="timeline-skills"><strong>{% trans "Habilidades" %}:</strong> {% trans "Documentação Fiscal, Planilhas Administrativas, Controle de Dados" %}</p>
-            </div>
-        </div>
-
-        <div class="timeline-item">
-            <div class="timeline-card">
-                <div class="timeline-header">
-                    <h3>{% trans "Estagiário" %}</h3>
-                    <span class="timeline-company">Prisma Informática</span>
-                </div>
-                <span class="timeline-period"><i class="far fa-calendar-alt"></i> {% trans "2017 · Morada Nova, CE · Presencial" %}</span>
-                <ul class="timeline-details">
-                    <li>{% trans "Iniciei contato com desenvolvimento web (HTML5, CSS3 e JavaScript)" %}</li>
-                    <li>{% trans "Ofereci suporte técnico e atendimento a clientes, fortalecendo comunicação e resolução de problemas" %}</li>
-                </ul>
-                <p class="timeline-skills"><strong>{% trans "Habilidades" %}:</strong> {% trans "HTML5, CSS3, JavaScript, Suporte Técnico, Atendimento ao Cliente" %}</p>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 </section>
 {% endblock %}

@@ -89,6 +89,26 @@
         </div>
     </div>
 
+    <!-- Terminal (easter egg) -->
+    <div class="terminal-overlay" id="terminalOverlay">
+        <div class="terminal" role="dialog" aria-label="Terminal">
+            <div class="terminal-titlebar">
+                <span class="term-dot term-dot-red"></span>
+                <span class="term-dot term-dot-yellow"></span>
+                <span class="term-dot term-dot-green"></span>
+                <span class="terminal-title">davi@portfolio: ~</span>
+                <button class="terminal-close" id="terminalClose" aria-label="{% trans 'Fechar terminal' %}">&times;</button>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+                <div class="terminal-output" id="terminalOutput"></div>
+                <div class="terminal-input-line">
+                    <span class="terminal-prompt">davi@portfolio:~$</span>
+                    <input type="text" id="terminalInput" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <main>
         {% block content %}{% endblock %}
     </main>

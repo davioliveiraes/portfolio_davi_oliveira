@@ -31,4 +31,25 @@
         </div>
     </div>
 </section>
+
+<section class="stats-section">
+    <div class="stat-item">
+        <span class="stat-number" data-count="{{ stats.projects }}">0</span>
+        <span class="stat-label">{% trans "Projetos" %}</span>
+    </div>
+    {% if stats.github_repos %}
+    <div class="stat-item">
+        <span class="stat-number" data-count="{{ stats.github_repos }}">0</span>
+        <span class="stat-label">{% trans "Repositórios no GitHub" %}</span>
+    </div>
+    {% endif %}
+    <div class="stat-item">
+        <span class="stat-number" data-count="{{ stats.certifications }}">0</span>
+        <span class="stat-label">{% trans "Certificações" %}</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-number" data-count="{{ stats.skills }}">0</span>
+        <span class="stat-label">{% trans "Tecnologias" %}</span>
+    </div>
+</section>
 {% endblock %}
