@@ -4,7 +4,8 @@
 #
 # Roda da SUA máquina local. Verifica o repositório local, garante que o
 # código está no GitHub e conecta na VPS via SSH para aplicar a atualização
-# (git pull -> migrate -> collectstatic -> restart) com healthcheck do serviço.
+# (git pull -> pip install -> migrate -> collectstatic -> restart) com
+# healthcheck do serviço.
 #
 # Pré-requisito: autenticação por chave SSH já configurada (ssh-copy-id),
 # para conectar sem digitar senha.
@@ -84,6 +85,9 @@ git pull origin "$BRANCH"
 
 echo "==> [remoto] Ativando virtualenv"
 source venv/bin/activate
+
+echo "==> [remoto] Instalando/atualizando dependências"
+pip install -r requirements.txt --quiet
 
 echo "==> [remoto] Aplicando migrações"
 python manage.py migrate --noinput
