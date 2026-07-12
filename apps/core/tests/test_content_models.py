@@ -11,14 +11,14 @@ class TestSeededContent:
 
     def test_seed_populates_all_models(self):
         assert SkillCategory.objects.count() == 7
-        assert Project.objects.count() == 10
+        assert Project.objects.count() == 11
         assert Experience.objects.count() == 4
         assert Certification.objects.count() == 8
 
     def test_projects_are_ordered(self):
         titles = list(Project.objects.values_list("title", flat=True))
         assert titles[0] == "API Encurtador de Links"
-        assert titles[-1] == "Projetos de Ciência de Dados"
+        assert titles[-1] == "E-commerce Ibeize"
 
 
 @pytest.mark.django_db
@@ -55,7 +55,7 @@ class TestProjectHelpers:
 class TestExperienceHelpers:
     def test_details_list_splits_lines(self):
         experience = Experience.objects.get(company="iBeize")
-        assert len(experience.details_list) == 6
+        assert len(experience.details_list) == 4
 
     def test_details_translated(self):
         with translation.override("en"):

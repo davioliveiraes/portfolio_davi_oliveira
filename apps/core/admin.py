@@ -26,8 +26,9 @@ class SkillCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ("title", "tags", "live_url", "order")
-    list_editable = ("order",)
+    list_display = ("title", "category", "tags", "live_url", "order")
+    list_editable = ("category", "order")
+    list_filter = ("category",)
     search_fields = ("title", "description", "tags")
 
 

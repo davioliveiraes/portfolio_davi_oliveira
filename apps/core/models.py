@@ -84,6 +84,17 @@ class Skill(TranslatableMixin, models.Model):
 
 
 class Project(TranslatableMixin, models.Model):
+    class Category(models.TextChoices):
+        TECNICO = "tecnico", _("Projetos Técnicos")
+        EMPRESARIAL = "empresarial", _("Soluções Empresariais")
+        SITES = "sites", _("Sites & Landing Pages")
+
+    category = models.CharField(
+        _("Categoria"),
+        max_length=20,
+        choices=Category.choices,
+        default=Category.TECNICO,
+    )
     title = models.CharField(_("Título"), max_length=150)
     title_en = models.CharField(_("Título (EN)"), max_length=150, blank=True)
     description = models.TextField(_("Descrição"))
@@ -92,7 +103,7 @@ class Project(TranslatableMixin, models.Model):
         _("Tags"), max_length=255, help_text="Separadas por vírgula"
     )
     tags_en = models.CharField(_("Tags (EN)"), max_length=255, blank=True)
-    github_url = models.URLField(_("URL do GitHub"))
+    github_url = models.URLField(_("URL do GitHub"), blank=True)
     live_url = models.URLField(_("URL do site no ar"), blank=True)
     order = models.PositiveSmallIntegerField(_("Ordem"), default=0)
 

@@ -7,7 +7,7 @@ from django.shortcuts import redirect, render
 from django.utils.translation import gettext as _
 
 from .forms import ContactForm
-from .models import Certification, Experience, Project, Skill, SkillCategory
+from .models import Certification, Experience, Project, SkillCategory
 from .services import get_github_repos
 
 logger = logging.getLogger(__name__)
@@ -20,13 +20,7 @@ def robots_txt(request):
 
 
 def home(request):
-    stats = {
-        "projects": Project.objects.count(),
-        "github_repos": len(get_github_repos()),
-        "certifications": Certification.objects.count(),
-        "skills": Skill.objects.count(),
-    }
-    return render(request, "core/home.html", {"stats": stats})
+    return render(request, "core/home.html")
 
 
 def sobre(request):
@@ -45,20 +39,9 @@ def projetos(request):
     for project in projects:
         project.github = github_repos.get(project.repo_name)
 
-    # Filtros curados: label exibido + palavras-chave (separadas por |)
-    # comparadas, sem case, contra as tags de cada projeto.
+    # Filtros por categoria do projeto (choices do modelo)
     filters = [
-        {"label": "Python", "keywords": "python"},
-        {"label": "Django", "keywords": "django"},
-        {"label": "FastAPI", "keywords": "fastapi"},
-        {"label": "Flask", "keywords": "flask"},
-        {"label": "GoLang", "keywords": "golang"},
-        {"label": "PostgreSQL", "keywords": "postgresql"},
-        {"label": "SQLite", "keywords": "sqlite"},
-        {"label": "Pytest", "keywords": "pytest"},
-        {"label": "PyJWT", "keywords": "pyjwt"},
-        {"label": "Bcrypt", "keywords": "bcrypt"},
-        {"label": _("Dados"), "keywords": "pandas|scikit|tensorflow|jupyter|numpy"},
+        {"label": label, "value": value} for value, label in Project.Category.choices
     ]
 
     return render(

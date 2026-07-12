@@ -15,14 +15,14 @@
     <div class="project-filters" id="projectFilters">
         <button class="filter-btn active" data-filter="all">{% trans "Todos" %}</button>
         {% for f in filters %}
-        <button class="filter-btn" data-filter="{{ f.keywords }}">{{ f.label }}</button>
+        <button class="filter-btn" data-filter="{{ f.value }}">{{ f.label }}</button>
         {% endfor %}
     </div>
     {% endif %}
 
     <div class="projects-grid">
         {% for project in projects %}
-        <div class="project-card" data-tags="{{ project.tag_list|join:'||' }}">
+        <div class="project-card" data-category="{{ project.category }}">
             <div class="project-header">
                 <i class="fas fa-folder-open"></i>
             </div>
@@ -43,9 +43,11 @@
             </div>
             {% endif %}
             <div class="project-actions">
+                {% if project.github_url %}
                 <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="project-link">
                     <i class="fab fa-github"></i><span>{% trans "Código" %}</span>
                 </a>
+                {% endif %}
                 {% if project.live_url %}
                 <a href="{{ project.live_url }}" target="_blank" rel="noopener" class="project-link project-link-live">
                     <i class="fas fa-external-link-alt"></i><span>{% trans "Ver site" %}</span>
@@ -56,6 +58,6 @@
         {% endfor %}
     </div>
 
-    <p class="projects-empty" id="projectsEmpty" hidden>{% trans "Nenhum projeto com essa tecnologia ainda — em breve!" %}</p>
+    <p class="projects-empty" id="projectsEmpty" hidden>{% trans "Nenhum projeto nessa categoria ainda — em breve!" %}</p>
 </section>
 {% endblock %}

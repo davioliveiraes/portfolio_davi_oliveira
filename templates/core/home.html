@@ -12,16 +12,17 @@
         <div class="hero-text">
             {% if last_update %}<p class="greeting">{% trans "Última atualização" %}: {{ last_update }}</p>{% endif %}
             <h1>{% trans "Olá, eu sou" %} <span class="highlight">Davi Oliveira</span></h1>
-            <p class="typewriter" id="typewriter" data-phrases="{% trans 'Engenheiro de Software Backend|Python · Django · FastAPI|Clean Architecture &amp; Testes|Automações, Dados &amp; IA' %}"><span class="typewriter-text" id="typewriterText"></span><span class="typewriter-cursor" aria-hidden="true">▌</span></p>
-            <p class="subtitle">{% trans "Construo APIs, automações e soluções com IA em Python — com código limpo, testes e arquitetura preparada para crescer. Atualmente explorando Go (Golang)." %}</p>
+            <p class="hero-tagline">{% trans "Programação, IA e Dados" %}</p>
+            <p class="subtitle">{% trans "Desenvolvo soluções Full Stack com Python e TypeScript, criando sistemas web, APIs, automações, análise de dados e aplicações com IA. Trabalho com foco em interfaces intuitivas, código bem estruturado e arquitetura." %}</p>
             <div class="tech-stack">
                 <span class="tech-tag">Python</span>
                 <span class="tech-tag">Django</span>
                 <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">TypeScript</span>
                 <span class="tech-tag">Go (Golang)</span>
                 <span class="tech-tag">Docker</span>
                 <span class="tech-tag">PostgreSQL</span>
-                <span class="tech-tag">{% trans "Inteligência Artificial" %}</span>
+                <span class="tech-tag">{% trans "IA Aplicada" %}</span>
             </div>
             <div class="cta-buttons">
                 <a href="{% url 'core:projetos' %}" class="btn btn-primary">{% trans "Ver Projetos" %}</a>
@@ -32,24 +33,4 @@
     </div>
 </section>
 
-<section class="stats-section">
-    <div class="stat-item">
-        <span class="stat-number" data-count="{{ stats.projects }}">0</span>
-        <span class="stat-label">{% trans "Projetos" %}</span>
-    </div>
-    {% if stats.github_repos %}
-    <div class="stat-item">
-        <span class="stat-number" data-count="{{ stats.github_repos }}">0</span>
-        <span class="stat-label">{% trans "Repositórios no GitHub" %}</span>
-    </div>
-    {% endif %}
-    <div class="stat-item">
-        <span class="stat-number" data-count="{{ stats.certifications }}">0</span>
-        <span class="stat-label">{% trans "Certificações" %}</span>
-    </div>
-    <div class="stat-item">
-        <span class="stat-number" data-count="{{ stats.skills }}">0</span>
-        <span class="stat-label">{% trans "Tecnologias" %}</span>
-    </div>
-</section>
 {% endblock %}

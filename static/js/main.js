@@ -18,41 +18,6 @@ window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e
 });
 
 // ============================================
-// TYPEWRITER (hero)
-// ============================================
-const typewriter = document.getElementById('typewriter');
-
-if (typewriter) {
-    const phrases = typewriter.dataset.phrases.split('|');
-    const textEl = document.getElementById('typewriterText');
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        textEl.textContent = phrases[0];
-    } else {
-        let phraseIndex = 0;
-        let charIndex = 0;
-        let deleting = false;
-
-        (function tick() {
-            const phrase = phrases[phraseIndex];
-            charIndex += deleting ? -1 : 1;
-            textEl.textContent = phrase.slice(0, charIndex);
-
-            let delay = deleting ? 40 : 85;
-            if (!deleting && charIndex === phrase.length) {
-                deleting = true;
-                delay = 2200; // pausa com a frase completa
-            } else if (deleting && charIndex === 0) {
-                deleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-                delay = 400;
-            }
-            setTimeout(tick, delay);
-        })();
-    }
-}
-
-// ============================================
 // ANIMAÇÃO DE ENTRADA NO SCROLL
 // ============================================
 const revealSelector = '.skill-card, .project-card, .timeline-card, .formation-card, .info-item, .section-header';
@@ -76,40 +41,6 @@ if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-mot
 }
 
 // ============================================
-// CONTADOR ANIMADO (stats da home)
-// ============================================
-const statNumbers = document.querySelectorAll('.stat-number');
-
-if (statNumbers.length) {
-    const showFinal = el => { el.textContent = el.dataset.count; };
-
-    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        statNumbers.forEach(showFinal);
-    } else {
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                statsObserver.unobserve(entry.target);
-
-                const el = entry.target;
-                const target = parseInt(el.dataset.count, 10);
-                const duration = 1100;
-                const start = performance.now();
-
-                (function step(now) {
-                    const progress = Math.min((now - start) / duration, 1);
-                    const eased = 1 - Math.pow(1 - progress, 3); // ease-out
-                    el.textContent = Math.round(target * eased);
-                    if (progress < 1) requestAnimationFrame(step);
-                })(start);
-            });
-        }, { threshold: 0.4 });
-
-        statNumbers.forEach(el => statsObserver.observe(el));
-    }
-}
-
-// ============================================
 // FILTRO DE PROJETOS POR TECNOLOGIA
 // ============================================
 const projectFilters = document.getElementById('projectFilters');
@@ -127,8 +58,7 @@ if (projectFilters) {
             const filter = btn.dataset.filter;
             let visible = 0;
             projectCards.forEach(card => {
-                const tags = card.dataset.tags.toLowerCase();
-                const show = filter === 'all' || filter.split('|').some(k => tags.includes(k));
+                const show = filter === 'all' || card.dataset.category === filter;
                 card.classList.toggle('filtered-out', !show);
                 if (show) visible++;
             });
