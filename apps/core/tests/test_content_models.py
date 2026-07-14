@@ -11,14 +11,14 @@ class TestSeededContent:
 
     def test_seed_populates_all_models(self):
         assert SkillCategory.objects.count() == 7
-        assert Project.objects.count() == 11
+        assert Project.objects.count() == 12
         assert Experience.objects.count() == 4
         assert Certification.objects.count() == 8
 
     def test_projects_are_ordered(self):
         titles = list(Project.objects.values_list("title", flat=True))
-        assert titles[0] == "API Encurtador de Links"
-        assert titles[-1] == "E-commerce Ibeize"
+        assert titles[0] == "Ecommerce Control"
+        assert titles[-1] == "Projetos Python"
 
 
 @pytest.mark.django_db
