@@ -385,6 +385,153 @@ msgstr ""
 "structured solutions, keep growing professionally and turn technology into "
 "real results."
 
+msgid "Início"
+msgstr "Home"
+
+msgid "Contatos"
+msgstr "Contact"
+
+msgid "Buscar seções e ações..."
+msgstr "Search sections and actions..."
+
+msgid "Desenvolvido por Davi Oliveira"
+msgstr "Built by Davi Oliveira"
+
+msgid "Todos os direitos reservados."
+msgstr "All rights reserved."
+
+msgid "Seção"
+msgstr "Section"
+
+msgid "Ação"
+msgstr "Action"
+
+msgid "Tema claro"
+msgstr "Light theme"
+
+msgid "Tema escuro"
+msgstr "Dark theme"
+
+msgid "Backend que aguenta"
+msgstr "Backend that holds"
+
+msgid "produção."
+msgstr "in production."
+
+msgid ""
+"Sou Davi Oliveira, engenheiro de software focado em Python — APIs, "
+"arquitetura limpa, testes e IA aplicada. Construo sistemas fullstack com "
+"Django, FastAPI e TypeScript, do primeiro commit ao deploy em VPS."
+msgstr ""
+"I'm Davi Oliveira, a software engineer focused on Python — APIs, clean "
+"architecture, testing and applied AI. I build fullstack systems with Django,"
+" FastAPI and TypeScript, from first commit to VPS deploy."
+
+msgid "Ver projetos"
+msgstr "View projects"
+
+msgid "Falar comigo"
+msgstr "Get in touch"
+
+msgid "Onde eu trabalhei"
+msgstr "Where I have worked"
+
+msgid "O que eu uso para construir"
+msgstr "What I build with"
+
+msgid "O que eu construí"
+msgstr "What I have built"
+
+msgid "Nenhum projeto nesta categoria ainda."
+msgstr "No projects in this category yet."
+
+msgid "Formação e certificações"
+msgstr "Education and certifications"
+
+msgid "Vamos conversar"
+msgstr "Let's talk"
+
+msgid ""
+"Aberto a oportunidades e a projetos sob demanda — APIs, sistemas web, "
+"automações e análise de dados. Respondo em até um dia útil."
+msgstr ""
+"Open to roles and to project work — APIs, web systems, automations and data "
+"analysis. I reply within one business day."
+
+msgid ""
+"Mensagem enviada com sucesso! Obrigado pelo contato — respondo em até um dia"
+" útil."
+msgstr ""
+"Message sent successfully! Thanks for reaching out — I reply within one "
+"business day."
+
+msgid "Enviar mensagem"
+msgstr "Send message"
+
+msgid "Morada Nova — CE, Brasil"
+msgstr "Morada Nova — CE, Brazil"
+
+msgid ""
+"Davi Oliveira, Engenheiro de Software backend com expertise em Python, "
+"Django e FastAPI. Clean Architecture, testes, automações e IA aplicada."
+msgstr ""
+"Davi Oliveira, backend Software Engineer with expertise in Python, Django "
+"and FastAPI. Clean Architecture, testing, automations and applied AI."
+
+msgid "Davi Oliveira, Engenheiro de Software"
+msgstr "Davi Oliveira, Software Engineer"
+
+msgid "Currículo"
+msgstr "Résumé"
+
+msgid "Engenheiro de Software"
+msgstr "Software Engineer"
+
+msgid "Programação, Web,"
+msgstr "Programming, Web,"
+
+msgid "Dados e IA Aplicada."
+msgstr "Data and Applied AI."
+
+msgid ""
+"Sou Davi Oliveira. Construo APIs, sistemas web e automações em Python, com "
+"arquitetura limpa, testes e IA aplicada, do primeiro commit ao deploy em "
+"produção."
+msgstr ""
+"I'm Davi Oliveira. I build APIs, web systems and automations in Python, with"
+" clean architecture, testing and applied AI, from the first commit to the "
+"production deploy."
+
+msgid "Dados · Decisão"
+msgstr "Data · Decisions"
+
+msgid "UNOPAR, Universidade Norte do Paraná"
+msgstr "UNOPAR, Universidade Norte do Paraná"
+
+msgid "2022 a 2025"
+msgstr "2022 to 2025"
+
+msgid "2015 a 2017"
+msgstr "2015 to 2017"
+
+msgid ""
+"Aberto a oportunidades e a projetos sob demanda: APIs, sistemas web, "
+"automações e análise de dados. Respondo em até um dia útil."
+msgstr ""
+"Open to roles and to project work: APIs, web systems, automations and data "
+"analysis. I reply within one business day."
+
+msgid "Morada Nova, CE, Brasil"
+msgstr "Morada Nova, CE, Brazil"
+
+#: templates/core/_carousel_controls.html:0
+msgid "Anterior"
+msgstr "Previous"
+
+#: templates/core/_carousel_controls.html:0
+msgid "Próximo"
+msgstr "Next"
+
 #~ msgid "Backend & Frameworks"
 #~ msgstr "Backend & Frameworks"
 

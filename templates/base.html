@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{% block meta_description %}{% trans 'Davi Oliveira — Engenheiro de Software backend com expertise em Python, Django e FastAPI. Clean Architecture, testes, automações e IA aplicada.' %}{% endblock %}">
+    <meta name="description" content="{% block meta_description %}{% trans 'Davi Oliveira, Engenheiro de Software backend com expertise em Python, Django e FastAPI. Clean Architecture, testes, automações e IA aplicada.' %}{% endblock %}">
     <title>{% block title %}{% trans "Davi Oliveira - Portfólio" %}{% endblock %}</title>
 
     <!-- Open Graph / compartilhamento em redes sociais -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Davi Oliveira">
-    <meta property="og:title" content="{% trans 'Davi Oliveira — Engenheiro de Software' %}">
+    <meta property="og:title" content="{% trans 'Davi Oliveira, Engenheiro de Software' %}">
     <meta property="og:description" content="{% trans 'Backend com Python, Django e FastAPI. Clean Architecture, testes, automações e IA aplicada.' %}">
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
     <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/banner_site.png' %}">
@@ -24,65 +24,63 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="icon" type="image/png" href="{% static 'images/icone_davi_oliveira.png' %}">
     <link rel="apple-touch-icon" href="{% static 'images/icone_davi_oliveira.png' %}">
     {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-                <a href="{% url 'core:home' %}">Davi Oliveira</a>
-            </div>
-            <button class="menu-toggle" aria-label="{% trans 'Abrir menu' %}">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-links">
-                <li><a href="{% url 'core:sobre' %}" class="{% if request.resolver_match.url_name == 'sobre' %}active{% endif %}">{% trans "Sobre" %}</a></li>
-                <li><a href="{% url 'core:competencias' %}" class="{% if request.resolver_match.url_name == 'competencias' %}active{% endif %}">{% trans "Competências" %}</a></li>
-                <li><a href="{% url 'core:projetos' %}" class="{% if request.resolver_match.url_name == 'projetos' %}active{% endif %}">{% trans "Projetos" %}</a></li>
-                <li><a href="{% url 'core:experiencias' %}" class="{% if request.resolver_match.url_name == 'experiencias' %}active{% endif %}">{% trans "Experiências" %}</a></li>
-                <li><a href="{% url 'core:formacao' %}" class="{% if request.resolver_match.url_name == 'formacao' %}active{% endif %}">{% trans "Formação" %}</a></li>
-                <li><a href="{% url 'core:contato' %}" class="{% if request.resolver_match.url_name == 'contato' %}active{% endif %}">{% trans "Contato" %}</a></li>
-            </ul>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="#inicio" class="brand">
+                <img src="{% static 'images/logo-do.png' %}" alt="DO">
+                Davi Oliveira
+            </a>
+            <nav class="site-nav" id="siteNav">
+                <a href="#inicio" data-section="inicio" class="active">{% trans "Início" %}</a>
+                <a href="#experiencia" data-section="experiencia">{% trans "Experiência" %}</a>
+                <a href="#habilidades" data-section="habilidades">{% trans "Habilidades" %}</a>
+                <a href="#projetos" data-section="projetos">{% trans "Projetos" %}</a>
+                <a href="#formacao" data-section="formacao">{% trans "Formação" %}</a>
+                <a href="#contatos" data-section="contatos">{% trans "Contatos" %}</a>
+            </nav>
             <div class="header-actions">
-                <div class="lang-switcher">
-                    {% language 'pt-br' %}{% url request.resolver_match.view_name as pt_url %}{% endlanguage %}
-                    {% language 'en' %}{% url request.resolver_match.view_name as en_url %}{% endlanguage %}
-                    <form action="{% url 'set_language' %}" method="post" class="lang-form">
-                        {% csrf_token %}
-                        <input name="next" type="hidden" value="{{ pt_url }}">
-                        <button type="submit" name="language" value="pt-br" class="lang-btn {% if LANGUAGE_CODE == 'pt-br' %}active{% endif %}" aria-label="Português">PT</button>
-                    </form>
-                    <span class="lang-divider">|</span>
-                    <form action="{% url 'set_language' %}" method="post" class="lang-form">
-                        {% csrf_token %}
-                        <input name="next" type="hidden" value="{{ en_url }}">
-                        <button type="submit" name="language" value="en" class="lang-btn {% if LANGUAGE_CODE == 'en' %}active{% endif %}" aria-label="English">EN</button>
-                    </form>
-                </div>
-                <button class="theme-toggle" id="themeToggle" aria-label="{% trans 'Alternar tema' %}">
-                    <i class="fas fa-moon theme-icon-dark"></i>
-                    <i class="fas fa-sun theme-icon-light"></i>
+                {% language 'pt-br' %}{% url 'core:home' as pt_home %}{% endlanguage %}
+                {% language 'en' %}{% url 'core:home' as en_home %}{% endlanguage %}
+                <form action="{% url 'set_language' %}" method="post" id="langForm">
+                    {% csrf_token %}
+                    {% if LANGUAGE_CODE == 'en' %}
+                    <input name="next" type="hidden" value="{{ pt_home }}">
+                    <input name="language" type="hidden" value="pt-br">
+                    {% else %}
+                    <input name="next" type="hidden" value="{{ en_home }}">
+                    <input name="language" type="hidden" value="en">
+                    {% endif %}
+                    <button type="submit" class="hbtn hbtn-lang" title="Português / English">{% if LANGUAGE_CODE == 'en' %}EN{% else %}PT{% endif %}</button>
+                </form>
+                <button type="button" class="hbtn hbtn-icon" id="themeToggle" aria-label="{% trans 'Alternar tema' %}">
+                    <svg class="icon-moon" width="15" height="15" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M233.54 142.23a8 8 0 0 0-8-2 88.08 88.08 0 0 1-109.8-109.8 8 8 0 0 0-10-10 104.84 104.84 0 0 0-52.91 37A104 104 0 0 0 136 224a103.1 103.1 0 0 0 62.52-20.88 104.84 104.84 0 0 0 37-52.91 8 8 0 0 0-1.98-7.98Z"/></svg>
+                    <svg class="icon-sun" width="15" height="15" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M120 40V16a8 8 0 0 1 16 0v24a8 8 0 0 1-16 0Zm72 88a64 64 0 1 1-64-64 64.07 64.07 0 0 1 64 64Zm-16 0a48 48 0 1 0-48 48 48.05 48.05 0 0 0 48-48ZM58.34 69.66a8 8 0 0 0 11.32-11.32l-16-16a8 8 0 0 0-11.32 11.32Zm0 116.68-16 16a8 8 0 0 0 11.32 11.32l16-16a8 8 0 0 0-11.32-11.32ZM192 72a8 8 0 0 0 5.66-2.34l16-16a8 8 0 0 0-11.32-11.32l-16 16A8 8 0 0 0 192 72Zm5.66 114.34a8 8 0 0 0-11.32 11.32l16 16a8 8 0 0 0 11.32-11.32ZM40 120H16a8 8 0 0 0 0 16h24a8 8 0 0 0 0-16Zm88 88a8 8 0 0 0-8 8v24a8 8 0 0 0 16 0v-24a8 8 0 0 0-8-8Zm112-88h-24a8 8 0 0 0 0 16h24a8 8 0 0 0 0-16Z"/></svg>
                 </button>
-                <button class="palette-trigger" id="paletteTrigger" aria-label="{% trans 'Buscar (Ctrl+K)' %}">
-                    <i class="fas fa-search"></i>
+                <button type="button" class="hbtn hbtn-k" id="paletteTrigger" aria-label="{% trans 'Buscar (Ctrl+K)' %}">
+                    <svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.66 218.34l-50.07-50.06a88.11 88.11 0 1 0-11.31 11.31l50.06 50.07a8 8 0 0 0 11.32-11.32ZM40 112a72 72 0 1 1 72 72 72.08 72.08 0 0 1-72-72Z"/></svg>
+                    <span>⌘K</span>
                 </button>
+                <a href="{% static 'docs/curriculo.pdf' %}" download id="cvButton" class="hbtn hbtn-cv">
+                    {% trans "Currículo" %}
+                    <svg width="13" height="13" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66 133.66l-72 72a8 8 0 0 1-11.32-11.32L196.69 136H40a8 8 0 0 1 0-16h156.69l-58.35-58.34a8 8 0 0 1 11.32-11.32l72 72a8 8 0 0 1 0 11.32Z"/></svg>
+                </a>
             </div>
-        </nav>
+        </div>
     </header>
 
     <!-- Command Palette -->
     <div class="palette-overlay" id="paletteOverlay">
         <div class="palette" role="dialog" aria-label="{% trans 'Paleta de comandos' %}">
             <div class="palette-input-wrapper">
-                <i class="fas fa-search"></i>
-                <input type="text" id="paletteInput" placeholder="{% trans 'Buscar páginas, ações...' %}" autocomplete="off">
+                <svg width="15" height="15" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.66 218.34l-50.07-50.06a88.11 88.11 0 1 0-11.31 11.31l50.06 50.07a8 8 0 0 0 11.32-11.32ZM40 112a72 72 0 1 1 72 72 72.08 72.08 0 0 1-72-72Z"/></svg>
+                <input type="text" id="paletteInput" placeholder="{% trans 'Buscar seções e ações...' %}" autocomplete="off">
                 <kbd>ESC</kbd>
             </div>
             <ul class="palette-results" id="paletteResults"></ul>
@@ -93,9 +91,6 @@
     <div class="terminal-overlay" id="terminalOverlay">
         <div class="terminal" role="dialog" aria-label="Terminal">
             <div class="terminal-titlebar">
-                <span class="term-dot term-dot-red"></span>
-                <span class="term-dot term-dot-yellow"></span>
-                <span class="term-dot term-dot-green"></span>
                 <span class="terminal-title">davi@portfolio: ~</span>
                 <button class="terminal-close" id="terminalClose" aria-label="{% trans 'Fechar terminal' %}">&times;</button>
             </div>
@@ -109,22 +104,43 @@
         </div>
     </div>
 
-    <main>
+    <main class="container">
         {% block content %}{% endblock %}
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="social-links">
-                <a href="mailto:davioliveiraes7@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i><span>Email</span></a>
-                <a href="https://github.com/davioliveiraes" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i><span>GitHub</span></a>
-                <a href="https://www.linkedin.com/in/davioliveiraes/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i><span>LinkedIn</span></a>
-                <a href="https://instagram.com/davioliveiraes" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i><span>Instagram</span></a>
-                <a href="https://www.youtube.com/@davioliveiraES" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-note">
+                <span class="by">{% trans "Desenvolvido por Davi Oliveira" %}</span>
+                <span class="rights">© 2026 Davi Oliveira. {% trans "Todos os direitos reservados." %}</span>
+            </div>
+            <div class="footer-links">
+                <a href="https://github.com/davioliveiraes" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://www.linkedin.com/in/davioliveiraes/" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://instagram.com/davioliveiraes" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://www.youtube.com/@davioliveiraES" target="_blank" rel="noopener">YouTube</a>
+                <a href="mailto:davioliveiraes7@gmail.com">Email</a>
             </div>
         </div>
     </footer>
 
+    <script>
+        // Strings traduzidas para a Command Palette e o Terminal
+        window.PF = {
+            lang: '{{ LANGUAGE_CODE }}',
+            i18n: {
+                section: '{% trans "Seção" %}',
+                action: '{% trans "Ação" %}',
+                link: 'Link',
+                themeLight: '{% trans "Tema claro" %}',
+                themeDark: '{% trans "Tema escuro" %}',
+                switchLang: '{% if LANGUAGE_CODE == "en" %}Mudar para Português{% else %}Switch to English{% endif %}',
+                terminal: 'Terminal',
+                cv: '{% trans "Currículo" %}',
+                download: 'Download',
+            },
+        };
+    </script>
     <script src="{% static 'js/main.js' %}"></script>
     {% block extra_js %}{% endblock %}
 </body>

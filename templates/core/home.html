@@ -1,36 +1,241 @@
 {% extends 'base.html' %}
 {% load static i18n %}
 
-{% block title %}Davi Oliveira{% endblock %}
-
 {% block content %}
-<section id="hero">
-    <div class="hero-content">
-        <div class="hero-photo">
-            <img src="{% static 'images/profile.jpg' %}" alt="{% trans 'Foto de Davi Oliveira' %}">
-        </div>
-        <div class="hero-text">
-            {% if last_update %}<p class="greeting">{% trans "Última atualização" %}: {{ last_update }}</p>{% endif %}
-            <h1>{% trans "Olá, eu sou" %} <span class="highlight">Davi Oliveira</span></h1>
-            <p class="hero-tagline">{% trans "Programação, IA e Dados" %}</p>
-            <p class="subtitle">{% trans "Desenvolvo soluções Full Stack com Python e TypeScript, criando sistemas web, APIs, automações, análise de dados e aplicações com IA. Trabalho com foco em interfaces intuitivas, código bem estruturado e arquitetura." %}</p>
-            <div class="tech-stack">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">Django</span>
-                <span class="tech-tag">FastAPI</span>
-                <span class="tech-tag">TypeScript</span>
-                <span class="tech-tag">Go (Golang)</span>
-                <span class="tech-tag">Docker</span>
-                <span class="tech-tag">PostgreSQL</span>
-                <span class="tech-tag">{% trans "IA Aplicada" %}</span>
+<!-- ============ Início ============ -->
+<section id="inicio" class="hero">
+    <div class="hero-grid">
+        <div class="hero-copy reveal">
+            <span class="hero-kicker">{% trans "Engenheiro de Software" %}</span>
+            <h1 class="hero-title">
+                <span>{% trans "Programação, Web," %}</span>
+                <span class="accent">{% trans "Dados e IA Aplicada." %}</span>
+            </h1>
+            <p class="hero-sub">{% trans "Sou Davi Oliveira. Construo APIs, sistemas web e automações em Python, com arquitetura limpa, testes e IA aplicada, do primeiro commit ao deploy em produção." %}</p>
+            <div class="hero-ctas">
+                <a href="#projetos" class="btn btn-hero btn-solid">
+                    {% trans "Ver projetos" %}
+                    <svg width="15" height="15" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66 133.66l-72 72a8 8 0 0 1-11.32-11.32L196.69 136H40a8 8 0 0 1 0-16h156.69l-58.35-58.34a8 8 0 0 1 11.32-11.32l72 72a8 8 0 0 1 0 11.32Z"/></svg>
+                </a>
+                <a href="#contatos" class="btn btn-hero">
+                    {% trans "Falar comigo" %}
+                    <svg width="15" height="15" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66 133.66l-72 72a8 8 0 0 1-11.32-11.32L196.69 136H40a8 8 0 0 1 0-16h156.69l-58.35-58.34a8 8 0 0 1 11.32-11.32l72 72a8 8 0 0 1 0 11.32Z"/></svg>
+                </a>
             </div>
-            <div class="cta-buttons">
-                <a href="{% url 'core:projetos' %}" class="btn btn-primary">{% trans "Ver Projetos" %}</a>
-                <a href="{% url 'core:contato' %}" class="btn btn-secondary">{% trans "Entrar em Contato" %}</a>
-                <a href="{% static 'docs/curriculo.pdf' %}" class="btn btn-outline" download><i class="fas fa-download"></i> {% trans "Baixar Currículo" %}</a>
+            <div class="hero-tech">
+                <span>Python</span>
+                <span>Golang</span>
+                <span>TypeScript</span>
+                <span>Django</span>
+                <span>FastAPI</span>
+                <span>React</span>
+                <span>PostgreSQL</span>
+                <span>Docker</span>
+            </div>
+        </div>
+        <div class="hero-photo reveal">
+            <img src="{% static 'images/profile-cutout.webp' %}" alt="Davi Oliveira">
+            <div class="hero-caption">
+                <span>Python · API</span>
+                <span>{% trans "Dados · Decisão" %}</span>
             </div>
         </div>
     </div>
 </section>
+<hr class="rule">
 
+<!-- ============ Experiência ============ -->
+<section id="experiencia" class="section">
+    <div class="section-head reveal">
+        <span class="kicker">{% trans "Experiência" %}</span>
+        <h2 class="section-title">{% trans "Onde eu trabalhei" %}</h2>
+    </div>
+    {% for experience in experiences %}
+    <div class="exp-row reveal">
+        <p class="exp-num">{{ forloop.counter|stringformat:"02d" }}</p>
+        <div>
+            <h3 class="exp-role">{{ experience.role_i18n }}</h3>
+            {% if experience.company_url %}
+            <a href="{{ experience.company_url }}" target="_blank" rel="noopener" class="exp-company">{{ experience.company }}</a>
+            {% else %}
+            <span class="exp-company">{{ experience.company }}</span>
+            {% endif %}
+            <p class="exp-period">{{ experience.period_i18n }}</p>
+        </div>
+        <div>
+            <ul class="exp-details">
+                {% for detail in experience.details_list %}
+                <li>{{ detail }}</li>
+                {% endfor %}
+            </ul>
+            {% if experience.skills_i18n %}
+            <p class="exp-skills">{{ experience.skills_i18n }}</p>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</section>
+<hr class="rule">
+
+<!-- ============ Habilidades ============ -->
+<section id="habilidades" class="section">
+    <div class="section-head reveal">
+        <span class="kicker">{% trans "Habilidades" %}</span>
+        <h2 class="section-title">{% trans "O que eu uso para construir" %}</h2>
+    </div>
+    {% for category in categories %}
+    <div class="skill-row reveal">
+        <h3 class="skill-name">{{ category.name_i18n }}</h3>
+        <div class="skill-chips">
+            {% for skill in category.skills.all %}
+            <span class="tag-chip">{{ skill.name_i18n }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</section>
+<hr class="rule">
+
+<!-- ============ Projetos ============ -->
+<section id="projetos" class="section">
+    <div class="projects-head reveal">
+        <div>
+            <span class="kicker">{% trans "Projetos" %}</span>
+            <h2 class="section-title">{% trans "O que eu construí" %}</h2>
+        </div>
+        <div class="filters" id="projectFilters">
+            <button type="button" class="filter-pill active" data-filter="all">{% trans "Todos" %}</button>
+            {% for filter in filters %}
+            <button type="button" class="filter-pill" data-filter="{{ filter.value }}">{{ filter.label }}</button>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="carousel" id="projectsCarousel">
+        <div class="carousel-viewport" role="region" tabindex="0" aria-label="{% trans 'Projetos' %}">
+            <div class="carousel-track projects-grid">
+        {% for project in projects %}
+        <article class="project-card reveal" data-category="{{ project.category }}">
+            <h3 class="card-title">{{ project.title_i18n }}</h3>
+            <p class="card-desc">{{ project.description_i18n }}</p>
+            <div class="card-tags">
+                {% for tag in project.tag_list %}
+                <span>{{ tag }}</span>
+                {% endfor %}
+            </div>
+            <div class="card-foot">
+                {% if project.github_url %}
+                <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="card-btn">
+                    <svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M208.31 75.68A59.78 59.78 0 0 0 202.93 28a8 8 0 0 0-6.93-4 59.75 59.75 0 0 0-48 24h-24a59.75 59.75 0 0 0-48-24 8 8 0 0 0-6.93 4 59.78 59.78 0 0 0-5.38 47.68A58.14 58.14 0 0 0 56 104v8a56.06 56.06 0 0 0 48.44 55.47A39.8 39.8 0 0 0 96 192v8H72a24 24 0 0 1-24-24 40 40 0 0 0-40-40 8 8 0 0 0 0 16 24 24 0 0 1 24 24 40 40 0 0 0 40 40h24v16a8 8 0 0 0 16 0v-40a24 24 0 0 1 48 0v40a8 8 0 0 0 16 0v-40a39.8 39.8 0 0 0-8.44-24.53A56.06 56.06 0 0 0 216 112v-8a58.14 58.14 0 0 0-7.69-28.32Z"/></svg>
+                    {% trans "Código" %}
+                </a>
+                {% endif %}
+                {% if project.live_url %}
+                <a href="{{ project.live_url }}" target="_blank" rel="noopener" class="card-btn card-btn-accent">
+                    <svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M216 104a8 8 0 0 1-16 0V67.31l-82.34 82.35a8 8 0 0 1-11.32-11.32L188.69 56H152a8 8 0 0 1 0-16h56a8 8 0 0 1 8 8Zm-24 40a8 8 0 0 0-8 8v48H56V72h48a8 8 0 0 0 0-16H56a16 16 0 0 0-16 16v128a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16v-48a8 8 0 0 0-8-8Z"/></svg>
+                    {% trans "Ver site" %}
+                </a>
+                {% endif %}
+            </div>
+        </article>
+        {% endfor %}
+            </div>
+        </div>
+        {% include "core/_carousel_controls.html" %}
+    </div>
+    <p class="projects-empty" id="projectsEmpty" hidden>{% trans "Nenhum projeto nesta categoria ainda." %}</p>
+</section>
+<hr class="rule">
+
+<!-- ============ Formação ============ -->
+<section id="formacao" class="section">
+    <div class="section-head reveal">
+        <span class="kicker">{% trans "Formação" %}</span>
+        <h2 class="section-title">{% trans "Formação e certificações" %}</h2>
+    </div>
+    <div class="edu-grid">
+        <div class="edu-card reveal">
+            <h3>{% trans "Bacharelado em Engenharia de Software" %}</h3>
+            <p class="edu-inst">{% trans "UNOPAR, Universidade Norte do Paraná" %}</p>
+            <p class="edu-period">{% trans "2022 a 2025" %} · {% trans "Concluído" %}</p>
+        </div>
+        <div class="edu-card reveal">
+            <h3>{% trans "Técnico em Informática" %}</h3>
+            <p class="edu-inst">EEEP Osmira Eduardo de Castro</p>
+            <p class="edu-period">{% trans "2015 a 2017" %} · {% trans "Concluído" %}</p>
+        </div>
+    </div>
+    <h3 class="certs-title reveal">{% trans "Certificações" %}</h3>
+    <div class="carousel certs-carousel" id="certsCarousel">
+        <div class="carousel-viewport" role="region" tabindex="0" aria-label="{% trans 'Certificações' %}">
+            <div class="carousel-track certs-grid">
+                {% for cert in certifications %}
+                <div class="cert-row reveal">
+                    <span class="cert-name">{{ cert.name_i18n }}</span>
+                    <span class="cert-meta">{{ cert.institution }}{% if cert.hours %} · {{ cert.hours }}h{% endif %}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% include "core/_carousel_controls.html" %}
+    </div>
+</section>
+<hr class="rule">
+
+<!-- ============ Contatos ============ -->
+<section id="contatos" class="section contact-section">
+    <div class="contact-grid reveal">
+        <div>
+            <span class="kicker">{% trans "Contatos" %}</span>
+            <h2 class="section-title">{% trans "Vamos conversar" %}</h2>
+            <p class="contact-sub">{% trans "Aberto a oportunidades e a projetos sob demanda: APIs, sistemas web, automações e análise de dados. Respondo em até um dia útil." %}</p>
+            {% if contact_sent %}
+            <div class="form-success">{% trans "Mensagem enviada com sucesso! Obrigado pelo contato — respondo em até um dia útil." %}</div>
+            {% else %}
+            <form method="post" action="{% url 'core:contato' %}" class="contact-form">
+                {% csrf_token %}
+                <label class="field" for="{{ form.name.id_for_label }}">{% trans "Nome" %}
+                    {{ form.name }}
+                    {% for error in form.name.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                </label>
+                <label class="field" for="{{ form.email.id_for_label }}">Email
+                    {{ form.email }}
+                    {% for error in form.email.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                </label>
+                <label class="field" for="{{ form.message.id_for_label }}">{% trans "Mensagem" %}
+                    {{ form.message }}
+                    {% for error in form.message.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                </label>
+                <button type="submit" class="btn btn-accent">{% trans "Enviar mensagem" %}</button>
+            </form>
+            {% endif %}
+        </div>
+        <div class="contact-links">
+            <a href="mailto:davioliveiraes7@gmail.com">
+                <span class="label">Email</span>
+                <span class="value">davioliveiraes7@gmail.com</span>
+            </a>
+            <a href="https://www.linkedin.com/in/davioliveiraes/" target="_blank" rel="noopener">
+                <span class="label">LinkedIn</span>
+                <span class="value">linkedin.com/in/davioliveiraes</span>
+            </a>
+            <a href="https://github.com/davioliveiraes" target="_blank" rel="noopener">
+                <span class="label">GitHub</span>
+                <span class="value">github.com/davioliveiraes</span>
+            </a>
+            <a href="#contatos">
+                <span class="label">{% trans "Localização" %}</span>
+                <span class="value">{% trans "Morada Nova, CE, Brasil" %}</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+{% if form.errors or contact_sent %}
+<script>
+    // Volta o visitante direto para a seção de contato após o envio do formulário
+    window.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('contatos').scrollIntoView();
+    });
+</script>
+{% endif %}
 {% endblock %}

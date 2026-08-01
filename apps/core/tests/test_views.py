@@ -9,65 +9,66 @@ from apps.core.models import Contact
 
 
 @pytest.mark.django_db
-class TestStaticPages:
-    """Testa todas as páginas estáticas do portfólio."""
+class TestHomePage:
+    """A one-page renderiza todas as seções em uma única resposta."""
 
-    @pytest.mark.parametrize(
-        "url_name,template",
-        [
-            ("core:home", "core/home.html"),
-            ("core:sobre", "core/sobre.html"),
-            ("core:competencias", "core/competencias.html"),
-            ("core:projetos", "core/projetos.html"),
-            ("core:experiencias", "core/experiencias.html"),
-            ("core:formacao", "core/formacao.html"),
-            ("core:contato", "core/contato.html"),
-        ],
-    )
-    def test_page_returns_200(self, client: Client, url_name, template):
-        response = client.get(reverse(url_name))
+    def test_home_returns_200(self, client: Client):
+        response = client.get(reverse("core:home"))
         assert response.status_code == 200
 
-    @pytest.mark.parametrize(
-        "url_name,template",
-        [
-            ("core:home", "core/home.html"),
-            ("core:sobre", "core/sobre.html"),
-            ("core:competencias", "core/competencias.html"),
-            ("core:projetos", "core/projetos.html"),
-            ("core:experiencias", "core/experiencias.html"),
-            ("core:formacao", "core/formacao.html"),
-            ("core:contato", "core/contato.html"),
-        ],
-    )
-    def test_page_uses_correct_template(self, client: Client, url_name, template):
-        response = client.get(reverse(url_name))
-        assert template in [t.name for t in response.templates]
+    def test_home_uses_one_page_template(self, client: Client):
+        response = client.get(reverse("core:home"))
+        templates = [t.name for t in response.templates]
+        assert "core/home.html" in templates
+        assert "base.html" in templates
+
+    def test_home_context_has_all_sections(self, client: Client):
+        response = client.get(reverse("core:home"))
+        for key in ("experiences", "categories", "projects", "certifications", "form"):
+            assert key in response.context
+
+    def test_home_contains_section_anchors(self, client: Client):
+        html = client.get(reverse("core:home")).content.decode()
+        for anchor in (
+            'id="inicio"',
+            'id="experiencia"',
+            'id="habilidades"',
+            'id="projetos"',
+            'id="formacao"',
+            'id="contatos"',
+        ):
+            assert anchor in html
+
+    def test_home_renders_seeded_content(self, client: Client):
+        html = client.get(reverse("core:home")).content.decode()
+        assert "Ecommerce Control" in html
+        assert "iBeize" in html
+
+
+@pytest.mark.django_db
+class TestLegacyRedirects:
+    """As URLs do site multipágina viram 301 para as âncoras da one-page."""
 
     @pytest.mark.parametrize(
-        "url_name",
+        "url_name,anchor",
         [
-            "core:home",
-            "core:sobre",
-            "core:competencias",
-            "core:projetos",
-            "core:experiencias",
-            "core:formacao",
-            "core:contato",
+            ("core:sobre", "#inicio"),
+            ("core:competencias", "#habilidades"),
+            ("core:projetos", "#projetos"),
+            ("core:experiencias", "#experiencia"),
+            ("core:formacao", "#formacao"),
+            ("core:contato", "#contatos"),
         ],
     )
-    def test_page_extends_base_template(self, client: Client, url_name):
+    def test_legacy_page_redirects_permanently(self, client: Client, url_name, anchor):
         response = client.get(reverse(url_name))
-        assert "base.html" in [t.name for t in response.templates]
+        assert response.status_code == 301
+        assert response.url == reverse("core:home") + anchor
 
 
 @pytest.mark.django_db
 class TestContatoView:
-    """Testa o formulário de contato (GET e POST)."""
-
-    def test_get_contains_form(self, client: Client):
-        response = client.get(reverse("core:contato"))
-        assert "form" in response.context
+    """Formulário de contato: POST em /contato/, renderizado na one-page."""
 
     @patch("apps.core.views.send_mail")
     def test_post_valid_saves_contact(self, mock_send_mail, client: Client):
@@ -97,7 +98,9 @@ class TestContatoView:
         assert call_kwargs[1]["recipient_list"] == ["davioliveiraes7@gmail.com"]
 
     @patch("apps.core.views.send_mail")
-    def test_post_valid_redirects(self, mock_send_mail, client: Client):
+    def test_post_valid_redirects_to_contact_section(
+        self, mock_send_mail, client: Client
+    ):
         data = {
             "name": "João Silva",
             "email": "joao@email.com",
@@ -105,34 +108,21 @@ class TestContatoView:
         }
         response = client.post(reverse("core:contato"), data)
         assert response.status_code == 302
-        assert response.url == reverse("core:contato")
+        assert response.url == reverse("core:home") + "?sent=1#contatos"
 
     @patch("apps.core.views.send_mail")
-    def test_post_valid_shows_success_message(self, mock_send_mail, client: Client):
-        data = {
-            "name": "João Silva",
-            "email": "joao@email.com",
-            "message": "Mensagem de teste",
-        }
-        response = client.post(reverse("core:contato"), data, follow=True)
-        messages = list(response.context["messages"])
-        assert len(messages) == 1
-        assert "sucesso" in str(messages[0]).lower()
+    def test_sent_flag_shows_confirmation(self, mock_send_mail, client: Client):
+        html = client.get(reverse("core:home") + "?sent=1").content.decode()
+        assert "form-success" in html
 
     def test_post_invalid_does_not_save(self, client: Client):
         data = {"name": "", "email": "invalido", "message": ""}
         client.post(reverse("core:contato"), data)
         assert Contact.objects.count() == 0
 
-    def test_post_invalid_shows_error_message(self, client: Client):
-        data = {"name": "", "email": "", "message": ""}
-        response = client.post(reverse("core:contato"), data)
-        messages = list(response.context["messages"])
-        assert len(messages) == 1
-        assert "erro" in str(messages[0]).lower()
-
-    def test_post_invalid_returns_form_with_errors(self, client: Client):
+    def test_post_invalid_rerenders_home_with_errors(self, client: Client):
         data = {"name": "", "email": "invalido", "message": ""}
         response = client.post(reverse("core:contato"), data)
         assert response.status_code == 200
+        assert "core/home.html" in [t.name for t in response.templates]
         assert response.context["form"].errors

@@ -11,14 +11,23 @@ class TestSeededContent:
 
     def test_seed_populates_all_models(self):
         assert SkillCategory.objects.count() == 7
-        assert Project.objects.count() == 12
+        assert Project.objects.count() == 13
         assert Experience.objects.count() == 4
         assert Certification.objects.count() == 8
 
-    def test_projects_are_ordered(self):
-        titles = list(Project.objects.values_list("title", flat=True))
-        assert titles[0] == "Ecommerce Control"
-        assert titles[-1] == "Projetos Python"
+    def test_projects_list_newest_first(self):
+        ids = list(Project.objects.values_list("id", flat=True))
+        assert ids == sorted(ids, reverse=True)
+
+    def test_certifications_list_newest_first(self):
+        ids = list(Certification.objects.values_list("id", flat=True))
+        assert ids == sorted(ids, reverse=True)
+
+    def test_order_field_pins_item_to_the_top(self):
+        oldest = Project.objects.order_by("id").first()
+        oldest.order = 1
+        oldest.save(update_fields=["order"])
+        assert Project.objects.first() == oldest
 
 
 @pytest.mark.django_db

@@ -18,100 +18,222 @@ window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e
 });
 
 // ============================================
-// ANIMAÇÃO DE ENTRADA NO SCROLL
+// SCROLL-SPY (link ativo na nav conforme a seção visível)
 // ============================================
-const revealSelector = '.skill-card, .project-card, .timeline-card, .formation-card, .info-item, .section-header';
+const navLinks = document.querySelectorAll('#siteNav a[data-section]');
+const sections = [];
+navLinks.forEach((link) => {
+    const el = document.getElementById(link.dataset.section);
+    if (el) sections.push(el);
+});
 
-if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+if ('IntersectionObserver' in window && sections.length) {
+    const spy = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                revealObserver.unobserve(entry.target);
+                navLinks.forEach((link) => {
+                    link.classList.toggle('active', link.dataset.section === entry.target.id);
+                });
             }
         });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll(revealSelector).forEach(el => {
-        const siblingIndex = Array.from(el.parentElement.children).indexOf(el);
-        el.style.transitionDelay = `${(siblingIndex % 4) * 70}ms`;
-        el.classList.add('reveal');
-        revealObserver.observe(el);
-    });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach((el) => spy.observe(el));
 }
 
 // ============================================
-// FILTRO DE PROJETOS POR TECNOLOGIA
+// ANIMAÇÃO DE ENTRADA NO SCROLL
+// O conteúdo nasce visível; a classe .reveal-in só dispara o enfeite
+// de entrada (nunca deixar elemento com opacity: 0 no estado inicial).
+// ============================================
+if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal-in');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+}
+
+// ============================================
+// CARROSSEL (projetos e certificações)
+// Pagina os itens na horizontal para a seção não crescer conforme o conteúdo aumenta
+// ============================================
+function initCarousel(root) {
+    const viewport = root.querySelector('.carousel-viewport');
+    const track = root.querySelector('.carousel-track');
+    if (!viewport || !track) return null;
+
+    const controls = root.querySelector('.carousel-controls');
+    const dotsBox = root.querySelector('.carousel-dots');
+    const countLabel = root.querySelector('.carousel-count');
+    const prevBtn = root.querySelector('.carousel-arrow[data-dir="prev"]');
+    const nextBtn = root.querySelector('.carousel-arrow[data-dir="next"]');
+    const items = Array.from(track.children);
+
+    const visibleItems = () => items.filter((item) => !item.classList.contains('filtered-out'));
+    const gapSize = () => parseFloat(getComputedStyle(track).columnGap) || 0;
+    const rows = () => Math.max(1, parseInt(getComputedStyle(root).getPropertyValue('--rows'), 10) || 1);
+    const maxScroll = () => Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+
+    // Colunas visíveis: derivadas da largura real do item, que o CSS controla por breakpoint
+    function perView() {
+        const first = visibleItems()[0];
+        if (!first) return 1;
+        const width = first.getBoundingClientRect().width;
+        if (!width) return 1;
+        return Math.max(1, Math.round((viewport.clientWidth + gapSize()) / (width + gapSize())));
+    }
+
+    const pageCount = () => Math.max(1, Math.ceil(visibleItems().length / (perView() * rows())));
+
+    // Uma página avança colunas inteiras, então a rolagem sempre para na borda de um item
+    function step() {
+        const first = visibleItems()[0];
+        if (!first) return viewport.clientWidth;
+        return (first.getBoundingClientRect().width + gapSize()) * perView();
+    }
+
+    function currentPage() {
+        const pages = pageCount();
+        if (pages < 2) return 0;
+        if (viewport.scrollLeft >= maxScroll() - 2) return pages - 1;
+        return Math.min(pages - 1, Math.round(viewport.scrollLeft / step()));
+    }
+
+    function goTo(page) {
+        const clamped = Math.min(Math.max(page, 0), pageCount() - 1);
+        viewport.scrollTo({ left: Math.min(clamped * step(), maxScroll()), behavior: 'smooth' });
+    }
+
+    function render() {
+        const pages = pageCount();
+        const page = currentPage();
+
+        if (controls) controls.hidden = pages < 2;
+        if (countLabel) countLabel.textContent = pages > 1 ? page + 1 + ' / ' + pages : '';
+        if (prevBtn) prevBtn.disabled = page === 0;
+        if (nextBtn) nextBtn.disabled = page >= pages - 1;
+
+        if (!dotsBox) return;
+        if (dotsBox.childElementCount !== pages) {
+            const pageWord = ((window.PF || {}).lang || 'pt-br').startsWith('en') ? 'Page ' : 'Página ';
+            dotsBox.textContent = '';
+            for (let i = 0; i < pages; i++) {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'carousel-dot';
+                dot.setAttribute('aria-label', pageWord + (i + 1));
+                dot.addEventListener('click', () => goTo(i));
+                dotsBox.appendChild(dot);
+            }
+        }
+        Array.from(dotsBox.children).forEach((dot, i) => {
+            dot.classList.toggle('active', i === page);
+        });
+    }
+
+    let ticking = false;
+    function scheduleRender() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            ticking = false;
+            render();
+        });
+    }
+
+    viewport.addEventListener('scroll', scheduleRender, { passive: true });
+    window.addEventListener('resize', scheduleRender);
+    window.addEventListener('load', render);
+
+    if (prevBtn) prevBtn.addEventListener('click', () => goTo(currentPage() - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goTo(currentPage() + 1));
+
+    viewport.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            goTo(currentPage() + 1);
+        } else if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            goTo(currentPage() - 1);
+        }
+    });
+
+    render();
+
+    return {
+        render: render,
+        // Usado pelo filtro: volta ao começo da lista e recalcula as páginas
+        reset: function () {
+            viewport.scrollTo({ left: 0, behavior: 'auto' });
+            render();
+        },
+    };
+}
+
+const carousels = new Map();
+document.querySelectorAll('.carousel').forEach((root) => {
+    const api = initCarousel(root);
+    if (api) carousels.set(root.id, api);
+});
+
+// ============================================
+// FILTRO DE PROJETOS POR CATEGORIA
 // ============================================
 const projectFilters = document.getElementById('projectFilters');
 
 if (projectFilters) {
-    const filterButtons = projectFilters.querySelectorAll('.filter-btn');
+    const filterButtons = projectFilters.querySelectorAll('.filter-pill');
     const projectCards = document.querySelectorAll('.project-card');
     const emptyMessage = document.getElementById('projectsEmpty');
 
-    filterButtons.forEach(btn => {
+    filterButtons.forEach((btn) => {
         btn.addEventListener('click', () => {
-            filterButtons.forEach(b => b.classList.remove('active'));
+            filterButtons.forEach((b) => b.classList.remove('active'));
             btn.classList.add('active');
 
             const filter = btn.dataset.filter;
             let visible = 0;
-            projectCards.forEach(card => {
+            projectCards.forEach((card) => {
                 const show = filter === 'all' || card.dataset.category === filter;
                 card.classList.toggle('filtered-out', !show);
                 if (show) visible++;
             });
             if (emptyMessage) emptyMessage.hidden = visible > 0;
+
+            const carousel = carousels.get('projectsCarousel');
+            if (carousel) carousel.reset();
         });
     });
 }
 
 // ============================================
-// MENU MOBILE
-// ============================================
-const menuToggle = document.querySelector('.menu-toggle');
-const navLinks = document.querySelector('.nav-links');
-
-menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('active');
-    navLinks.classList.toggle('open');
-});
-
-navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-        menuToggle.classList.remove('active');
-        navLinks.classList.remove('open');
-    });
-});
-
-document.addEventListener('click', (e) => {
-    if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
-        menuToggle.classList.remove('active');
-        navLinks.classList.remove('open');
-    }
-});
-
-// ============================================
 // COMMAND PALETTE
 // ============================================
+const PF = window.PF || { lang: 'pt-br', i18n: {} };
+const isEN = (PF.lang || 'pt-br').startsWith('en');
+
+function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
 const palette = {
     overlay: document.getElementById('paletteOverlay'),
     input: document.getElementById('paletteInput'),
     results: document.getElementById('paletteResults'),
     selectedIndex: -1,
 
-    commands: [
-        { label: 'Home', desc: 'Página inicial', icon: 'fas fa-home', url: '/' },
-        { label: 'Sobre', desc: 'Sobre mim', icon: 'fas fa-user', url: '/sobre/' },
-        { label: 'Competências', desc: 'Competências técnicas', icon: 'fas fa-code', url: '/competencias/' },
-        { label: 'Projetos', desc: 'Meus projetos', icon: 'fas fa-folder-open', url: '/projetos/' },
-        { label: 'Experiências', desc: 'Experiências profissionais', icon: 'fas fa-briefcase', url: '/experiencias/' },
-        { label: 'Formação', desc: 'Formação acadêmica', icon: 'fas fa-graduation-cap', url: '/formacao/' },
-        { label: 'Contato', desc: 'Entre em contato', icon: 'fas fa-envelope', url: '/contato/' },
-        { label: 'GitHub', desc: 'Abrir perfil no GitHub', icon: 'fab fa-github', url: 'https://github.com/davioliveiraes', external: true },
-        { label: 'LinkedIn', desc: 'Abrir perfil no LinkedIn', icon: 'fab fa-linkedin-in', url: 'https://www.linkedin.com/in/davioliveiraes/', external: true },
-    ],
+    // Seções vêm da própria nav (já traduzidas pelo template)
+    commands: Array.from(navLinks).map((link) => ({
+        label: link.textContent.trim(),
+        hint: PF.i18n.section || 'Seção',
+        action: () => scrollToSection(link.dataset.section),
+    })),
 
     open() {
         this.overlay.classList.add('open');
@@ -133,10 +255,7 @@ const palette = {
     filter(query) {
         if (!query) return this.commands;
         const q = query.toLowerCase();
-        return this.commands.filter(cmd =>
-            cmd.label.toLowerCase().includes(q) ||
-            cmd.desc.toLowerCase().includes(q)
-        );
+        return this.commands.filter((cmd) => cmd.label.toLowerCase().includes(q));
     },
 
     render(items) {
@@ -144,14 +263,12 @@ const palette = {
         items.forEach((cmd, i) => {
             const li = document.createElement('li');
             li.className = 'palette-item' + (i === this.selectedIndex ? ' selected' : '');
-            li.innerHTML = `
-                <div class="palette-icon"><i class="${cmd.icon}"></i></div>
-                <div class="palette-label">
-                    <span>${cmd.label}</span>
-                    <small>${cmd.desc}</small>
-                </div>
-            `;
-            li.addEventListener('click', () => this.navigate(cmd));
+            const label = document.createElement('span');
+            label.textContent = cmd.dynamicLabel ? cmd.dynamicLabel() : cmd.label;
+            const hint = document.createElement('small');
+            hint.textContent = cmd.hint;
+            li.append(label, hint);
+            li.addEventListener('click', () => this.run(cmd));
             li.addEventListener('mouseenter', () => {
                 this.selectedIndex = i;
                 this.updateSelection();
@@ -169,20 +286,14 @@ const palette = {
         if (selected) selected.scrollIntoView({ block: 'nearest' });
     },
 
-    navigate(cmd) {
+    run(cmd) {
         this.close();
-        if (cmd.action) {
-            cmd.action();
-        } else if (cmd.external) {
-            window.open(cmd.url, '_blank', 'noopener');
-        } else {
-            window.location.href = cmd.url;
-        }
+        cmd.action();
     },
 
     handleKeydown(e) {
-        const items = this.results.querySelectorAll('.palette-item');
-        const count = items.length;
+        const filtered = this.filter(this.input.value);
+        const count = filtered.length;
 
         if (e.key === 'ArrowDown') {
             e.preventDefault();
@@ -192,17 +303,47 @@ const palette = {
             e.preventDefault();
             this.selectedIndex = (this.selectedIndex - 1 + count) % count;
             this.updateSelection();
-        } else if (e.key === 'Enter' && this.selectedIndex >= 0) {
+        } else if (e.key === 'Enter') {
             e.preventDefault();
-            const filtered = this.filter(this.input.value);
-            if (filtered[this.selectedIndex]) {
-                this.navigate(filtered[this.selectedIndex]);
-            }
+            const cmd = filtered[this.selectedIndex] || filtered[0];
+            if (cmd) this.run(cmd);
         } else if (e.key === 'Escape') {
             this.close();
         }
     }
 };
+
+// Ações além das seções
+palette.commands.push(
+    {
+        label: PF.i18n.themeDark || 'Tema escuro',
+        dynamicLabel: () => (document.documentElement.getAttribute('data-theme') === 'dark'
+            ? (PF.i18n.themeLight || 'Tema claro')
+            : (PF.i18n.themeDark || 'Tema escuro')),
+        hint: PF.i18n.action || 'Ação',
+        action: () => themeToggle.click(),
+    },
+    {
+        label: PF.i18n.switchLang || 'Switch to English',
+        hint: PF.i18n.action || 'Ação',
+        action: () => document.getElementById('langForm').submit(),
+    },
+    {
+        label: PF.i18n.cv || 'Currículo',
+        hint: PF.i18n.download || 'Download',
+        action: () => document.getElementById('cvButton').click(),
+    },
+    {
+        label: 'GitHub',
+        hint: PF.i18n.link || 'Link',
+        action: () => window.open('https://github.com/davioliveiraes', '_blank', 'noopener'),
+    },
+    {
+        label: 'LinkedIn',
+        hint: PF.i18n.link || 'Link',
+        action: () => window.open('https://www.linkedin.com/in/davioliveiraes/', '_blank', 'noopener'),
+    }
+);
 
 // Ctrl+K / Cmd+K para abrir
 document.addEventListener('keydown', (e) => {
@@ -218,8 +359,7 @@ document.addEventListener('keydown', (e) => {
 // Filtrar ao digitar
 palette.input.addEventListener('input', () => {
     palette.selectedIndex = 0;
-    const filtered = palette.filter(palette.input.value);
-    palette.render(filtered);
+    palette.render(palette.filter(palette.input.value));
 });
 
 // Navegação com teclado dentro da palette
@@ -243,17 +383,13 @@ const terminal = {
     history: [],
     historyIndex: -1,
     booted: false,
-    isEN: (document.documentElement.lang || 'pt-br').startsWith('en'),
 
     t(pt, en) {
-        return this.isEN ? en : pt;
-    },
-
-    pagePath(path) {
-        return this.isEN ? '/en' + path : path;
+        return isEN ? en : pt;
     },
 
     open() {
+        palette.close();
         this.overlay.classList.add('open');
         if (!this.booted) {
             this.booted = true;
@@ -286,42 +422,42 @@ const terminal = {
         this.history.push(raw);
         this.historyIndex = this.history.length;
 
-        const go = (path) => {
-            this.print(this.t('Abrindo', 'Opening') + ' ' + path + '...');
-            setTimeout(() => { window.location.href = this.pagePath(path); }, 350);
+        const go = (section) => {
+            this.print(this.t('Indo para', 'Going to') + ' #' + section + '...');
+            this.close();
+            scrollToSection(section);
         };
 
         const commands = {
             help: () => this.print(this.t(
-                'Comandos disponíveis:\n  <span class="term-accent">sobre</span>        quem eu sou\n  <span class="term-accent">projetos</span>     o que eu construí\n  <span class="term-accent">skills</span>       tecnologias que uso\n  <span class="term-accent">experiencia</span>  minha trajetória\n  <span class="term-accent">formacao</span>     estudos e certificações\n  <span class="term-accent">contato</span>      vamos conversar\n  <span class="term-accent">github</span>       meu GitHub\n  <span class="term-accent">linkedin</span>     meu LinkedIn\n  <span class="term-accent">theme</span>        alternar dark/light\n  <span class="term-accent">whoami</span>       ?\n  <span class="term-accent">clear</span>        limpar a tela\n  <span class="term-accent">exit</span>         fechar o terminal',
-                'Available commands:\n  <span class="term-accent">about</span>        who I am\n  <span class="term-accent">projects</span>     what I have built\n  <span class="term-accent">skills</span>       technologies I use\n  <span class="term-accent">experience</span>   my journey\n  <span class="term-accent">education</span>    studies and certifications\n  <span class="term-accent">contact</span>      let\'s talk\n  <span class="term-accent">github</span>       my GitHub\n  <span class="term-accent">linkedin</span>     my LinkedIn\n  <span class="term-accent">theme</span>        toggle dark/light\n  <span class="term-accent">whoami</span>       ?\n  <span class="term-accent">clear</span>        clear the screen\n  <span class="term-accent">exit</span>         close the terminal'
+                'Comandos disponíveis:\n  <span class="term-accent">whoami</span>       quem eu sou\n  <span class="term-accent">projetos</span>     o que eu construí\n  <span class="term-accent">skills</span>       tecnologias que uso\n  <span class="term-accent">experiencia</span>  minha trajetória\n  <span class="term-accent">formacao</span>     estudos e certificações\n  <span class="term-accent">contato</span>      vamos conversar\n  <span class="term-accent">social</span>       minhas redes\n  <span class="term-accent">github</span>       meu GitHub\n  <span class="term-accent">linkedin</span>     meu LinkedIn\n  <span class="term-accent">theme</span>        alternar dark/light\n  <span class="term-accent">clear</span>        limpar a tela\n  <span class="term-accent">exit</span>         fechar o terminal',
+                'Available commands:\n  <span class="term-accent">whoami</span>       who I am\n  <span class="term-accent">projects</span>     what I have built\n  <span class="term-accent">skills</span>       technologies I use\n  <span class="term-accent">experience</span>   my journey\n  <span class="term-accent">education</span>    studies and certifications\n  <span class="term-accent">contact</span>      let\'s talk\n  <span class="term-accent">social</span>       my networks\n  <span class="term-accent">github</span>       my GitHub\n  <span class="term-accent">linkedin</span>     my LinkedIn\n  <span class="term-accent">theme</span>        toggle dark/light\n  <span class="term-accent">clear</span>        clear the screen\n  <span class="term-accent">exit</span>         close the terminal'
             )),
-            sobre: () => go('/sobre/'),
-            about: () => go('/sobre/'),
-            projetos: () => go('/projetos/'),
-            projects: () => go('/projetos/'),
-            skills: () => go('/competencias/'),
-            competencias: () => go('/competencias/'),
-            experiencia: () => go('/experiencias/'),
-            experiencias: () => go('/experiencias/'),
-            experience: () => go('/experiencias/'),
-            formacao: () => go('/formacao/'),
-            education: () => go('/formacao/'),
-            contato: () => go('/contato/'),
-            contact: () => go('/contato/'),
+            whoami: () => this.print(this.t(
+                'Davi Oliveira — engenheiro de software. Python, Django, FastAPI, TypeScript, IA aplicada.',
+                'Davi Oliveira — software engineer. Python, Django, FastAPI, TypeScript, applied AI.'
+            )),
+            projetos: () => go('projetos'),
+            projects: () => go('projetos'),
+            skills: () => go('habilidades'),
+            habilidades: () => go('habilidades'),
+            experiencia: () => go('experiencia'),
+            experiencias: () => go('experiencia'),
+            experience: () => go('experiencia'),
+            formacao: () => go('formacao'),
+            education: () => go('formacao'),
+            contato: () => go('contatos'),
+            contact: () => go('contatos'),
+            social: () => this.print('github.com/davioliveiraes · linkedin.com/in/davioliveiraes · instagram.com/davioliveiraes'),
             github: () => { window.open('https://github.com/davioliveiraes', '_blank', 'noopener'); this.print('GitHub ↗'); },
             linkedin: () => { window.open('https://www.linkedin.com/in/davioliveiraes/', '_blank', 'noopener'); this.print('LinkedIn ↗'); },
             theme: () => {
-                document.getElementById('themeToggle').click();
+                themeToggle.click();
                 this.print(this.t('Tema alternado. 🎨', 'Theme toggled. 🎨'));
             },
-            whoami: () => this.print(this.t(
-                'Um(a) visitante curioso(a) — e isso já diz muito sobre você. 👀\nCuriosidade é requisito da vaga, aliás.',
-                'A curious visitor — and that already says a lot about you. 👀\nCuriosity happens to be a job requirement.'
-            )),
-            ls: () => this.print('sobre/  projetos/  competencias/  experiencias/  formacao/  contato/'),
+            ls: () => this.print('inicio/  experiencia/  habilidades/  projetos/  formacao/  contatos/'),
             pwd: () => this.print('/home/davi/portfolio'),
-            date: () => this.print(new Date().toLocaleString(this.isEN ? 'en-US' : 'pt-BR')),
+            date: () => this.print(new Date().toLocaleString(isEN ? 'en-US' : 'pt-BR')),
             sudo: () => this.print(this.t(
                 'davi não está no arquivo sudoers. Este incidente será reportado. 😄',
                 'davi is not in the sudoers file. This incident will be reported. 😄'
@@ -334,8 +470,8 @@ const terminal = {
             commands[cmd]();
         } else {
             this.print(this.t(
-                `comando não encontrado: ${cmd}. Tente <span class="term-accent">help</span>.`,
-                `command not found: ${cmd}. Try <span class="term-accent">help</span>.`
+                `comando não encontrado: ${cmd} — tente <span class="term-accent">help</span>`,
+                `command not found: ${cmd} — try <span class="term-accent">help</span>`
             ), 'term-error');
         }
     }
@@ -383,12 +519,11 @@ if (terminal.overlay) {
 
     // Entrada pela Command Palette
     palette.commands.push({
-        label: 'Terminal',
-        desc: terminal.t('Modo terminal (easter egg)', 'Terminal mode (easter egg)'),
-        icon: 'fas fa-terminal',
+        label: PF.i18n.terminal || 'Terminal',
+        hint: 'Ctrl+`',
         action: () => terminal.open(),
     });
 
     // Dica para quem abre o DevTools
-    console.log('%c$ davi@portfolio:~  —  ' + terminal.t('aperte Ctrl+` para abrir o terminal secreto', 'press Ctrl+` to open the secret terminal'), 'font-family: monospace; color: #5fb3c9;');
+    console.log('%c$ davi@portfolio:~  —  ' + terminal.t('aperte Ctrl+` para abrir o terminal secreto', 'press Ctrl+` to open the secret terminal'), 'font-family: monospace; color: #8fd6a0;');
 }

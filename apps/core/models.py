@@ -105,12 +105,18 @@ class Project(TranslatableMixin, models.Model):
     tags_en = models.CharField(_("Tags (EN)"), max_length=255, blank=True)
     github_url = models.URLField(_("URL do GitHub"), blank=True)
     live_url = models.URLField(_("URL do site no ar"), blank=True)
-    order = models.PositiveSmallIntegerField(_("Ordem"), default=0)
+    order = models.PositiveSmallIntegerField(
+        _("Destaque"),
+        default=0,
+        help_text="Maior valor aparece primeiro. Deixe 0 para seguir a ordem de "
+        "cadastro (o mais recente primeiro).",
+    )
 
     class Meta:
         verbose_name = _("Projeto")
         verbose_name_plural = _("Projetos")
-        ordering = ["order", "id"]
+        # Sem destaque manual, o cadastro mais recente vem primeiro
+        ordering = ["-order", "-id"]
 
     def __str__(self):
         return self.title
@@ -178,12 +184,18 @@ class Certification(TranslatableMixin, models.Model):
     hours = models.PositiveSmallIntegerField(
         _("Carga horária (h)"), null=True, blank=True
     )
-    order = models.PositiveSmallIntegerField(_("Ordem"), default=0)
+    order = models.PositiveSmallIntegerField(
+        _("Destaque"),
+        default=0,
+        help_text="Maior valor aparece primeiro. Deixe 0 para seguir a ordem de "
+        "cadastro (a mais recente primeiro).",
+    )
 
     class Meta:
         verbose_name = _("Certificação")
         verbose_name_plural = _("Certificações")
-        ordering = ["order", "id"]
+        # Sem destaque manual, o cadastro mais recente vem primeiro
+        ordering = ["-order", "-id"]
 
     def __str__(self):
         return self.name
