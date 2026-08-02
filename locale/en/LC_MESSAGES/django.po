@@ -532,6 +532,24 @@ msgstr "Previous"
 msgid "Próximo"
 msgstr "Next"
 
+msgid "Sistemas de Informação"
+msgstr "Information Systems"
+
+msgid "UFC, Universidade Federal do Ceará"
+msgstr "UFC, Federal University of Ceará"
+
+msgid "2018 a 2019"
+msgstr "2018 to 2019"
+
+msgid "Incompleto"
+msgstr "Incomplete"
+
+msgid "Ver atividades"
+msgstr "View activities"
+
+msgid "Ocultar atividades"
+msgstr "Hide activities"
+
 #~ msgid "Backend & Frameworks"
 #~ msgstr "Backend & Frameworks"
 

@@ -63,14 +63,23 @@
             <p class="exp-period">{{ experience.period_i18n }}</p>
         </div>
         <div>
-            <ul class="exp-details">
-                {% for detail in experience.details_list %}
-                <li>{{ detail }}</li>
-                {% endfor %}
-            </ul>
-            {% if experience.skills_i18n %}
-            <p class="exp-skills">{{ experience.skills_i18n }}</p>
-            {% endif %}
+            <button type="button" class="exp-toggle" aria-expanded="false" aria-controls="expBody{{ forloop.counter }}"
+                    data-label-open="{% trans 'Ver atividades' %}" data-label-close="{% trans 'Ocultar atividades' %}">
+                <span class="exp-toggle-text">{% trans "Ver atividades" %}</span>
+                <svg class="exp-toggle-icon" width="13" height="13" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66 101.66l-80 80a8 8 0 0 1-11.32 0l-80-80a8 8 0 0 1 11.32-11.32L128 164.69l74.34-74.35a8 8 0 0 1 11.32 11.32Z"/></svg>
+            </button>
+            <div class="exp-body" id="expBody{{ forloop.counter }}">
+                <div class="exp-body-inner">
+                    <ul class="exp-details">
+                        {% for detail in experience.details_list %}
+                        <li>{{ detail }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% if experience.skills_i18n %}
+                    <p class="exp-skills">{{ experience.skills_i18n }}</p>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
     {% endfor %}
@@ -157,6 +166,11 @@
             <h3>{% trans "Bacharelado em Engenharia de Software" %}</h3>
             <p class="edu-inst">{% trans "UNOPAR, Universidade Norte do Paraná" %}</p>
             <p class="edu-period">{% trans "2022 a 2025" %} · {% trans "Concluído" %}</p>
+        </div>
+        <div class="edu-card reveal">
+            <h3>{% trans "Sistemas de Informação" %}</h3>
+            <p class="edu-inst">{% trans "UFC, Universidade Federal do Ceará" %}</p>
+            <p class="edu-period">{% trans "2018 a 2019" %} · {% trans "Incompleto" %}</p>
         </div>
         <div class="edu-card reveal">
             <h3>{% trans "Técnico em Informática" %}</h3>

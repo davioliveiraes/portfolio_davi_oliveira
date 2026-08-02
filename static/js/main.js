@@ -212,6 +212,40 @@ if (projectFilters) {
 }
 
 // ============================================
+// EXPERIÊNCIA: ATIVIDADES RECOLHIDAS
+// Cada cargo abre as próprias atividades; a seção não nasce comprida.
+// ============================================
+document.querySelectorAll('.exp-row').forEach((row) => {
+    const toggle = row.querySelector('.exp-toggle');
+    const body = row.querySelector('.exp-body');
+    if (!toggle || !body) return;
+
+    // Só recolhe quando o JS está de pé (sem JS o conteúdo continua legível)
+    row.classList.add('is-collapsible');
+
+    const label = toggle.querySelector('.exp-toggle-text');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    toggle.addEventListener('click', () => {
+        const open = !row.classList.contains('is-open');
+        row.classList.toggle('is-open', open);
+        toggle.setAttribute('aria-expanded', String(open));
+        if (label) {
+            label.textContent = open ? toggle.dataset.labelClose : toggle.dataset.labelOpen;
+        }
+
+        // Depois de expandir, traz o final da linha para a tela
+        if (open && !reduced) {
+            window.setTimeout(() => {
+                if (row.getBoundingClientRect().bottom > window.innerHeight) {
+                    row.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+                }
+            }, 380);
+        }
+    });
+});
+
+// ============================================
 // COMMAND PALETTE
 // ============================================
 const PF = window.PF || { lang: 'pt-br', i18n: {} };

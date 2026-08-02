@@ -61,6 +61,17 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* Nenhuma seção pode gerar rolagem horizontal no celular.
+   "clip" (e não "hidden") preserva o position: sticky do header. */
+html,
+body {
+    overflow-x: clip;
+}
+
+img {
+    max-width: 100%;
+}
+
 a {
     color: var(--pf-accent);
     text-decoration: none;
@@ -140,6 +151,11 @@ section[id] {
 
     .carousel-viewport {
         scroll-behavior: auto;
+    }
+
+    .exp-row.is-collapsible .exp-body,
+    .exp-toggle-icon {
+        transition: none;
     }
 }
 
@@ -533,6 +549,60 @@ html:not([data-theme="light"]) .icon-sun {
     color: var(--pf-muted);
     margin-top: 6px;
     font-variant-numeric: tabular-nums;
+}
+
+/* Atividades recolhidas: a seção fica curta e o visitante abre o que interessa.
+   Sem JS o botão não aparece e o conteúdo continua visível. */
+.exp-toggle {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    height: 32px;
+    padding: 0 14px;
+    background: transparent;
+    border: 1px solid var(--pf-border);
+    border-radius: 999px;
+    color: var(--pf-muted);
+    font-size: 12.5px;
+    cursor: pointer;
+}
+
+.exp-row.is-collapsible .exp-toggle {
+    display: inline-flex;
+}
+
+.exp-toggle:hover {
+    background: color-mix(in srgb, var(--pf-accent) 12%, transparent);
+    color: var(--pf-accent);
+}
+
+.exp-row.is-open .exp-toggle {
+    border-color: var(--pf-accent);
+    color: var(--pf-accent);
+}
+
+.exp-toggle-icon {
+    transition: transform 0.25s ease;
+}
+
+.exp-row.is-open .exp-toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* A altura anima de 0fr para 1fr: sem max-height chutado */
+.exp-row.is-collapsible .exp-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s ease;
+}
+
+.exp-row.is-collapsible.is-open .exp-body {
+    grid-template-rows: 1fr;
+}
+
+.exp-row.is-collapsible .exp-body-inner {
+    overflow: hidden;
+    padding-top: 18px;
 }
 
 .exp-details {
@@ -1036,6 +1106,8 @@ html:not([data-theme="light"]) .icon-sun {
 .contact-links .value {
     font-size: 15px;
     line-height: 24px;
+    /* e-mails e URLs longas nunca estouram a largura da coluna */
+    overflow-wrap: anywhere;
 }
 
 /* ---------- Footer ---------- */
@@ -1314,7 +1386,8 @@ html:not([data-theme="light"]) .icon-sun {
     .exp-row,
     .skill-row,
     .contact-grid {
-        grid-template-columns: 1fr;
+        /* minmax(0, …) evita que conteúdo largo empurre a coluna */
+        grid-template-columns: minmax(0, 1fr);
     }
 
     /* Em uma coluna o hero flui naturalmente (sem travar em 100vh) */
@@ -1344,15 +1417,29 @@ html:not([data-theme="light"]) .icon-sun {
 }
 
 @media (max-width: 640px) {
-    .site-nav,
-    .hbtn-lang,
-    .hbtn-icon {
+    /* Sem a nav, a palette vira a navegação: o ⌘K volta a aparecer.
+       Idioma e tema continuam visíveis, na segunda linha do header. */
+    .site-nav {
         display: none;
     }
 
-    /* Sem nav, a palette é a navegação: o ⌘K volta a aparecer */
     .hbtn-k {
         display: inline-flex;
+    }
+
+    .header-inner {
+        gap: 10px 12px;
+    }
+
+    .header-actions {
+        flex: 1 1 100%;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    /* O CTA fecha a linha à direita, os controles pequenos ficam à esquerda */
+    .hbtn-cv {
+        margin-left: auto;
     }
 
     .carousel {
@@ -1366,5 +1453,39 @@ html:not([data-theme="light"]) .icon-sun {
 
     .carousel-arrows {
         display: none;
+    }
+
+    /* Rótulo em cima, valor embaixo: nada é cortado em tela estreita */
+    .contact-links a {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        padding: 14px 0;
+    }
+
+    /* Abaixo de 16px o Safari do iOS dá zoom ao focar o campo,
+       e o zoom é o que deixa a página "cortada" na horizontal. */
+    .contact-form input,
+    .contact-form textarea,
+    .palette-input-wrapper input,
+    .terminal-input-line input {
+        font-size: 16px;
+    }
+}
+
+/* Telas bem estreitas (iPhone SE e similares): a busca fica só com o ícone */
+@media (max-width: 400px) {
+    .hbtn-k {
+        width: 32px;
+        padding: 0;
+    }
+
+    .hbtn-k span {
+        display: none;
+    }
+
+    .hbtn-cv {
+        padding: 0 13px;
+        letter-spacing: 0.08em;
     }
 }

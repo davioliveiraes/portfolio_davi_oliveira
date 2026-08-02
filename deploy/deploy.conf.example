@@ -1,0 +1,13 @@
+# Configuração local do deploy. Copie para deploy/deploy.conf e ajuste.
+#
+#   cp deploy/deploy.conf.example deploy/deploy.conf
+#
+# O deploy.conf não vai para o git (está no .gitignore). O formato
+# "${VAR:-valor}" mantém a precedência das variáveis de ambiente:
+# VPS_IP=outro-ip make deploy continua funcionando.
+
+VPS_IP="${VPS_IP:-}"
+VPS_USER="${VPS_USER:-root}"
+PROJECT_DIR="${PROJECT_DIR:-/home/portfolio_davi_oliveira}"
+BRANCH="${BRANCH:-main}"
+SERVICE_NAME="${SERVICE_NAME:-portfolio}"

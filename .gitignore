@@ -15,6 +15,7 @@ media/
 
 # Variáveis de ambiente
 .env
+deploy/deploy.conf
 
 # Testes
 .coverage

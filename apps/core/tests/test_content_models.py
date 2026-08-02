@@ -66,6 +66,11 @@ class TestExperienceHelpers:
         experience = Experience.objects.get(company="iBeize")
         assert len(experience.details_list) == 4
 
+    def test_ibeize_period_is_closed(self):
+        experience = Experience.objects.get(company="iBeize")
+        assert experience.period.startswith("Fev 2026 a Jul 2026")
+        assert experience.period_en.startswith("Feb 2026 to Jul 2026")
+
     def test_details_translated(self):
         with translation.override("en"):
             experience = Experience.objects.get(company="iBeize")

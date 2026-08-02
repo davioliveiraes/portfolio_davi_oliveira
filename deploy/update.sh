@@ -11,9 +11,13 @@
 # para conectar sem digitar senha.
 #
 # Uso:
+#   make deploy            (ou ./deploy/update.sh)
+#
+# A configuração fica em deploy/deploy.conf (fora do git). Sem ele, dá para
+# passar tudo por variável de ambiente:
 #   VPS_IP=1.2.3.4 ./deploy/update.sh
 #
-# Variáveis de ambiente (com defaults):
+# Variáveis (com defaults):
 #   VPS_IP        (obrigatória — aborta se ausente)
 #   VPS_USER      (default: root)
 #   PROJECT_DIR   (default: /home/portfolio_davi_oliveira)
@@ -21,6 +25,14 @@
 #   SERVICE_NAME  (default: portfolio)
 
 set -e
+
+# --- Configuração local (deploy/deploy.conf), se existir ---
+# O arquivo usa "${VAR:-valor}", então variável de ambiente continua ganhando.
+CONFIG_FILE="$(dirname "$0")/deploy.conf"
+if [ -f "$CONFIG_FILE" ]; then
+    # shellcheck source=/dev/null
+    . "$CONFIG_FILE"
+fi
 
 # --- Configuração via variáveis de ambiente ---
 VPS_USER="${VPS_USER:-root}"
@@ -31,7 +43,8 @@ SITE_URL="https://davioliveira.tech"
 
 if [ -z "${VPS_IP:-}" ]; then
     echo "❌ VPS_IP não definida."
-    echo "   Uso: VPS_IP=<ip-do-servidor> ./deploy/update.sh"
+    echo "   Crie o deploy/deploy.conf a partir do deploy/deploy.conf.example"
+    echo "   ou rode com: VPS_IP=<ip-do-servidor> ./deploy/update.sh"
     exit 1
 fi
 
