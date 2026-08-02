@@ -748,8 +748,6 @@ html:not([data-theme="light"]) .icon-sun {
     flex: 0 0 calc((100% - (var(--per-view) - 1) * var(--carousel-gap)) / var(--per-view));
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 24px;
     border: 1px solid var(--pf-border);
     border-radius: 8px;
     background: color-mix(in srgb, var(--pf-surface) 55%, transparent);
@@ -832,6 +830,64 @@ html:not([data-theme="light"]) .icon-sun {
     display: none;
 }
 
+/* Topo do card: moldura fixa 2:1 em TODOS os cards (com print ou não), para que
+   os títulos fiquem na mesma altura em toda a linha do carrossel. 2:1 é a
+   proporção dos prints de tela cheia, então o corte é mínimo; qualquer imagem
+   fora dessa proporção é normalizada pelo object-fit: cover, sem distorcer.
+   O raio é 1px menor que o do card para encaixar por dentro da borda. */
+.card-media {
+    flex: 0 0 auto;
+    aspect-ratio: 2 / 1;
+    border-bottom: 1px solid var(--pf-border);
+    border-radius: 7px 7px 0 0;
+    overflow: hidden;
+    background: var(--pf-tint);
+}
+
+.card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Capa neutra dos projetos sem interface (APIs): nome do repositório em mono
+   sobre a malha de pontos, no lugar de um retângulo vazio. */
+.card-media-blank {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-image: radial-gradient(circle,
+            color-mix(in srgb, var(--pf-rule) 40%, transparent) 1px,
+            transparent 1px);
+    background-size: 16px 16px;
+    color: var(--pf-muted);
+}
+
+.card-media-blank svg {
+    color: var(--pf-accent);
+}
+
+.card-media-blank span {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+    padding: 0 16px;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px;
+}
+
 .card-title {
     font-weight: 500;
     font-size: 19px;
@@ -843,13 +899,25 @@ html:not([data-theme="light"]) .icon-sun {
     font-size: 15px;
     line-height: 26px;
     color: color-mix(in srgb, var(--pf-text) 78%, transparent);
-    flex: 1;
+    /* Teto de linhas: uma descrição longa não estica a linha inteira do grid */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    overflow: hidden;
+}
+
+.has-preview .card-desc {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
 }
 
 .card-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 6px 10px;
+    /* Empurra tags e botões para a base: nenhum card fica "afundado" */
+    margin-top: auto;
 }
 
 .card-tags span {

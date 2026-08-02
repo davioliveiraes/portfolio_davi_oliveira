@@ -550,6 +550,9 @@ msgstr "View activities"
 msgid "Ocultar atividades"
 msgstr "Hide activities"
 
+msgid "Tela do projeto %(name)s"
+msgstr "Screenshot of the %(name)s project"
+
 #~ msgid "Backend & Frameworks"
 #~ msgstr "Backend & Frameworks"
 

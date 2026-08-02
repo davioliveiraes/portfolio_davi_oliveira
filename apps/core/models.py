@@ -105,6 +105,14 @@ class Project(TranslatableMixin, models.Model):
     tags_en = models.CharField(_("Tags (EN)"), max_length=255, blank=True)
     github_url = models.URLField(_("URL do GitHub"), blank=True)
     live_url = models.URLField(_("URL do site no ar"), blank=True)
+    image = models.CharField(
+        _("Preview"),
+        max_length=200,
+        blank=True,
+        help_text="Caminho dentro de static/, ex.: images/projects/apex-reports.webp. "
+        "Ideal 2:1 (920x460); outras proporções são cortadas pelo card. "
+        "Vazio: o card usa a capa neutra (projeto sem interface).",
+    )
     order = models.PositiveSmallIntegerField(
         _("Destaque"),
         default=0,

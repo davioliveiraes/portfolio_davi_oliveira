@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.utils import translation
 
 import pytest
@@ -54,6 +55,21 @@ class TestProjectHelpers:
     def test_tag_list_splits_and_strips(self):
         project = Project.objects.get(github_url__endswith="url_shortener_api")
         assert project.tag_list == ["Django REST Framework", "PostgreSQL", "Docker"]
+
+    def test_projects_with_interface_have_a_preview(self):
+        with_preview = set(
+            Project.objects.exclude(image="").values_list("title", flat=True)
+        )
+        assert with_preview == {
+            "Apex Reports",
+            "Ecommerce Control",
+            "E-commerce Ibeize",
+            "Portfólio Pessoal",
+        }
+
+    def test_preview_paths_point_to_static_files(self):
+        for path in Project.objects.exclude(image="").values_list("image", flat=True):
+            assert (settings.BASE_DIR / "static" / path).exists()
 
     def test_repo_name_extracted_from_url(self):
         project = Project.objects.get(title="Portfólio Pessoal")
