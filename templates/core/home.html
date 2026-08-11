@@ -50,26 +50,23 @@
         <span class="kicker">{% trans "Experiência" %}</span>
         <h2 class="section-title">{% trans "Onde eu trabalhei" %}</h2>
     </div>
-    {% for experience in experiences %}
-    <div class="exp-row reveal">
-        <p class="exp-num">{{ forloop.counter|stringformat:"02d" }}</p>
-        <div>
-            <h3 class="exp-role">{{ experience.role_i18n }}</h3>
-            {% if experience.company_url %}
-            <a href="{{ experience.company_url }}" target="_blank" rel="noopener" class="exp-company">{{ experience.company }}</a>
-            {% else %}
-            <span class="exp-company">{{ experience.company }}</span>
-            {% endif %}
-            <p class="exp-period">{{ experience.period_i18n }}</p>
-        </div>
-        <div>
-            <button type="button" class="exp-toggle" aria-expanded="false" aria-controls="expBody{{ forloop.counter }}"
-                    data-label-open="{% trans 'Ver atividades' %}" data-label-close="{% trans 'Ocultar atividades' %}">
-                <span class="exp-toggle-text">{% trans "Ver atividades" %}</span>
-                <svg class="exp-toggle-icon" width="13" height="13" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66 101.66l-80 80a8 8 0 0 1-11.32 0l-80-80a8 8 0 0 1 11.32-11.32L128 164.69l74.34-74.35a8 8 0 0 1 11.32 11.32Z"/></svg>
-            </button>
-            <div class="exp-body" id="expBody{{ forloop.counter }}">
-                <div class="exp-body-inner">
+    <div class="carousel exp-carousel" id="expCarousel">
+        <div class="carousel-viewport" role="region" tabindex="0" aria-label="{% trans 'Experiência' %}">
+            <div class="carousel-track exp-grid">
+                {% for experience in experiences %}
+                <article class="exp-card reveal">
+                    <div class="exp-card-head">
+                        <p class="exp-num">{{ forloop.counter|stringformat:"02d" }}</p>
+                        <div>
+                            <h3 class="exp-role">{{ experience.role_i18n }}</h3>
+                            {% if experience.company_url %}
+                            <a href="{{ experience.company_url }}" target="_blank" rel="noopener" class="exp-company">{{ experience.company }}</a>
+                            {% else %}
+                            <span class="exp-company">{{ experience.company }}</span>
+                            {% endif %}
+                            <p class="exp-period">{{ experience.period_i18n }}</p>
+                        </div>
+                    </div>
                     <ul class="exp-details">
                         {% for detail in experience.details_list %}
                         <li>{{ detail }}</li>
@@ -78,11 +75,12 @@
                     {% if experience.skills_i18n %}
                     <p class="exp-skills">{{ experience.skills_i18n }}</p>
                     {% endif %}
-                </div>
+                </article>
+                {% endfor %}
             </div>
         </div>
+        {% include "core/_carousel_controls.html" %}
     </div>
-    {% endfor %}
 </section>
 <hr class="rule">
 
@@ -92,16 +90,23 @@
         <span class="kicker">{% trans "Habilidades" %}</span>
         <h2 class="section-title">{% trans "O que eu uso para construir" %}</h2>
     </div>
-    {% for category in categories %}
-    <div class="skill-row reveal">
-        <h3 class="skill-name">{{ category.name_i18n }}</h3>
-        <div class="skill-chips">
-            {% for skill in category.skills.all %}
-            <span class="tag-chip">{{ skill.name_i18n }}</span>
-            {% endfor %}
+    <div class="carousel skills-carousel" id="skillsCarousel">
+        <div class="carousel-viewport" role="region" tabindex="0" aria-label="{% trans 'Habilidades' %}">
+            <div class="carousel-track skills-grid">
+                {% for category in categories %}
+                <article class="skill-card reveal">
+                    <h3 class="skill-name">{{ category.name_i18n }}</h3>
+                    <div class="skill-chips">
+                        {% for skill in category.skills.all %}
+                        <span class="tag-chip">{{ skill.name_i18n }}</span>
+                        {% endfor %}
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
         </div>
+        {% include "core/_carousel_controls.html" %}
     </div>
-    {% endfor %}
 </section>
 <hr class="rule">
 
