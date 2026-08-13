@@ -688,14 +688,21 @@ html:not([data-theme="light"]) .icon-sun {
     --carousel-gap: 20px;
 }
 
+/* O overflow recorta na borda do padding box, que é exatamente onde o snap
+   encosta o item — sem recuo, a borda de 1px do card fica em cima do limite e
+   o arredondamento de subpixel a come. O scroll-padding afasta o snap desse
+   limite e, de quebra, faz a parada do snap coincidir com o passo que o JS
+   calcula. Na vertical a folga é maior porque o reveal desloca o card 14px;
+   a margem negativa devolve o espaço para a seção não crescer. */
 .carousel-viewport {
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
+    scroll-padding-inline: calc(var(--carousel-gap) / 2);
     scroll-behavior: smooth;
     scrollbar-width: none;
-    margin: 0 calc(-1 * var(--carousel-gap) / 2);
-    padding: 4px calc(var(--carousel-gap) / 2);
+    margin: -12px calc(-1 * var(--carousel-gap) / 2);
+    padding: 16px calc(var(--carousel-gap) / 2);
 }
 
 .carousel-viewport::-webkit-scrollbar {
@@ -722,6 +729,20 @@ html:not([data-theme="light"]) .icon-sun {
 .carousel-track > .exp-card,
 .carousel-track > .skill-card {
     flex: 0 0 calc((100% - (var(--per-view) - 1) * var(--carousel-gap)) / var(--per-view));
+}
+
+/* No fim da rolagem o último card encostava no limite de recorte e perdia a
+   borda: a área rolável ignora o padding e a margem do lado final, só as
+   caixas dos itens contam. Este espaçador é uma caixa de verdade, então entra
+   na conta; a margem negativa anula o gap que ele mesmo cria, para a folga
+   final ficar igual à da esquerda. As certificações ficam de fora — são
+   linhas com borda só no topo, sem borda lateral a proteger. */
+.exp-grid::after,
+.skills-grid::after,
+.projects-grid::after {
+    content: '';
+    flex: 0 0 calc(var(--carousel-gap) / 2);
+    margin-inline-start: calc(-1 * var(--carousel-gap));
 }
 
 .project-card {
