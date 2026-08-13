@@ -13,7 +13,7 @@ class TestSeededContent:
     def test_seed_populates_all_models(self):
         assert SkillCategory.objects.count() == 7
         assert Project.objects.count() == 13
-        assert Experience.objects.count() == 4
+        assert Experience.objects.count() == 5
         assert Certification.objects.count() == 8
 
     def test_projects_list_newest_first(self):
@@ -86,6 +86,14 @@ class TestExperienceHelpers:
         experience = Experience.objects.get(company="iBeize")
         assert experience.period.startswith("Fev 2026 a Jul 2026")
         assert experience.period_en.startswith("Feb 2026 to Jul 2026")
+
+    def test_current_role_comes_first(self):
+        assert Experience.objects.first().company == "Apex Acelera"
+
+    def test_current_role_period_is_open_and_remote(self):
+        experience = Experience.objects.get(company="Apex Acelera")
+        assert experience.period == "Ago 2026 até hoje · Remoto"
+        assert experience.period_en == "Aug 2026 to today · Remote"
 
     def test_details_translated(self):
         with translation.override("en"):
