@@ -77,6 +77,8 @@ function initCarousel(root) {
     const visibleItems = () => items.filter((item) => !item.classList.contains('filtered-out'));
     const gapSize = () => parseFloat(getComputedStyle(track).columnGap) || 0;
     const rows = () => Math.max(1, parseInt(getComputedStyle(root).getPropertyValue('--rows'), 10) || 1);
+    const maxDots = () => Math.max(1, parseInt(getComputedStyle(root).getPropertyValue('--max-dots'), 10) || 99);
+    const pageWord = ((window.PF || {}).lang || 'pt-br').startsWith('en') ? 'Page ' : 'Página ';
     const maxScroll = () => Math.max(0, viewport.scrollWidth - viewport.clientWidth);
 
     // Colunas visíveis: derivadas da largura real do item, que o CSS controla por breakpoint
@@ -119,20 +121,29 @@ function initCarousel(root) {
         if (nextBtn) nextBtn.disabled = page >= pages - 1;
 
         if (!dotsBox) return;
-        if (dotsBox.childElementCount !== pages) {
-            const pageWord = ((window.PF || {}).lang || 'pt-br').startsWith('en') ? 'Page ' : 'Página ';
+
+        // Com muitas páginas a tira inteira não caberia na linha, então só uma
+        // janela é desenhada: ela desliza para manter o ponto ativo no meio,
+        // e o "x / y" ao lado continua dizendo a posição real.
+        const shown = Math.min(pages, maxDots());
+        const start = Math.min(Math.max(page - Math.floor(shown / 2), 0), pages - shown);
+
+        if (dotsBox.childElementCount !== shown) {
             dotsBox.textContent = '';
-            for (let i = 0; i < pages; i++) {
+            for (let i = 0; i < shown; i++) {
                 const dot = document.createElement('button');
                 dot.type = 'button';
                 dot.className = 'carousel-dot';
-                dot.setAttribute('aria-label', pageWord + (i + 1));
-                dot.addEventListener('click', () => goTo(i));
+                // O alvo muda conforme a janela desliza, então é lido no clique
+                dot.addEventListener('click', () => goTo(Number(dot.dataset.page)));
                 dotsBox.appendChild(dot);
             }
         }
         Array.from(dotsBox.children).forEach((dot, i) => {
-            dot.classList.toggle('active', i === page);
+            const target = start + i;
+            dot.dataset.page = target;
+            dot.setAttribute('aria-label', pageWord + (target + 1));
+            dot.classList.toggle('active', target === page);
         });
     }
 

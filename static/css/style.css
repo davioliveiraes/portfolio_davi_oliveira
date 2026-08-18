@@ -685,6 +685,9 @@ html:not([data-theme="light"]) .icon-sun {
 .carousel {
     --per-view: 3;
     --rows: 1;
+    /* Teto de pontos desenhados de uma vez; acima disso o JS desliza uma janela.
+       Alto o bastante para, no desktop, nunca recortar nada. */
+    --max-dots: 99;
     --carousel-gap: 20px;
 }
 
@@ -1515,6 +1518,10 @@ html:not([data-theme="light"]) .icon-sun {
 
     .carousel {
         --per-view: 1;
+        /* Sem as setas, sobra a linha "pontos + contador", e ela tem uma
+           largura só. Sete é o que cabe ao lado do "x / y" em 375px: mais do
+           que isso a tira empurrava o contador para fora da tela. */
+        --max-dots: 7;
     }
 
     /* Uma coluna só: mais linhas por página para não virar um carrossel infinito */
