@@ -80,7 +80,11 @@ class TestProjectHelpers:
 class TestExperienceHelpers:
     def test_details_list_splits_lines(self):
         experience = Experience.objects.get(company="iBeize")
-        assert len(experience.details_list) == 4
+        assert len(experience.details_list) == 3
+
+    def test_every_experience_has_three_details(self):
+        for experience in Experience.objects.all():
+            assert len(experience.details_list) == 3, experience.company
 
     def test_ibeize_period_is_closed(self):
         experience = Experience.objects.get(company="iBeize")
