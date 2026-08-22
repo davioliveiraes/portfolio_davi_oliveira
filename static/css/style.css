@@ -452,13 +452,13 @@ html:not([data-theme="light"]) .icon-sun {
     margin-bottom: 30px;
 }
 
-/* Linha de tecnologias (não são chips) */
+/* Linha de tecnologias (não são chips). Grid de colunas fixas (não flex-wrap)
+   para as linhas alinharem em coluna, uma embaixo da outra. */
 .hero-tech {
     border-top: 1px solid var(--pf-border);
     padding-top: 22px;
-    max-width: 44ch;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(5, auto);
     gap: 8px 18px;
 }
 
@@ -1548,6 +1548,11 @@ html:not([data-theme="light"]) .icon-sun {
     .palette-input-wrapper input,
     .terminal-input-line input {
         font-size: 16px;
+    }
+
+    /* 5 colunas não cabem em tela estreita: cai para 2 */
+    .hero-tech {
+        grid-template-columns: repeat(2, auto);
     }
 }
 

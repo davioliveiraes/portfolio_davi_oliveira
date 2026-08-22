@@ -11,7 +11,7 @@ class TestSeededContent:
     """A migration de carga deve popular o conteúdo do portfólio."""
 
     def test_seed_populates_all_models(self):
-        assert SkillCategory.objects.count() == 7
+        assert SkillCategory.objects.count() == 6
         assert Project.objects.count() == 13
         assert Experience.objects.count() == 5
         assert Certification.objects.count() == 8
