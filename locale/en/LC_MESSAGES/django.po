@@ -490,8 +490,8 @@ msgstr "Résumé"
 msgid "Engenheiro de Software"
 msgstr "Software Engineer"
 
-msgid "Programação e Sistemas"
-msgstr "Programming and Systems"
+msgid "Programação e Dados"
+msgstr "Programming and Data"
 
 msgid "Automações e IA."
 msgstr "Automation and AI."

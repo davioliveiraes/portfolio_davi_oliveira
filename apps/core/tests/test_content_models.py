@@ -61,7 +61,7 @@ class TestProjectHelpers:
             Project.objects.exclude(image="").values_list("title", flat=True)
         )
         assert with_preview == {
-            "Apex Reports",
+            "Apex Acelera | Reports",
             "Ecommerce Control",
             "E-commerce Ibeize",
             "Portfólio Pessoal",
@@ -74,6 +74,16 @@ class TestProjectHelpers:
     def test_repo_name_extracted_from_url(self):
         project = Project.objects.get(title="Portfólio Pessoal")
         assert project.repo_name == "portfolio_davi_oliveira"
+
+    def test_project_descriptions_are_short_complete_previews(self):
+        for project in Project.objects.all():
+            assert project.description.endswith("."), project.title
+            assert project.description_en.endswith("."), project.title
+            assert len(project.description) <= 180, project.title
+            assert len(project.description_en) <= 180, project.title
+            if project.image:
+                assert len(project.description) <= 100, project.title
+                assert len(project.description_en) <= 100, project.title
 
 
 @pytest.mark.django_db

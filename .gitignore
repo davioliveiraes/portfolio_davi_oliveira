@@ -33,3 +33,6 @@ htmlcov/
 # Claude
 resume_claude.txt
 .claude/
+
+# Codex
+resume_codex.txt

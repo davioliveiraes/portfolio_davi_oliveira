@@ -899,20 +899,15 @@ html:not([data-theme="light"]) .icon-sun {
 }
 
 .card-desc {
+    display: block;
     font-size: 15px;
     line-height: 26px;
     color: color-mix(in srgb, var(--pf-text) 78%, transparent);
-    /* Teto de linhas: uma descrição longa não estica a linha inteira do grid */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
-    line-clamp: 4;
-    overflow: hidden;
-}
-
-.has-preview .card-desc {
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
+    overflow: visible;
+    white-space: normal;
+    text-overflow: clip;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
 }
 
 .card-tags {
