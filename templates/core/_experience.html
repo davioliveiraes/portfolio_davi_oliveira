@@ -1,0 +1,41 @@
+{% load static i18n %}
+<section id="experiencia" class="section">
+    <div class="section-head reveal">
+        <span class="kicker">{% trans "Experiência" %}</span>
+        <h2 class="section-title">{% trans "Onde eu trabalhei" %}</h2>
+    </div>
+    <div class="carousel exp-carousel" id="expCarousel">
+        <div class="carousel-viewport" role="region" tabindex="0" aria-label="{% trans 'Experiência' %}">
+            <div class="carousel-track exp-grid">
+                {% for experience in experiences %}
+                <article class="exp-card reveal">
+                    <div class="exp-card-head">
+                        <p class="exp-num">{{ forloop.counter|stringformat:"02d" }}</p>
+                        <div>
+                            <h3 class="exp-role" id="experience-role-{{ experience.pk }}">{{ experience.role_i18n }}</h3>
+                            {% if experience.company_url %}
+                            <a href="{{ experience.company_url }}" target="_blank" rel="noopener" class="exp-company" id="experience-company-{{ experience.pk }}">{{ experience.company }}</a>
+                            {% else %}
+                            <span class="exp-company" id="experience-company-{{ experience.pk }}">{{ experience.company }}</span>
+                            {% endif %}
+                            <p class="exp-period">{{ experience.period_i18n }}</p>
+                        </div>
+                    </div>
+                    <div class="exp-details-scroll" tabindex="0" role="region"
+                         aria-labelledby="experience-role-{{ experience.pk }} experience-company-{{ experience.pk }}">
+                        <ul class="exp-details">
+                            {% for detail in experience.details_list %}
+                            <li>{{ detail }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% if experience.skills_i18n %}
+                    <p class="exp-skills">{{ experience.skills_i18n }}</p>
+                    {% endif %}
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+        {% include "core/_carousel_controls.html" %}
+    </div>
+</section>

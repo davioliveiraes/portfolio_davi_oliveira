@@ -1,0 +1,43 @@
+{% load static i18n %}
+<section id="inicio" class="hero" aria-labelledby="hero-title">
+    <div class="hero-grid">
+        <div class="hero-copy reveal">
+            <span class="hero-kicker">{% trans "Engenheiro de Software" %}</span>
+            <h1 class="hero-title" id="hero-title">
+                <span>{% trans "Programação e Dados" %}</span>
+                <span class="accent">{% trans "Automações e IA." %}</span>
+            </h1>
+            <p class="hero-sub">{% trans "Sou Davi Oliveira. Do ecossistema Python: APIs em FastAPI, sistemas fullstack em Django, dados e automações com IA aplicada, do primeiro commit ao deploy em produção." %}</p>
+            <div class="hero-ctas">
+                <a href="#projetos" class="btn btn-hero btn-solid">
+                    {% trans "Ver projetos" %}
+                    <svg width="15" height="15" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66 133.66l-72 72a8 8 0 0 1-11.32-11.32L196.69 136H40a8 8 0 0 1 0-16h156.69l-58.35-58.34a8 8 0 0 1 11.32-11.32l72 72a8 8 0 0 1 0 11.32Z"/></svg>
+                </a>
+                <a href="#contatos" class="btn btn-hero">
+                    {% trans "Falar comigo" %}
+                    <svg width="15" height="15" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66 133.66l-72 72a8 8 0 0 1-11.32-11.32L196.69 136H40a8 8 0 0 1 0-16h156.69l-58.35-58.34a8 8 0 0 1 11.32-11.32l72 72a8 8 0 0 1 0 11.32Z"/></svg>
+                </a>
+            </div>
+            <div class="hero-tech">
+                <span>Python</span>
+                <span>Django</span>
+                <span>FastAPI</span>
+                <span>SQL</span>
+                <span>PostgreSQL</span>
+                <span>{% trans "Dados" %}</span>
+                <span>Docker</span>
+                <span>Golang</span>
+                <span>LLMs</span>
+                <span>{% trans "Automação" %}</span>
+            </div>
+        </div>
+        <div class="hero-photo reveal">
+            {% include "core/_hero_art.html" %}
+            <img src="{% static 'images/profile-cutout.webp' %}" alt="Davi Oliveira" width="1254" height="1254" fetchpriority="high">
+            <div class="hero-caption">
+                <span>Python · API</span>
+                <span>{% trans "Dados · Decisão" %}</span>
+            </div>
+        </div>
+    </div>
+</section>

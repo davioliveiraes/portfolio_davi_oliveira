@@ -1,0 +1,89 @@
+{% load i18n %}
+{# Ilustração decorativa: não representa serviços ou métricas em tempo real. #}
+<svg class="hero-circuit" viewBox="0 0 900 1000" fill="none" preserveAspectRatio="xMidYMin meet" aria-hidden="true" focusable="false">
+    <defs>
+        <pattern id="hero-data-grid" width="36" height="36" patternUnits="userSpaceOnUse">
+            <path d="M36 0H0V36" stroke="currentColor" stroke-width="0.7"/>
+            <circle cx="0" cy="0" r="1.7" fill="currentColor"/>
+        </pattern>
+        <radialGradient id="hero-data-glow">
+            <stop class="hero-glow-center" offset="0"/>
+            <stop class="hero-glow-edge" offset="1"/>
+        </radialGradient>
+        <linearGradient id="hero-orbit-fade" x1="100" y1="100" x2="800" y2="850" gradientUnits="userSpaceOnUse">
+            <stop class="hero-orbit-start"/>
+            <stop class="hero-orbit-end" offset="1"/>
+        </linearGradient>
+    </defs>
+
+    <!-- Campo de dados: profundidade sem um disco sólido atrás do retrato. -->
+    <ellipse cx="450" cy="495" rx="430" ry="465" fill="url(#hero-data-glow)"/>
+    <circle class="hero-art-grid" cx="450" cy="484" r="366" fill="url(#hero-data-grid)"/>
+    <g stroke="url(#hero-orbit-fade)" stroke-width="1">
+        <circle cx="450" cy="484" r="366"/>
+        <circle cx="450" cy="484" r="397" stroke-dasharray="3 12"/>
+        <path d="M85 484a365 365 0 0 1 365-365M450 849a365 365 0 0 0 365-365" stroke-width="2"/>
+    </g>
+
+    <!-- Rotas que conectam API, armazenamento e inferência. -->
+    <g class="hero-art-routes" stroke="currentColor" stroke-width="1.2">
+        <path d="M137 283V389M137 551V610L218 691H340M250 205H302L350 157H571L627 213H695"/>
+        <path d="M201 470H296L350 416H634L702 349M813 386V482L743 552V633"/>
+        <path d="M60 355V99H319M598 97H856V419M54 629V693H122"/>
+        <circle cx="319" cy="99" r="4"/><circle cx="598" cy="97" r="4"/>
+        <circle cx="137" cy="340" r="4"/><circle cx="743" cy="633" r="4"/>
+    </g>
+    <g class="hero-art-packets" fill="currentColor">
+        <rect x="133" y="317" width="8" height="8" rx="2"/>
+        <rect x="274" y="466" width="8" height="8" rx="2"/>
+        <rect x="809" y="427" width="8" height="8" rx="2"/>
+    </g>
+
+    <!-- Backend: uma pequena janela de requisição, não um card interativo. -->
+    <g class="hero-art-backend">
+        <text class="hero-art-label" x="30" y="129">01 / BACKEND</text>
+        <rect class="hero-art-panel" x="30" y="148" width="220" height="134" rx="8"/>
+        <path class="hero-art-divider" d="M30 181H250"/>
+        <g class="hero-art-window-dots" fill="currentColor">
+            <circle cx="47" cy="165" r="2.5"/><circle cx="58" cy="165" r="2.5"/><circle cx="69" cy="165" r="2.5"/>
+        </g>
+        <text class="hero-art-meta" x="232" y="170" text-anchor="end">REST / JSON</text>
+        <text class="hero-art-code" x="48" y="212"><tspan class="hero-art-keyword">GET</tspan> /api/v1</text>
+        <text class="hero-art-code hero-art-code-muted" x="48" y="246">{"data": []}</text>
+    </g>
+
+    <!-- Dados: camadas de armazenamento e uma consulta SQL. -->
+    <g class="hero-art-data">
+        <text class="hero-art-label" x="68" y="396">02 / {% trans "Dados" %}</text>
+        <g class="hero-art-database" stroke="currentColor" stroke-width="1.5">
+            <path d="M77 429V509C77 522 104 533 137 533S197 522 197 509V429"/>
+            <ellipse cx="137" cy="429" rx="60" ry="24"/>
+            <path d="M77 455C77 468 104 479 137 479S197 468 197 455M77 482C77 495 104 506 137 506S197 495 197 482"/>
+        </g>
+        <circle class="hero-art-packets" cx="181" cy="455" r="2.5" fill="currentColor"/>
+        <circle class="hero-art-packets" cx="181" cy="482" r="2.5" fill="currentColor"/>
+        <text class="hero-art-code hero-art-code-muted" x="64" y="568">SELECT *</text>
+        <text class="hero-art-code hero-art-code-muted" x="64" y="593">FROM events;</text>
+        <text class="hero-art-meta" x="64" y="620">SQL / ETL / ANALYTICS</text>
+    </g>
+
+    <!-- IA: camadas de uma rede, com nós de entrada, processamento e saída. -->
+    <g class="hero-art-ai">
+        <text class="hero-art-label" x="687" y="176">03 / {% trans "IA" %}</text>
+        <text class="hero-art-meta" x="687" y="198">LLM / INFERENCE</text>
+        <g class="hero-art-neural-links" stroke="currentColor" stroke-width="1.2">
+            <path d="M696 245L755 270L821 303M696 245L755 340L821 373M696 314L755 270L821 373M696 314L755 340L821 303M696 314L755 410L821 373M696 383L755 340M696 383L755 410L821 303"/>
+        </g>
+        <g class="hero-art-neural-nodes" stroke="currentColor" stroke-width="1.5">
+            <circle cx="696" cy="245" r="7"/><circle cx="696" cy="314" r="7"/><circle cx="696" cy="383" r="7"/>
+            <circle cx="755" cy="270" r="9"/><circle cx="755" cy="340" r="9"/><circle cx="755" cy="410" r="9"/>
+            <circle cx="821" cy="303" r="7"/><circle cx="821" cy="373" r="7"/>
+        </g>
+        <circle class="hero-art-packets" cx="755" cy="340" r="3" fill="currentColor"/>
+        <path class="hero-art-signal" d="M685 472H705L718 461L731 483L747 450L763 472H839" stroke="currentColor" stroke-width="1.5"/>
+    </g>
+    <g class="hero-art-marks" stroke="currentColor" stroke-width="1">
+        <path d="M829 62H847M838 53V71M38 582H54M46 574V590"/>
+        <path d="M347 63H385M355 71H377M542 733H558M550 725V741"/>
+    </g>
+</svg>

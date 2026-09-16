@@ -389,25 +389,29 @@ html:not([data-theme="light"]) .icon-sun {
 
 /* ---------- Início (hero) ---------- */
 
-/* O hero ocupa exatamente a primeira tela (viewport menos o header),
-   sem conteúdo aparecendo embaixo; a foto ancora na base da tela. */
+/* A primeira tela é dedicada ao Início, descontando a altura real do header.
+   min-height permite que o conteúdo cresça em telas baixas e no celular. */
 .hero {
-    min-height: calc(100vh - 64px);
-    min-height: calc(100svh - 64px);
+    --hero-top-space: 20px;
     display: flex;
-    padding: 0;
+    min-height: calc(100vh - var(--pf-header-height, 64px));
+    min-height: calc(100svh - var(--pf-header-height, 64px));
+    padding-top: var(--hero-top-space);
 }
 
 .hero-grid {
     flex: 1;
     display: grid;
-    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-    gap: clamp(28px, 5vw, 72px);
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: clamp(28px, 4vw, 64px);
     align-items: center;
 }
 
 .hero-copy {
-    padding: calc(2 * var(--leading)) 0;
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+    padding: clamp(28px, 3.5vw, 52px) 0;
 }
 
 .hero-kicker {
@@ -470,18 +474,123 @@ html:not([data-theme="light"]) .icon-sun {
     color: var(--pf-muted);
 }
 
-/* Foto recortada (com alpha): a silhueta integra a foto ao fundo.
-   A coluna ocupa a altura toda do hero e a imagem encosta na base. */
+/* O retrato acompanha a altura disponível, aproximando o rosto do header.
+   A arte vetorial usa os tokens do tema e não intercepta cliques ou foco. */
 .hero-photo {
+    --hero-portrait-height: max(480px, calc(100svh - var(--pf-header-height, 64px) - var(--hero-top-space)));
     position: relative;
-    align-self: stretch;
+    isolation: isolate;
+    align-self: end;
+    height: var(--hero-portrait-height);
+    min-width: 0;
+}
+
+.hero-circuit {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--pf-accent);
+    pointer-events: none;
+}
+
+.hero-glow-center {
+    stop-color: var(--pf-accent);
+    stop-opacity: 0.24;
+}
+
+.hero-glow-edge {
+    stop-color: var(--pf-accent);
+    stop-opacity: 0;
+}
+
+.hero-orbit-start {
+    stop-color: var(--pf-accent);
+    stop-opacity: 0.55;
+}
+
+.hero-orbit-end {
+    stop-color: var(--pf-accent);
+    stop-opacity: 0.08;
+}
+
+.hero-art-grid {
+    opacity: 0.16;
+}
+
+.hero-art-routes,
+.hero-art-marks,
+.hero-art-neural-links {
+    opacity: 0.45;
+}
+
+.hero-art-panel {
+    fill: color-mix(in srgb, var(--pf-bg) 82%, transparent);
+    stroke: color-mix(in srgb, var(--pf-accent) 55%, transparent);
+}
+
+.hero-art-divider {
+    stroke: var(--pf-accent);
+    opacity: 0.3;
+}
+
+.hero-art-label,
+.hero-art-code,
+.hero-art-meta {
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    fill: var(--pf-accent-soft);
+}
+
+.hero-art-label {
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.75;
+}
+
+.hero-art-code {
+    font-size: 19px;
+    opacity: 0.8;
+}
+
+.hero-art-meta {
+    font-size: 11px;
+    letter-spacing: 1.1px;
+    opacity: 0.65;
+}
+
+.hero-art-keyword {
+    fill: var(--pf-accent);
+    font-weight: 600;
+}
+
+.hero-art-code-muted,
+.hero-art-window-dots,
+.hero-art-signal {
+    opacity: 0.55;
+}
+
+.hero-art-database,
+.hero-art-neural-nodes {
+    fill: color-mix(in srgb, var(--pf-bg) 75%, transparent);
+    stroke: color-mix(in srgb, var(--pf-accent-soft) 55%, var(--pf-accent));
+    opacity: 0.65;
+}
+
+.hero-art-packets {
+    color: var(--pf-accent-soft);
+    opacity: 0.65;
 }
 
 .hero-photo img {
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    object-position: bottom center;
+    object-fit: cover;
+    object-position: center top;
     display: block;
     filter: brightness(0.97) contrast(1.02);
 }
@@ -492,7 +601,7 @@ html:not([data-theme="light"]) .icon-sun {
 
 .hero-caption {
     position: absolute;
-    top: 8px;
+    top: 16px;
     right: 4px;
     display: flex;
     flex-direction: column;
@@ -534,6 +643,7 @@ html:not([data-theme="light"]) .icon-sun {
 }
 
 .exp-card-head {
+    flex-shrink: 0;
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
     gap: 4px 16px;
@@ -568,6 +678,26 @@ html:not([data-theme="light"]) .icon-sun {
     font-variant-numeric: tabular-nums;
 }
 
+/* A primeira experiência conserva a altura natural que já guiava a linha.
+   As demais não ampliam os cards: atividades extras rolam dentro do espaço
+   disponível, mantendo cabeçalho e habilidades visíveis, inclusive no mobile. */
+.exp-details-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--pf-accent) transparent;
+}
+
+.exp-card:not(:first-child) .exp-details-scroll {
+    contain: size;
+    padding-inline-end: 8px;
+}
+
+.exp-details-scroll:focus-visible {
+    outline-offset: -2px;
+}
+
 .exp-details {
     display: flex;
     flex-direction: column;
@@ -596,6 +726,7 @@ html:not([data-theme="light"]) .icon-sun {
 /* Fecha o card por baixo: com os cards esticados na mesma altura, as
    habilidades do cargo ficam alinhadas no rodapé de todos eles. */
 .exp-skills {
+    flex-shrink: 0;
     margin-top: auto;
     padding-top: 4px;
     font-size: 13px;
@@ -1457,15 +1588,21 @@ html:not([data-theme="light"]) .icon-sun {
 }
 
 @media (max-width: 860px) {
-    .hero-grid,
     .contact-grid {
         /* minmax(0, …) evita que conteúdo largo empurre a coluna */
         grid-template-columns: minmax(0, 1fr);
     }
+}
 
-    /* Em uma coluna o hero flui naturalmente (sem travar em 100vh) */
+/* Tablets em pé também empilham a composição para não recortar o rosto. */
+@media (max-width: 860px), (max-width: 1180px) and (orientation: portrait) {
+    .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    /* Em uma coluna, texto e retrato mantêm a hierarquia sem espaços vazios. */
     .hero {
-        min-height: 0;
+        --hero-top-space: 12px;
     }
 
     .hero-copy {
@@ -1474,10 +1611,10 @@ html:not([data-theme="light"]) .icon-sun {
 
     .hero-photo {
         align-self: auto;
-    }
-
-    .hero-photo img {
+        justify-self: center;
+        width: min(100%, 540px);
         height: auto;
+        aspect-ratio: 1;
     }
 
     .hero-grid {
@@ -1566,4 +1703,23 @@ html:not([data-theme="light"]) .icon-sun {
         padding: 0 13px;
         letter-spacing: 0.08em;
     }
+}
+
+/* Navegação por teclado, sem alterar a identidade visual. */
+body.modal-open {
+    overflow: hidden;
+}
+
+.skip-link {
+    position: fixed;
+    top: -80px;
+    left: 20px;
+    z-index: 200;
+    padding: 12px 20px;
+    color: var(--pf-on-accent);
+    background: var(--pf-accent);
+}
+
+.skip-link:focus {
+    top: 12px;
 }

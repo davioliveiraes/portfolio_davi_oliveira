@@ -1,0 +1,62 @@
+{% load static i18n %}
+<section id="projetos" class="section">
+    <div class="projects-head reveal">
+        <div>
+            <span class="kicker">{% trans "Projetos" %}</span>
+            <h2 class="section-title">{% trans "O que eu construí" %}</h2>
+        </div>
+        <div class="filters" id="projectFilters">
+            <button type="button" class="filter-pill active" aria-pressed="true" data-filter="all">{% trans "Todos" %}</button>
+            {% for filter in filters %}
+            <button type="button" class="filter-pill" aria-pressed="false" data-filter="{{ filter.value }}">{{ filter.label }}</button>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="carousel" id="projectsCarousel">
+        <div class="carousel-viewport" role="region" tabindex="0" aria-label="{% trans 'Projetos' %}">
+            <div class="carousel-track projects-grid">
+        {% for project in projects %}
+        <article class="project-card reveal{% if project.image %} has-preview{% endif %}" data-category="{{ project.category }}">
+            <div class="card-media">
+                {% if project.image %}
+                <img src="{% static project.image %}" width="920" height="460" loading="lazy" decoding="async"
+                     alt="{% blocktrans with name=project.title_i18n %}Tela do projeto {{ name }}{% endblocktrans %}">
+                {% else %}
+                {# Projeto sem interface: capa neutra do mesmo tamanho, para a linha do grid ficar alinhada #}
+                <div class="card-media-blank" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M69.12 94.15L28.5 128l40.62 33.85a8 8 0 1 1-10.24 12.29l-48-40a8 8 0 0 1 0-12.29l48-40a8 8 0 0 1 10.24 12.3Zm176 27.7l-48-40a8 8 0 1 0-10.24 12.3L227.5 128l-40.62 33.85a8 8 0 1 0 10.24 12.29l48-40a8 8 0 0 0 0-12.29ZM162.73 32.48a8 8 0 0 0-10.25 4.79l-64 176a8 8 0 0 0 4.79 10.26 8.14 8.14 0 0 0 2.73.47 8 8 0 0 0 7.52-5.26l64-176a8 8 0 0 0-4.79-10.26Z"/></svg>
+                    <span>{{ project.repo_name|default:project.get_category_display }}</span>
+                </div>
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">{{ project.title_i18n }}</h3>
+                <p class="card-desc">{{ project.description_i18n }}</p>
+                <div class="card-tags">
+                    {% for tag in project.tag_list %}
+                    <span>{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                <div class="card-foot">
+                    {% if project.github_url %}
+                    <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="card-btn">
+                        <svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M208.31 75.68A59.78 59.78 0 0 0 202.93 28a8 8 0 0 0-6.93-4 59.75 59.75 0 0 0-48 24h-24a59.75 59.75 0 0 0-48-24 8 8 0 0 0-6.93 4 59.78 59.78 0 0 0-5.38 47.68A58.14 58.14 0 0 0 56 104v8a56.06 56.06 0 0 0 48.44 55.47A39.8 39.8 0 0 0 96 192v8H72a24 24 0 0 1-24-24 40 40 0 0 0-40-40 8 8 0 0 0 0 16 24 24 0 0 1 24 24 40 40 0 0 0 40 40h24v16a8 8 0 0 0 16 0v-40a24 24 0 0 1 48 0v40a8 8 0 0 0 16 0v-40a39.8 39.8 0 0 0-8.44-24.53A56.06 56.06 0 0 0 216 112v-8a58.14 58.14 0 0 0-7.69-28.32Z"/></svg>
+                        {% trans "Código" %}
+                    </a>
+                    {% endif %}
+                    {% if project.live_url %}
+                    <a href="{{ project.live_url }}" target="_blank" rel="noopener" class="card-btn card-btn-accent">
+                        <svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M216 104a8 8 0 0 1-16 0V67.31l-82.34 82.35a8 8 0 0 1-11.32-11.32L188.69 56H152a8 8 0 0 1 0-16h56a8 8 0 0 1 8 8Zm-24 40a8 8 0 0 0-8 8v48H56V72h48a8 8 0 0 0 0-16H56a16 16 0 0 0-16 16v128a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16v-48a8 8 0 0 0-8-8Z"/></svg>
+                        {% trans "Ver site" %}
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+            </div>
+        </div>
+        {% include "core/_carousel_controls.html" %}
+    </div>
+    <p class="projects-empty" id="projectsEmpty" hidden>{% trans "Nenhum projeto nesta categoria ainda." %}</p>
+</section>

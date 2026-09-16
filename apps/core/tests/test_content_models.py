@@ -1,4 +1,9 @@
+from importlib import import_module
+from types import SimpleNamespace
+
+from django.apps import apps
 from django.conf import settings
+from django.db import connection
 from django.utils import translation
 
 import pytest
@@ -71,6 +76,10 @@ class TestProjectHelpers:
         for path in Project.objects.exclude(image="").values_list("image", flat=True):
             assert (settings.BASE_DIR / "static" / path).exists()
 
+    def test_apex_uses_updated_screenshot(self):
+        project = Project.objects.get(title="Apex Acelera | Reports")
+        assert project.image == "images/projects/apex-reports-overview.png"
+
     def test_repo_name_extracted_from_url(self):
         project = Project.objects.get(title="Portfólio Pessoal")
         assert project.repo_name == "portfolio_davi_oliveira"
@@ -90,11 +99,70 @@ class TestProjectHelpers:
 class TestExperienceHelpers:
     def test_details_list_splits_lines(self):
         experience = Experience.objects.get(company="iBeize")
-        assert len(experience.details_list) == 3
+        assert len(experience.details_list) == 4
 
-    def test_every_experience_has_three_details(self):
-        for experience in Experience.objects.all():
-            assert len(experience.details_list) == 3, experience.company
+    @pytest.mark.parametrize("language", ["pt-br", "en"])
+    @pytest.mark.parametrize(
+        "company,count",
+        [
+            ("Apex Acelera", 3),
+            ("iBeize", 4),
+            ("Hiper Morada Nova", 4),
+            ("Betânia Lácteos", 2),
+            ("Prisma Informática", 2),
+        ],
+    )
+    def test_experience_keeps_requested_details(self, company, count, language):
+        with translation.override(language):
+            experience = Experience.objects.get(company=company)
+            assert len(experience.details_list) == count
+            assert all(not detail.startswith("•") for detail in experience.details_list)
+
+    def test_hiper_includes_fiscal_work_and_updated_reporting_description(self):
+        experience = Experience.objects.get(company="Hiper Morada Nova")
+        assert experience.details_list == [
+            "Gerenciei o ciclo completo de entrada e saída de NF-e via SysPDV, "
+            "garantindo correta emissão, conferência tributária e conformidade "
+            "fiscal diária.",
+            "Desenvolvi e implementei dashboards automatizados em Excel, "
+            "transformando dados brutos em insights de negócio.",
+            "Automatizei análises e relatórios administrativos, melhorando a "
+            "precisão e eficiência operacional.",
+            "Prestei suporte técnico a sistemas e equipamentos, garantindo a "
+            "continuidade operacional do SysPDV.",
+        ]
+        assert "60%" not in experience.details_en
+
+    def test_ibeize_and_prisma_include_requested_web_technologies(self):
+        ibeize = Experience.objects.get(company="iBeize")
+        prisma = Experience.objects.get(company="Prisma Informática")
+        assert "CSS/HTML/JS/GoTemplate avançado" in ibeize.details_list[1]
+        assert "integração com operação logística" in ibeize.details_list[3]
+        assert "HTML5, CSS3 e JavaScript" in prisma.details_list[0]
+        assert "integração front-end e back-end." in prisma.details_list[0]
+
+    def test_content_update_is_reversible(self):
+        migration = import_module(
+            "apps.core.migrations.0025_refresh_experience_details_and_apex_image"
+        )
+        editor = SimpleNamespace(connection=connection)
+        migration.restore_content(apps, editor)
+        for company, (details, details_en) in migration.OLD_DETAILS.items():
+            experience = Experience.objects.get(company=company)
+            assert (experience.details, experience.details_en) == (details, details_en)
+        assert (
+            Project.objects.get(title=migration.PROJECT_TITLE).image
+            == migration.OLD_IMAGE
+        )
+
+        migration.apply_content(apps, editor)
+        for company, (details, details_en) in migration.NEW_DETAILS.items():
+            experience = Experience.objects.get(company=company)
+            assert (experience.details, experience.details_en) == (details, details_en)
+        assert (
+            Project.objects.get(title=migration.PROJECT_TITLE).image
+            == migration.NEW_IMAGE
+        )
 
     def test_ibeize_period_is_closed(self):
         experience = Experience.objects.get(company="iBeize")

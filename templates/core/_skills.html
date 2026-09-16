@@ -1,0 +1,24 @@
+{% load static i18n %}
+<section id="habilidades" class="section">
+    <div class="section-head reveal">
+        <span class="kicker">{% trans "Habilidades" %}</span>
+        <h2 class="section-title">{% trans "O que eu uso para construir" %}</h2>
+    </div>
+    <div class="carousel skills-carousel" id="skillsCarousel">
+        <div class="carousel-viewport" role="region" tabindex="0" aria-label="{% trans 'Habilidades' %}">
+            <div class="carousel-track skills-grid">
+                {% for category in categories %}
+                <article class="skill-card reveal">
+                    <h3 class="skill-name">{{ category.name_i18n }}</h3>
+                    <div class="skill-chips">
+                        {% for skill in category.skills.all %}
+                        <span class="tag-chip">{{ skill.name_i18n }}</span>
+                        {% endfor %}
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+        {% include "core/_carousel_controls.html" %}
+    </div>
+</section>

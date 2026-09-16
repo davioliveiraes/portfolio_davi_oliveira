@@ -1,0 +1,38 @@
+{% load static i18n %}
+<section id="formacao" class="section">
+    <div class="section-head reveal">
+        <span class="kicker">{% trans "Formação" %}</span>
+        <h2 class="section-title">{% trans "Formação e certificações" %}</h2>
+    </div>
+    <div class="edu-grid">
+        <div class="edu-card reveal">
+            <h3>{% trans "Bacharelado em Engenharia de Software" %}</h3>
+            <p class="edu-inst">{% trans "UNOPAR, Universidade Norte do Paraná" %}</p>
+            <p class="edu-period">{% trans "2022 a 2025" %} · {% trans "Concluído" %}</p>
+        </div>
+        <div class="edu-card reveal">
+            <h3>{% trans "Sistemas de Informação" %}</h3>
+            <p class="edu-inst">{% trans "UFC, Universidade Federal do Ceará" %}</p>
+            <p class="edu-period">{% trans "2018 a 2019" %} · {% trans "Incompleto" %}</p>
+        </div>
+        <div class="edu-card reveal">
+            <h3>{% trans "Técnico em Informática" %}</h3>
+            <p class="edu-inst">EEEP Osmira Eduardo de Castro</p>
+            <p class="edu-period">{% trans "2015 a 2017" %} · {% trans "Concluído" %}</p>
+        </div>
+    </div>
+    <h3 class="certs-title reveal">{% trans "Certificações" %}</h3>
+    <div class="carousel certs-carousel" id="certsCarousel">
+        <div class="carousel-viewport" role="region" tabindex="0" aria-label="{% trans 'Certificações' %}">
+            <div class="carousel-track certs-grid">
+                {% for cert in certifications %}
+                <div class="cert-row reveal">
+                    <span class="cert-name">{{ cert.name_i18n }}</span>
+                    <span class="cert-meta">{{ cert.institution }}{% if cert.hours %} · {{ cert.hours }}h{% endif %}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% include "core/_carousel_controls.html" %}
+    </div>
+</section>

@@ -1,19 +1,68 @@
+// A altura pode mudar quando o menu quebra linha, o idioma muda ou há zoom.
+// O hero preenche somente o espaço restante da primeira tela.
+const siteHeader = document.querySelector('.site-header');
+if (siteHeader) {
+    const syncHeaderHeight = () => {
+        document.documentElement.style.setProperty(
+            '--pf-header-height', `${siteHeader.getBoundingClientRect().height}px`
+        );
+    };
+    syncHeaderHeight();
+    if ('ResizeObserver' in window) {
+        new ResizeObserver(syncHeaderHeight).observe(siteHeader);
+    } else {
+        window.addEventListener('resize', syncHeaderHeight);
+    }
+}
+
 // ============================================
 // THEME TOGGLE (dark / light)
 // ============================================
 const themeToggle = document.getElementById('themeToggle');
+const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+const scrollBehavior = () => motionPreference.matches ? 'instant' : 'smooth';
 
 themeToggle.addEventListener('click', () => {
     const current = document.documentElement.getAttribute('data-theme');
     const next = current === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
 });
 
-// Sincroniza com mudança no sistema operacional (se o usuário não definiu manualmente)
-window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
-    if (!localStorage.getItem('theme')) {
-        document.documentElement.setAttribute('data-theme', e.matches ? 'light' : 'dark');
+// Mantém o comportamento original: segue o sistema até uma escolha manual.
+window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (event) => {
+    let saved = null;
+    try { saved = localStorage.getItem('theme'); } catch (e) {}
+    if (saved !== 'dark' && saved !== 'light') {
+        document.documentElement.setAttribute('data-theme', event.matches ? 'light' : 'dark');
+    }
+});
+
+// Os diálogos mantêm o foco de teclado e o devolvem ao botão de origem.
+let dialogTrigger = null;
+function openDialog(overlay) {
+    document.querySelectorAll('.palette-overlay.open, .terminal-overlay.open').forEach(closeDialog);
+    dialogTrigger = document.activeElement;
+    overlay.classList.add('open');
+    document.body.classList.add('modal-open');
+}
+function closeDialog(overlay) {
+    if (!overlay.classList.contains('open')) return;
+    overlay.classList.remove('open');
+    document.body.classList.remove('modal-open');
+    if (dialogTrigger && dialogTrigger.isConnected) dialogTrigger.focus();
+}
+document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Tab') return;
+    const overlay = document.querySelector('.terminal-overlay.open, .palette-overlay.open');
+    if (!overlay) return;
+    const focusable = Array.from(overlay.querySelectorAll('input, button, a[href]')).filter(el => !el.disabled && el.getClientRects().length);
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault(); last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault(); first.focus();
     }
 });
 
@@ -33,6 +82,8 @@ if ('IntersectionObserver' in window && sections.length) {
             if (entry.isIntersecting) {
                 navLinks.forEach((link) => {
                     link.classList.toggle('active', link.dataset.section === entry.target.id);
+                    if (link.dataset.section === entry.target.id) link.setAttribute('aria-current', 'location');
+                    else link.removeAttribute('aria-current');
                 });
             }
         });
@@ -108,7 +159,7 @@ function initCarousel(root) {
 
     function goTo(page) {
         const clamped = Math.min(Math.max(page, 0), pageCount() - 1);
-        viewport.scrollTo({ left: Math.min(clamped * step(), maxScroll()), behavior: 'smooth' });
+        viewport.scrollTo({ left: Math.min(clamped * step(), maxScroll()), behavior: scrollBehavior() });
     }
 
     function render() {
@@ -144,6 +195,7 @@ function initCarousel(root) {
             dot.dataset.page = target;
             dot.setAttribute('aria-label', pageWord + (target + 1));
             dot.classList.toggle('active', target === page);
+            dot.setAttribute('aria-current', target === page ? 'true' : 'false');
         });
     }
 
@@ -180,7 +232,7 @@ function initCarousel(root) {
         render: render,
         // Usado pelo filtro: volta ao começo da lista e recalcula as páginas
         reset: function () {
-            viewport.scrollTo({ left: 0, behavior: 'auto' });
+            viewport.scrollTo({ left: 0, behavior: 'instant' });
             render();
         },
     };
@@ -204,8 +256,12 @@ if (projectFilters) {
 
     filterButtons.forEach((btn) => {
         btn.addEventListener('click', () => {
-            filterButtons.forEach((b) => b.classList.remove('active'));
+            filterButtons.forEach((b) => {
+                b.classList.remove('active');
+                b.setAttribute('aria-pressed', 'false');
+            });
             btn.classList.add('active');
+            btn.setAttribute('aria-pressed', 'true');
 
             const filter = btn.dataset.filter;
             let visible = 0;
@@ -230,7 +286,7 @@ const isEN = (PF.lang || 'pt-br').startsWith('en');
 
 function scrollToSection(id) {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (el) el.scrollIntoView({ behavior: scrollBehavior() });
 }
 
 const palette = {
@@ -247,7 +303,7 @@ const palette = {
     })),
 
     open() {
-        this.overlay.classList.add('open');
+        openDialog(this.overlay);
         this.input.value = '';
         this.selectedIndex = -1;
         this.render(this.commands);
@@ -255,8 +311,7 @@ const palette = {
     },
 
     close() {
-        this.overlay.classList.remove('open');
-        this.input.blur();
+        closeDialog(this.overlay);
     },
 
     toggle() {
@@ -308,11 +363,11 @@ const palette = {
 
         if (e.key === 'ArrowDown') {
             e.preventDefault();
-            this.selectedIndex = (this.selectedIndex + 1) % count;
+            this.selectedIndex = count ? (this.selectedIndex + 1) % count : -1;
             this.updateSelection();
         } else if (e.key === 'ArrowUp') {
             e.preventDefault();
-            this.selectedIndex = (this.selectedIndex - 1 + count) % count;
+            this.selectedIndex = count ? (this.selectedIndex - 1 + count) % count : -1;
             this.updateSelection();
         } else if (e.key === 'Enter') {
             e.preventDefault();
@@ -401,7 +456,7 @@ const terminal = {
 
     open() {
         palette.close();
-        this.overlay.classList.add('open');
+        openDialog(this.overlay);
         if (!this.booted) {
             this.booted = true;
             this.print(this.t(
@@ -413,8 +468,7 @@ const terminal = {
     },
 
     close() {
-        this.overlay.classList.remove('open');
-        this.input.blur();
+        closeDialog(this.overlay);
     },
 
     print(html, cssClass = '') {

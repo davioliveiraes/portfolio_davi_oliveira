@@ -2,6 +2,7 @@ from unittest.mock import patch
 
 from django.test import Client
 from django.urls import reverse
+from django.utils.translation import override
 
 import pytest
 
@@ -43,6 +44,47 @@ class TestHomePage:
         html = client.get(reverse("core:home")).content.decode()
         assert "Ecommerce Control" in html
         assert "iBeize" in html
+
+    @pytest.mark.parametrize("language", ["pt-br", "en"])
+    def test_resume_download_uses_profile_filename(self, client, language):
+        with override(language):
+            html = client.get(reverse("core:home")).content.decode()
+        assert (
+            '<a href="/static/docs/curriculo.pdf" '
+            'download="davi-oliveira-profile.pdf" id="cvButton"'
+        ) in html
+
+    def test_hero_preserves_identity_and_actions(self, client: Client):
+        html = client.get(reverse("core:home")).content.decode()
+        hero = html.split('<section id="inicio"', 1)[1].split("</section>", 1)[0]
+
+        assert 'aria-labelledby="hero-title"' in hero
+        assert 'id="hero-title"' in hero
+        assert "images/profile-cutout.webp" in hero
+        assert 'alt="Davi Oliveira"' in hero
+        assert 'href="#projetos"' in hero
+        assert 'href="#contatos"' in hero
+        assert 'class="hero-tech"' in hero
+        assert 'class="hero-circuit"' in hero
+        assert 'aria-hidden="true" focusable="false"' in hero
+        for layer in ("backend", "data", "ai"):
+            assert f'class="hero-art-{layer}"' in hero
+
+    @pytest.mark.parametrize(
+        "language,title,accent",
+        [
+            ("pt-br", "Programação e Dados", "Automações e IA."),
+            ("en", "Programming and Data", "Automation and AI."),
+        ],
+    )
+    def test_hero_keeps_translated_content(self, client, language, title, accent):
+        with override(language):
+            html = client.get(reverse("core:home")).content.decode()
+        hero = html.split('<section id="inicio"', 1)[1].split("</section>", 1)[0]
+
+        assert title in hero
+        assert accent in hero
+        assert f"03 / {'AI' if language == 'en' else 'IA'}" in hero
 
 
 @pytest.mark.django_db

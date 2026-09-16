@@ -13,6 +13,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+msgid "Pular para o conteúdo"
+msgstr "Skip to content"
+
+msgid "Navegação principal"
+msgstr "Main navigation"
+
+msgid "Dados"
+msgstr "Data"
+
+msgid "Automação"
+msgstr "Automation"
+
+msgid "IA"
+msgstr "AI"
+
 msgid "Seu nome"
 msgstr "Your name"
 
