@@ -19,7 +19,7 @@ class TestSeededContent:
         assert SkillCategory.objects.count() == 6
         assert Project.objects.count() == 13
         assert Experience.objects.count() == 5
-        assert Certification.objects.count() == 8
+        assert Certification.objects.count() == 9
 
     def test_projects_list_newest_first(self):
         ids = list(Project.objects.values_list("id", flat=True))
