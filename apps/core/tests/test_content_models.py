@@ -16,7 +16,7 @@ class TestSeededContent:
     """A migration de carga deve popular o conteúdo do portfólio."""
 
     def test_seed_populates_all_models(self):
-        assert SkillCategory.objects.count() == 6
+        assert SkillCategory.objects.count() == 3
         assert Project.objects.count() == 13
         assert Experience.objects.count() == 5
         assert Certification.objects.count() == 9
@@ -142,12 +142,17 @@ class TestExperienceHelpers:
         assert "integração front-end e back-end." in prisma.details_list[0]
 
     def test_content_update_is_reversible(self):
+        # A Apex Acelera foi atualizada de novo em 0027 (para bater com o
+        # currículo), então seu texto não é mais o que 0025 escreve/espera:
+        # a verificação de 0025 cobre só as empresas que ele ainda controla.
         migration = import_module(
             "apps.core.migrations.0025_refresh_experience_details_and_apex_image"
         )
         editor = SimpleNamespace(connection=connection)
         migration.restore_content(apps, editor)
         for company, (details, details_en) in migration.OLD_DETAILS.items():
+            if company == "Apex Acelera":
+                continue
             experience = Experience.objects.get(company=company)
             assert (experience.details, experience.details_en) == (details, details_en)
         assert (
@@ -157,6 +162,8 @@ class TestExperienceHelpers:
 
         migration.apply_content(apps, editor)
         for company, (details, details_en) in migration.NEW_DETAILS.items():
+            if company == "Apex Acelera":
+                continue
             experience = Experience.objects.get(company=company)
             assert (experience.details, experience.details_en) == (details, details_en)
         assert (

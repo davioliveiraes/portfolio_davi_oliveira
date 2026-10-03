@@ -1,0 +1,290 @@
+[
+  {
+    "name": "Backend & Frameworks",
+    "name_en": "Backend & Frameworks",
+    "icon": "fas fa-server",
+    "order": 0,
+    "skills": [
+      {
+        "name": "Python",
+        "name_en": "",
+        "detail": "FastAPI, Flask, Django",
+        "detail_en": "",
+        "icon": "fab fa-python",
+        "order": 0
+      },
+      {
+        "name": "Django",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "",
+        "order": 1
+      },
+      {
+        "name": "FastAPI",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "",
+        "order": 2
+      },
+      {
+        "name": "Flask",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "",
+        "order": 3
+      },
+      {
+        "name": "Go (Golang)",
+        "name_en": "",
+        "detail": "Em constante evolução",
+        "detail_en": "Continuously learning",
+        "icon": "fab fa-golang",
+        "order": 4
+      },
+      {
+        "name": "APIs RESTful",
+        "name_en": "RESTful APIs",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fas fa-file-code",
+        "order": 5
+      },
+      {
+        "name": "Clean Architecture & MVC",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fas fa-cubes",
+        "order": 6
+      },
+      {
+        "name": "Integração de serviços externos",
+        "name_en": "External service integration",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fas fa-plug",
+        "order": 7
+      }
+    ]
+  },
+  {
+    "name": "Inteligência Artificial",
+    "name_en": "Artificial Intelligence",
+    "icon": "fas fa-brain",
+    "order": 2,
+    "skills": [
+      {
+        "name": "LLMs",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fas fa-robot",
+        "order": 0
+      },
+      {
+        "name": "Pipelines RAG",
+        "name_en": "RAG Pipelines",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fas fa-stream",
+        "order": 1
+      },
+      {
+        "name": "Modelos Clássicos de ML",
+        "name_en": "Classical ML Models",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fas fa-microchip",
+        "order": 2
+      },
+      {
+        "name": "Automação de processos",
+        "name_en": "Process automation",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fas fa-cogs",
+        "order": 3
+      }
+    ]
+  },
+  {
+    "name": "Dados",
+    "name_en": "Data",
+    "icon": "fas fa-chart-line",
+    "order": 3,
+    "skills": [
+      {
+        "name": "Pandas",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fas fa-table",
+        "order": 1
+      },
+      {
+        "name": "NumPy",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fas fa-calculator",
+        "order": 2
+      },
+      {
+        "name": "Matplotlib",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fas fa-chart-bar",
+        "order": 3
+      },
+      {
+        "name": "Seaborn",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fas fa-chart-area",
+        "order": 4
+      },
+      {
+        "name": "Excel",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fas fa-file-excel",
+        "order": 5
+      }
+    ]
+  },
+  {
+    "name": "Banco de Dados",
+    "name_en": "Databases",
+    "icon": "fas fa-database",
+    "order": 4,
+    "skills": [
+      {
+        "name": "PostgreSQL",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fas fa-database",
+        "order": 0
+      },
+      {
+        "name": "MongoDB",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fas fa-database",
+        "order": 1
+      },
+      {
+        "name": "SQLite",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fas fa-database",
+        "order": 2
+      },
+      {
+        "name": "SQLAlchemy & ORM",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fas fa-layer-group",
+        "order": 3
+      }
+    ]
+  },
+  {
+    "name": "DevOps & Infra",
+    "name_en": "DevOps & Infra",
+    "icon": "fas fa-cloud",
+    "order": 5,
+    "skills": [
+      {
+        "name": "Docker",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fab fa-docker",
+        "order": 0
+      },
+      {
+        "name": "CI/CD (GitHub Actions)",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fas fa-infinity",
+        "order": 1
+      },
+      {
+        "name": "AWS",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fab fa-aws",
+        "order": 2
+      },
+      {
+        "name": "Linux & CLI",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fab fa-linux",
+        "order": 3
+      },
+      {
+        "name": "Nginx + Gunicorn",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "",
+        "order": 4
+      }
+    ]
+  },
+  {
+    "name": "Qualidade & Versionamento",
+    "name_en": "Quality & Versioning",
+    "icon": "fas fa-tools",
+    "order": 6,
+    "skills": [
+      {
+        "name": "Pytest",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fas fa-vial",
+        "order": 0
+      },
+      {
+        "name": "Git",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "fab fa-git-alt",
+        "order": 1
+      },
+      {
+        "name": "Pre-commit",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "",
+        "order": 2
+      },
+      {
+        "name": "Black & isort",
+        "name_en": "",
+        "detail": "",
+        "detail_en": "",
+        "icon": "",
+        "order": 3
+      }
+    ]
+  }
+]
