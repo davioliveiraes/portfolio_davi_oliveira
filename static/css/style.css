@@ -1262,6 +1262,15 @@ html:not([data-theme="light"]) .icon-sun {
     align-self: flex-start;
 }
 
+/* Honeypot: fora da tela, mas ainda no DOM para os bots preencherem */
+.hp-field {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
 .form-success {
     max-width: 520px;
     padding: 20px 24px;

@@ -5,6 +5,12 @@ from .models import Contact
 
 
 class ContactForm(forms.ModelForm):
+    # Honeypot: escondido de quem usa o site, mas bots preenchem todo campo
+    website = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={"tabindex": "-1", "autocomplete": "off"}),
+    )
+
     class Meta:
         model = Contact
         fields = ("name", "email", "message")
@@ -15,3 +21,6 @@ class ContactForm(forms.ModelForm):
                 attrs={"placeholder": _("Escreva sua mensagem..."), "rows": 6}
             ),
         }
+
+    def is_spam(self):
+        return bool(self.cleaned_data.get("website"))

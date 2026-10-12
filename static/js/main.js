@@ -499,8 +499,8 @@ const terminal = {
                 'Available commands:\n  <span class="term-accent">whoami</span>       who I am\n  <span class="term-accent">projects</span>     what I have built\n  <span class="term-accent">skills</span>       technologies I use\n  <span class="term-accent">experience</span>   my journey\n  <span class="term-accent">education</span>    studies and certifications\n  <span class="term-accent">contact</span>      let\'s talk\n  <span class="term-accent">social</span>       my networks\n  <span class="term-accent">github</span>       my GitHub\n  <span class="term-accent">linkedin</span>     my LinkedIn\n  <span class="term-accent">theme</span>        toggle dark/light\n  <span class="term-accent">clear</span>        clear the screen\n  <span class="term-accent">exit</span>         close the terminal'
             )),
             whoami: () => this.print(this.t(
-                'Davi Oliveira — engenheiro de software. Python, Django, FastAPI, TypeScript, IA aplicada.',
-                'Davi Oliveira — software engineer. Python, Django, FastAPI, TypeScript, applied AI.'
+                'Davi Oliveira — engenheiro de software. Desenvolvimento, dados e IA aplicada com Python.',
+                'Davi Oliveira — software engineer. Development, data, and applied AI with Python.'
             )),
             projetos: () => go('projetos'),
             projects: () => go('projetos'),

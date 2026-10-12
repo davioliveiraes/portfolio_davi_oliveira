@@ -37,6 +37,8 @@
                     <span>{{ tag }}</span>
                     {% endfor %}
                 </div>
+                {# Sem link (ex.: repositório privado), sem rodapé: evita a linha divisória solta #}
+                {% if project.github_url or project.live_url %}
                 <div class="card-foot">
                     {% if project.github_url %}
                     <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="card-btn">
@@ -51,6 +53,7 @@
                     </a>
                     {% endif %}
                 </div>
+                {% endif %}
             </div>
         </article>
         {% endfor %}

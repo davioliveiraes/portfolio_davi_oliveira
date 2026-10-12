@@ -23,7 +23,8 @@ class Contact(models.Model):
     class Meta:
         verbose_name = _("Mensagem")
         verbose_name_plural = _("Mensagens")
-        ordering = ["-created_at"]
+        # O id desempata mensagens gravadas no mesmo instante
+        ordering = ["-created_at", "-id"]
 
     def __str__(self):
         return f"{self.name} - {self.email}"

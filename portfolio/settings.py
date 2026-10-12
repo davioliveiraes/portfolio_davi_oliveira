@@ -58,7 +58,6 @@ TEMPLATES = [
                 "django.template.context_processors.i18n",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "apps.core.context_processors.site_meta",
             ],
         },
     },
@@ -92,7 +91,6 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = "pt-br"
 TIME_ZONE = "America/Sao_Paulo"
 USE_I18N = True
-USE_L10N = True
 USE_TZ = True
 
 LANGUAGES = [
@@ -134,7 +132,6 @@ if DEBUG:
 
 # Security (production)
 if not DEBUG:
-    SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
@@ -152,3 +149,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config("EMAIL_HOST_USER", default="")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="")
 DEFAULT_FROM_EMAIL = config("EMAIL_HOST_USER", default="")
+# SMTP travado não pode segurar a request do formulário de contato
+EMAIL_TIMEOUT = 10
+
+# Destino das mensagens do formulário de contato
+CONTACT_EMAIL = config("CONTACT_EMAIL", default="davioliveiraes7@gmail.com")

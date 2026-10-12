@@ -1,6 +1,7 @@
 import logging
 
-from django.core.mail import send_mail
+from django.conf import settings
+from django.core.mail import EmailMessage
 from django.http import HttpResponse, HttpResponsePermanentRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -60,17 +61,21 @@ def contato(request):
 
     form = ContactForm(request.POST)
     if form.is_valid():
+        if form.is_spam():
+            # Bot caiu no honeypot: responde como sucesso, sem salvar nem notificar
+            return redirect(reverse("core:home") + "?sent=1#contatos")
         form.save()
         try:
-            send_mail(
+            EmailMessage(
                 subject=f"[Portfólio] Nova mensagem de {form.cleaned_data['name']}",
-                message=f"Nome: {form.cleaned_data['name']}\n"
+                body=f"Nome: {form.cleaned_data['name']}\n"
                 f"Email: {form.cleaned_data['email']}\n\n"
                 f"{form.cleaned_data['message']}",
-                from_email="davioliveiraes7@gmail.com",
-                recipient_list=["davioliveiraes7@gmail.com"],
-                fail_silently=False,
-            )
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=[settings.CONTACT_EMAIL],
+                # "Responder" no cliente de email vai direto para o visitante
+                reply_to=[form.cleaned_data["email"]],
+            ).send(fail_silently=False)
         except Exception:
             # A mensagem já está salva no banco; falha no SMTP não deve
             # quebrar a experiência do visitante.

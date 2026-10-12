@@ -4,7 +4,7 @@
         <div>
             <span class="kicker">{% trans "Contatos" %}</span>
             <h2 class="section-title">{% trans "Vamos conversar" %}</h2>
-            <p class="contact-sub">{% trans "Aberto a oportunidades e a projetos sob demanda: APIs em Python, automações com IA e análise de dados. Respondo em até um dia útil." %}</p>
+            <p class="contact-sub">{% trans "Disponibilidade imediata para vagas remotas ou híbridas e para projetos sob demanda: sistemas em Python, automações com IA e análise de dados. Respondo em até um dia útil." %}</p>
             {% if contact_sent %}
             <div class="form-success" role="status">{% trans "Mensagem enviada com sucesso! Obrigado pelo contato — respondo em até um dia útil." %}</div>
             {% else %}
@@ -22,6 +22,11 @@
                     {{ form.message }}
                     {% for error in form.message.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
                 </label>
+                {# Honeypot anti-spam: fora da tela e da árvore de acessibilidade #}
+                <div class="hp-field" aria-hidden="true">
+                    <label for="{{ form.website.id_for_label }}">Website</label>
+                    {{ form.website }}
+                </div>
                 <button type="submit" class="btn btn-accent">{% trans "Enviar mensagem" %}</button>
             </form>
             {% endif %}
@@ -41,7 +46,7 @@
             </a>
             <a href="#contatos">
                 <span class="label">{% trans "Localização" %}</span>
-                <span class="value">{% trans "Morada Nova, CE, Brasil" %}</span>
+                <span class="value">{% trans "Morada Nova, CE · Remoto / Híbrido" %}</span>
             </a>
         </div>
     </div>

@@ -4,16 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{% block meta_description %}{% trans 'Davi Oliveira, Engenheiro de Software Python: backend com FastAPI, fullstack com Django, dados e automações com IA aplicada.' %}{% endblock %}">
+    <meta name="description" content="{% block meta_description %}{% trans 'Davi Oliveira, Engenheiro de Software: desenvolvimento, dados e IA aplicada para resolver problemas reais de negócio.' %}{% endblock %}">
     <title>{% block title %}{% trans "Davi Oliveira - Portfólio" %}{% endblock %}</title>
+
+    <!-- URL canônica e versões por idioma (sem query string como ?sent=1) -->
+    {% url 'core:home' as home_path %}
+    {% language 'pt-br' %}{% url 'core:home' as pt_home %}{% endlanguage %}
+    {% language 'en' %}{% url 'core:home' as en_home %}{% endlanguage %}
+    <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{{ home_path }}">
+    <link rel="alternate" hreflang="pt-br" href="{{ request.scheme }}://{{ request.get_host }}{{ pt_home }}">
+    <link rel="alternate" hreflang="en" href="{{ request.scheme }}://{{ request.get_host }}{{ en_home }}">
+    <link rel="alternate" hreflang="x-default" href="{{ request.scheme }}://{{ request.get_host }}{{ pt_home }}">
 
     <!-- Open Graph / compartilhamento em redes sociais -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Davi Oliveira">
-    <meta property="og:title" content="{% trans 'Davi Oliveira, Engenheiro de Software Python' %}">
-    <meta property="og:description" content="{% trans 'FastAPI (backend), Django (fullstack), dados e automações com IA aplicada.' %}">
-    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:title" content="{% trans 'Davi Oliveira, Engenheiro de Software | Dados | IA Aplicada' %}">
+    <meta property="og:description" content="{% trans 'Sistemas e automações que reduzem o trabalho manual e indicadores claros para a tomada de decisão.' %}">
+    <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ home_path }}">
     <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/banner_site.png' %}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="600">
     <meta name="twitter:card" content="summary_large_image">
     <script>
         (function () {
@@ -28,7 +39,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=20260915-experience-1">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=20261012-contact-honeypot">
     <link rel="icon" type="image/png" href="{% static 'images/icone_davi_oliveira.png' %}">
     <link rel="apple-touch-icon" href="{% static 'images/icone_davi_oliveira.png' %}">
     {% block extra_css %}{% endblock %}
@@ -50,8 +61,6 @@
                 <a href="#contatos" data-section="contatos">{% trans "Contatos" %}</a>
             </nav>
             <div class="header-actions">
-                {% language 'pt-br' %}{% url 'core:home' as pt_home %}{% endlanguage %}
-                {% language 'en' %}{% url 'core:home' as en_home %}{% endlanguage %}
                 <form action="{% url 'set_language' %}" method="post" id="langForm">
                     {% csrf_token %}
                     {% if LANGUAGE_CODE == 'en' %}
@@ -145,7 +154,7 @@
             },
         };
     </script>
-    <script src="{% static 'js/main.js' %}?v=20260915-hero-fullscreen-1"></script>
+    <script src="{% static 'js/main.js' %}?v=20261012-resume"></script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>

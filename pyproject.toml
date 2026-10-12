@@ -23,6 +23,12 @@ python_files = ["test_*.py", "*_test.py"]
 addopts = ["-ra", "--strict-markers"]
 testpaths = ["apps"]
 
+[tool.coverage.run]
+# Mede só o código da aplicação: migrações de conteúdo e os próprios testes
+# inflariam (ou derrubariam) o número sem dizer nada sobre a lógica
+source = ["apps", "portfolio"]
+omit = ["*/migrations/*", "*/tests/*", "portfolio/asgi.py", "portfolio/wsgi.py"]
+
 [tool.pylint.master]
 ignore = ["migrations", "venv"]
 load-plugins = ["pylint_django"]

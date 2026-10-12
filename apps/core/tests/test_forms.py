@@ -45,6 +45,25 @@ class TestContactForm:
         assert not form.is_valid()
         assert len(form.errors) == 3
 
+    def test_filled_honeypot_is_spam(self):
+        form = ContactForm(
+            data={
+                "name": "Bot",
+                "email": "bot@email.com",
+                "message": "Promo",
+                "website": "https://spam.example",
+            }
+        )
+        assert form.is_valid()
+        assert form.is_spam()
+
+    def test_empty_honeypot_is_not_spam(self):
+        form = ContactForm(
+            data={"name": "João", "email": "joao@email.com", "message": "Msg"}
+        )
+        assert form.is_valid()
+        assert not form.is_spam()
+
     def test_widgets_have_placeholders(self):
         form = ContactForm()
         assert form.fields["name"].widget.attrs["placeholder"] == "Seu nome"
