@@ -431,8 +431,9 @@ palette.input.addEventListener('input', () => {
 // Navegação com teclado dentro da palette
 palette.input.addEventListener('keydown', (e) => palette.handleKeydown(e));
 
-// Botão trigger no header
-document.getElementById('paletteTrigger').addEventListener('click', () => palette.open());
+// Botão trigger no header (ausente no hub minimalista — página sem busca)
+const paletteTriggerEl = document.getElementById('paletteTrigger');
+if (paletteTriggerEl) paletteTriggerEl.addEventListener('click', () => palette.open());
 
 // Fechar ao clicar no overlay
 palette.overlay.addEventListener('click', (e) => {

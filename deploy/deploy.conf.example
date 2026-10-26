@@ -11,3 +11,6 @@ VPS_USER="${VPS_USER:-root}"
 PROJECT_DIR="${PROJECT_DIR:-/home/portfolio_davi_oliveira}"
 BRANCH="${BRANCH:-main}"
 SERVICE_NAME="${SERVICE_NAME:-portfolio}"
+# Só exibida na mensagem final do deploy — o domínio real do site vem do
+# SITE_URL configurado no .env da VPS (veja docs/MIGRACAO_DOMINIO.md).
+SITE_URL="${SITE_URL:-https://davioliveira.tech}"

@@ -1732,3 +1732,170 @@ body.modal-open {
 .skip-link:focus {
     top: 12px;
 }
+
+/* ============================================================
+   Hub pessoal ("/") — link-in-bio minimalista. Mesmos tokens de cor,
+   fonte e o toggle de tema do resto do site; sem identidade nova.
+   Em /curriculo nada daqui se aplica (.hub-page só existe no hub).
+   ============================================================ */
+
+.hub-page .site-header,
+.hub-page .site-footer {
+    display: none;
+}
+
+/* --pf-ground tem um brilho escuro ancorado no rodapé do body (pensado para
+   o /curriculo, bem mais alto); numa página curta como a hub ele sobra como
+   uma faixa visível perto do fim. Fundo liso aqui, sem o gradiente. */
+.hub-page {
+    background: var(--pf-bg);
+}
+
+.hub-header {
+    padding: 20px clamp(16px, 6vw, 32px) 0;
+}
+
+.hub-header-inner {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+/* Mesmos .hbtn do header padrão, só com área de toque maior (acessibilidade
+   em mobile) — o ícone continua do mesmo tamanho, centralizado. */
+.hub-header .hbtn {
+    min-width: 44px;
+    min-height: 44px;
+}
+
+.hub {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: calc(1.5 * var(--leading)) clamp(16px, 6vw, 32px) calc(3 * var(--leading));
+    text-align: center;
+}
+
+.hub-domain {
+    display: block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--pf-accent);
+    margin-bottom: calc(1.25 * var(--leading));
+}
+
+.hub-photo {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto calc(var(--leading));
+    border: 1px solid var(--pf-border);
+    background: var(--pf-surface);
+}
+
+.hub-name {
+    font-size: 26px;
+    line-height: 1.3;
+    font-weight: 600;
+    margin: 0 0 8px;
+}
+
+.hub-tagline {
+    font-size: 17px;
+    line-height: 1.5;
+    font-weight: 600;
+    margin: 0 0 var(--leading);
+}
+
+.hub-bio {
+    color: var(--pf-muted);
+    margin: 0 0 calc(1.5 * var(--leading));
+}
+
+.hub-intro {
+    font-size: 13px;
+    color: var(--pf-muted);
+    margin: 0 0 12px;
+}
+
+.hub-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0 0 calc(1.5 * var(--leading));
+    text-align: left;
+}
+
+.hub-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 44px;
+    padding: 16px 20px;
+    border: 1px solid var(--pf-border);
+    border-radius: 10px;
+    color: var(--pf-text);
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.hub-link:hover {
+    border-color: var(--pf-accent);
+    background: color-mix(in srgb, var(--pf-accent) 8%, transparent);
+}
+
+.hub-link-text {
+    min-width: 0;
+}
+
+.hub-link-title {
+    display: block;
+    font-weight: 600;
+}
+
+.hub-link-subtitle {
+    display: block;
+    font-size: 13px;
+    color: var(--pf-muted);
+}
+
+.hub-link-arrow {
+    flex-shrink: 0;
+    color: var(--pf-accent);
+    transition: transform 0.15s ease;
+}
+
+.hub-link:hover .hub-link-arrow {
+    transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hub-link,
+    .hub-link-arrow {
+        transition: none;
+    }
+}
+
+.hub-footer {
+    font-size: 13px;
+}
+
+.hub-footer a {
+    color: var(--pf-muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.hub-footer a:hover {
+    color: var(--pf-accent);
+}
+
+.hub-footer-sep {
+    color: var(--pf-muted);
+    margin: 0 8px;
+}

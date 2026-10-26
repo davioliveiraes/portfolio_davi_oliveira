@@ -569,6 +569,33 @@ msgstr "Incomplete"
 msgid "Tela do projeto %(name)s"
 msgstr "Screenshot of the %(name)s project"
 
+msgid "Davi Oliveira, Engenheiro de Software: Python, backend, dados e automações com IA aplicada."
+msgstr "Davi Oliveira, Software Engineer: Python, backend, data, and automations with applied AI."
+
+msgid "Engenheiro de Software com foco em Python, backend e dados."
+msgstr "Software Engineer focused on Python, backend, and data."
+
+msgid "Programo, automatizo e transformo dados em decisão."
+msgstr "I code, automate, and turn data into decisions."
+
+msgid ""
+"Engenheiro de Software com foco em Python, backend e dados. Crio sistemas, "
+"automações e indicadores com IA aplicada para resolver problemas reais de "
+"negócio. Hoje cuido de dados e tráfego pago na Apex Acelera."
+msgstr ""
+"Software Engineer focused on Python, backend, and data. I build systems, "
+"automations, and indicators with applied AI to solve real business "
+"problems. I currently handle data and paid traffic at Apex Acelera."
+
+msgid "Esta página está crescendo. Por enquanto, comece por aqui:"
+msgstr "This page is growing. For now, start here:"
+
+msgid "Links"
+msgstr "Links"
+
+msgid "Experiência, projetos e formação"
+msgstr "Experience, projects, and education"
+
 #~ msgid "Backend & Frameworks"
 #~ msgstr "Backend & Frameworks"
 

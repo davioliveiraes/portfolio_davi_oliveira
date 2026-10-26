@@ -23,6 +23,8 @@
 #   PROJECT_DIR   (default: /home/portfolio_davi_oliveira)
 #   BRANCH        (default: main)
 #   SERVICE_NAME  (default: portfolio)
+#   SITE_URL      (default: https://davioliveira.tech — só exibida no final;
+#                  o domínio que o site responde vem do SITE_URL no .env da VPS)
 
 set -e
 
@@ -39,7 +41,7 @@ VPS_USER="${VPS_USER:-root}"
 PROJECT_DIR="${PROJECT_DIR:-/home/portfolio_davi_oliveira}"
 BRANCH="${BRANCH:-main}"
 SERVICE_NAME="${SERVICE_NAME:-portfolio}"
-SITE_URL="https://davioliveira.tech"
+SITE_URL="${SITE_URL:-https://davioliveira.tech}"
 
 if [ -z "${VPS_IP:-}" ]; then
     echo "❌ VPS_IP não definida."

@@ -1,25 +1,86 @@
 {% extends 'base.html' %}
+{% load static i18n %}
+
+{% block body_class %}hub-page{% endblock %}
+
+{% block title %}Davi Oliveira{% endblock %}
+{% block meta_description %}{% trans 'Davi Oliveira, Engenheiro de Software: Python, backend, dados e automações com IA aplicada.' %}{% endblock %}
+{% block og_title %}Davi Oliveira{% endblock %}
+{% block og_description %}{% trans 'Engenheiro de Software com foco em Python, backend e dados.' %}{% endblock %}
+
+{% block header %}
+<header class="hub-header">
+    <div class="hub-header-inner">
+        <form action="{% url 'set_language' %}" method="post" id="langForm">
+            {% csrf_token %}
+            {% if LANGUAGE_CODE == 'en' %}
+            <input name="next" type="hidden" value="{{ pt_path }}">
+            <input name="language" type="hidden" value="pt-br">
+            {% else %}
+            <input name="next" type="hidden" value="{{ en_path }}">
+            <input name="language" type="hidden" value="en">
+            {% endif %}
+            <button type="submit" class="hbtn hbtn-lang" title="Português / English">{% if LANGUAGE_CODE == 'en' %}EN{% else %}PT{% endif %}</button>
+        </form>
+        <button type="button" class="hbtn hbtn-icon" id="themeToggle" aria-label="{% trans 'Alternar tema' %}">
+            <svg class="icon-moon" width="15" height="15" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M233.54 142.23a8 8 0 0 0-8-2 88.08 88.08 0 0 1-109.8-109.8 8 8 0 0 0-10-10 104.84 104.84 0 0 0-52.91 37A104 104 0 0 0 136 224a103.1 103.1 0 0 0 62.52-20.88 104.84 104.84 0 0 0 37-52.91 8 8 0 0 0-1.98-7.98Z"/></svg>
+            <svg class="icon-sun" width="15" height="15" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M120 40V16a8 8 0 0 1 16 0v24a8 8 0 0 1-16 0Zm72 88a64 64 0 1 1-64-64 64.07 64.07 0 0 1 64 64Zm-16 0a48 48 0 1 0-48 48 48.05 48.05 0 0 0 48-48ZM58.34 69.66a8 8 0 0 0 11.32-11.32l-16-16a8 8 0 0 0-11.32 11.32Zm0 116.68-16 16a8 8 0 0 0 11.32 11.32l16-16a8 8 0 0 0-11.32-11.32ZM192 72a8 8 0 0 0 5.66-2.34l16-16a8 8 0 0 0-11.32-11.32l-16 16A8 8 0 0 0 192 72Zm5.66 114.34a8 8 0 0 0-11.32 11.32l16 16a8 8 0 0 0 11.32-11.32ZM40 120H16a8 8 0 0 0 0 16h24a8 8 0 0 0 0-16Zm88 88a8 8 0 0 0-8 8v24a8 8 0 0 0 16 0v-24a8 8 0 0 0-8-8Zm112-88h-24a8 8 0 0 0 0 16h24a8 8 0 0 0 0-16Z"/></svg>
+        </button>
+    </div>
+</header>
+{% endblock %}
+
+{% block footer %}
+<footer class="hub-footer">
+    <div class="container" style="text-align: center;">
+        <a href="https://instagram.com/davioliveiraes" target="_blank" rel="noopener">Instagram</a><span class="hub-footer-sep">·</span><a href="https://www.youtube.com/@davioliveiraES" target="_blank" rel="noopener">YouTube</a><span class="hub-footer-sep">·</span><a href="https://www.linkedin.com/in/davioliveiraes/" target="_blank" rel="noopener">LinkedIn</a><span class="hub-footer-sep">·</span><a href="https://github.com/davioliveiraes" target="_blank" rel="noopener">GitHub</a>
+    </div>
+</footer>
+{% endblock %}
 
 {% block content %}
-{% include "core/_hero.html" %}
-<hr class="rule">
-{% include "core/_projects.html" %}
-<hr class="rule">
-{% include "core/_skills.html" %}
-<hr class="rule">
-{% include "core/_experience.html" %}
-<hr class="rule">
-{% include "core/_education.html" %}
-<hr class="rule">
-{% include "core/_contact.html" %}
+<div class="hub reveal">
+    <span class="hub-domain">{{ SITE_DOMAIN|upper }}</span>
+
+    <img
+        class="hub-photo"
+        src="{% static 'images/profile-hub.webp' %}"
+        width="110" height="110"
+        alt="Davi Oliveira"
+    >
+
+    <h1 class="hub-name">Davi Oliveira</h1>
+
+    <p class="hub-tagline">{% trans "Programo, automatizo e transformo dados em decisão." %}</p>
+
+    <p class="hub-bio">{% trans "Engenheiro de Software com foco em Python, backend e dados. Crio sistemas, automações e indicadores com IA aplicada para resolver problemas reais de negócio. Hoje cuido de dados e tráfego pago na Apex Acelera." %}</p>
+
+    <p class="hub-intro">{% trans "Esta página está crescendo. Por enquanto, comece por aqui:" %}</p>
+
+    <nav class="hub-links" aria-label="{% trans 'Links' %}">
+        {% for link in links %}
+        <a class="hub-link" href="{{ link.url }}">
+            <span class="hub-link-text">
+                <span class="hub-link-title">{{ link.title }}</span>
+                <span class="hub-link-subtitle">{{ link.subtitle }}</span>
+            </span>
+            <svg class="hub-link-arrow" width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66 133.66l-72 72a8 8 0 0 1-11.32-11.32L196.69 136H40a8 8 0 0 1 0-16h156.69l-58.35-58.34a8 8 0 0 1 11.32-11.32l72 72a8 8 0 0 1 0 11.32Z"/></svg>
+        </a>
+        {% endfor %}
+    </nav>
+</div>
 {% endblock %}
 
 {% block extra_js %}
-{% if form.errors or contact_sent %}
 <script>
-    window.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('contatos').scrollIntoView({ behavior: 'instant' });
-    });
+    // Compatibilidade com links antigos da one-page: quem chega em "/" com
+    // uma âncora de seção do currículo é levado para lá, hash incluso.
+    (function () {
+        var legacySectionIds = ['projetos', 'habilidades', 'experiencia', 'formacao', 'contatos'];
+        var hash = window.location.hash.replace('#', '');
+        if (legacySectionIds.indexOf(hash) !== -1) {
+            window.location.replace('{% url "core:curriculo" %}' + window.location.hash);
+        }
+    })();
 </script>
-{% endif %}
 {% endblock %}

@@ -9,8 +9,8 @@ class StaticViewSitemap(Sitemap):
     alternates = True
 
     def items(self):
-        # One-page: as URLs antigas são redirects 301 e ficam fora do sitemap
-        return ["core:home"]
+        # URLs antigas do site multipágina são redirects 301 e ficam fora do sitemap
+        return ["core:home", "core:curriculo"]
 
     def location(self, item):
         return reverse(item)

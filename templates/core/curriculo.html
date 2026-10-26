@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Davi Oliveira - Currículo" %}{% endblock %}
+{% block meta_description %}{% trans 'Currículo completo de Davi Oliveira: projetos, competências, experiência profissional e formação em Engenharia de Software, dados e IA aplicada.' %}{% endblock %}
+{% block og_title %}{% trans 'Davi Oliveira, Engenheiro de Software | Dados | IA Aplicada' %}{% endblock %}
+{% block og_description %}{% trans 'Sistemas e automações que reduzem o trabalho manual e indicadores claros para a tomada de decisão.' %}{% endblock %}
+
+{% block content %}
+{% include "core/_hero.html" %}
+<hr class="rule">
+{% include "core/_projects.html" %}
+<hr class="rule">
+{% include "core/_skills.html" %}
+<hr class="rule">
+{% include "core/_experience.html" %}
+<hr class="rule">
+{% include "core/_education.html" %}
+<hr class="rule">
+{% include "core/_contact.html" %}
+{% endblock %}
+
+{% block extra_js %}
+{% if form.errors or contact_sent %}
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('contatos').scrollIntoView({ behavior: 'instant' });
+    });
+</script>
+{% endif %}
+{% endblock %}

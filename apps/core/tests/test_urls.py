@@ -7,6 +7,9 @@ class TestURLs:
     def test_home_url(self):
         assert resolve(reverse("core:home")).view_name == "core:home"
 
+    def test_curriculo_url(self):
+        assert resolve("/curriculo/").view_name == "core:curriculo"
+
     def test_sobre_url(self):
         assert resolve("/sobre/").view_name == "core:sobre"
 

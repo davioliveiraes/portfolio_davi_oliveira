@@ -9,6 +9,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG", default=False, cast=bool)
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="", cast=Csv())
+# Necessário com Django 4+ para POST (ex.: formulário de contato, troca de
+# idioma) por HTTPS atrás de um domínio não listado em ALLOWED_HOSTS sozinho.
+CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", default="", cast=Csv())
+
+# Domínio canônico do site (usado no hub, no canonical/OG, no sitemap, no
+# robots.txt e no JSON-LD). Centralizado aqui: trocar de domínio é só mudar
+# esta variável de ambiente. SITE_DOMAIN (netloc de SITE_URL) é derivado sob
+# demanda em vez de guardado aqui, para continuar correto se algo sobrescrever
+# settings.SITE_URL em tempo de execução (ex.: o fixture `settings` dos testes).
+SITE_URL = config("SITE_URL", default="https://davioliveira.tech")
 
 # Application definition
 DJANGO_APPS = [
@@ -58,6 +68,7 @@ TEMPLATES = [
                 "django.template.context_processors.i18n",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "apps.core.context_processors.site_meta",
             ],
         },
     },

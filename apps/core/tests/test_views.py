@@ -12,25 +12,95 @@ from apps.core.models import Contact
 
 @pytest.mark.django_db
 class TestHomePage:
-    """A one-page renderiza todas as seções em uma única resposta."""
+    """O hub pessoal (link-in-bio) em "/". O portfólio completo mora em /curriculo."""
 
     def test_home_returns_200(self, client: Client):
         response = client.get(reverse("core:home"))
         assert response.status_code == 200
 
-    def test_home_uses_one_page_template(self, client: Client):
+    def test_home_uses_hub_template(self, client: Client):
         response = client.get(reverse("core:home"))
         templates = [t.name for t in response.templates]
         assert "core/home.html" in templates
         assert "base.html" in templates
 
-    def test_home_context_has_all_sections(self, client: Client):
-        response = client.get(reverse("core:home"))
+    def test_home_links_to_curriculo(self, client: Client):
+        html = client.get(reverse("core:home")).content.decode()
+        assert f'href="{reverse("core:curriculo")}"' in html
+
+    def test_home_renders_hub_card_title_and_subtitle(self, client: Client):
+        html = client.get(reverse("core:home")).content.decode()
+        card = html.split('class="hub-link"', 1)[1].split("</a>", 1)[0]
+        assert "Currículo" in card
+        assert "Experiência, projetos e formação" in card
+
+    def test_home_has_legacy_hash_redirect_script(self, client: Client):
+        html = client.get(reverse("core:home")).content.decode()
+        for section in (
+            "projetos",
+            "habilidades",
+            "experiencia",
+            "formacao",
+            "contatos",
+        ):
+            assert f"'{section}'" in html
+        assert reverse("core:curriculo") in html
+
+    @pytest.mark.parametrize("language,path", [("pt-br", "/"), ("en", "/en/")])
+    def test_head_has_canonical_and_hreflang(self, client, language, path, settings):
+        with override(language):
+            html = client.get(reverse("core:home")).content.decode()
+        host = settings.SITE_URL
+        assert f'<link rel="canonical" href="{host}{path}">' in html
+        assert f'<meta property="og:url" content="{host}{path}">' in html
+        assert f'<link rel="alternate" hreflang="pt-br" href="{host}/">' in html
+        assert f'<link rel="alternate" hreflang="en" href="{host}/en/">' in html
+        assert f'<link rel="alternate" hreflang="x-default" href="{host}/">' in html
+
+    def test_home_has_minimal_header_without_shared_chrome(self, client: Client):
+        # No hub, nav/⌘K/CV do header global ficam fora: a página é enxuta.
+        html = client.get(reverse("core:home")).content.decode()
+        assert 'id="siteNav"' not in html
+        assert 'id="paletteTrigger"' not in html
+        assert 'id="cvButton"' not in html
+        assert 'id="themeToggle"' in html
+
+    def test_home_domain_line_comes_from_settings(self, client: Client, settings):
+        settings.SITE_URL = "https://example.com"
+        html = client.get(reverse("core:home")).content.decode()
+        assert "EXAMPLE.COM" in html
+
+
+@pytest.mark.django_db
+class TestCurriculoPage:
+    """A one-page renderiza todas as seções em uma única resposta, em /curriculo."""
+
+    def test_curriculo_returns_200(self, client: Client):
+        response = client.get(reverse("core:curriculo"))
+        assert response.status_code == 200
+
+    @pytest.mark.parametrize("language", ["pt-br", "en"])
+    def test_resume_download_uses_profile_filename(self, client, language):
+        with override(language):
+            html = client.get(reverse("core:curriculo")).content.decode()
+        assert (
+            '<a href="/static/docs/curriculo.pdf" '
+            'download="davi-oliveira-profile.pdf" id="cvButton"'
+        ) in html
+
+    def test_curriculo_uses_one_page_template(self, client: Client):
+        response = client.get(reverse("core:curriculo"))
+        templates = [t.name for t in response.templates]
+        assert "core/curriculo.html" in templates
+        assert "base.html" in templates
+
+    def test_curriculo_context_has_all_sections(self, client: Client):
+        response = client.get(reverse("core:curriculo"))
         for key in ("experiences", "categories", "projects", "certifications", "form"):
             assert key in response.context
 
-    def test_home_contains_section_anchors(self, client: Client):
-        html = client.get(reverse("core:home")).content.decode()
+    def test_curriculo_contains_section_anchors(self, client: Client):
+        html = client.get(reverse("core:curriculo")).content.decode()
         for anchor in (
             'id="inicio"',
             'id="experiencia"',
@@ -41,41 +111,41 @@ class TestHomePage:
         ):
             assert anchor in html
 
-    def test_home_renders_seeded_content(self, client: Client):
-        html = client.get(reverse("core:home")).content.decode()
+    def test_curriculo_renders_seeded_content(self, client: Client):
+        html = client.get(reverse("core:curriculo")).content.decode()
         assert "Ecommerce Control" in html
         assert "iBeize" in html
 
     def test_private_apex_repo_is_not_linked(self, client: Client):
-        html = client.get(reverse("core:home")).content.decode()
+        html = client.get(reverse("core:curriculo")).content.decode()
         apex = html.split("Apex Acelera | Reports</h3>", 1)[1].split("</article>")[0]
         assert "github.com/davioliveiraes/apex-reports" not in html
         # Sem nenhum link, o card também não tem o rodapé com a linha divisória
         assert "card-foot" not in apex
 
-    @pytest.mark.parametrize("language,path", [("pt-br", "/"), ("en", "/en/")])
-    def test_head_has_canonical_and_hreflang(self, client, language, path):
+    @pytest.mark.parametrize(
+        "language,path", [("pt-br", "/curriculo/"), ("en", "/en/curriculo/")]
+    )
+    def test_head_has_canonical_and_hreflang(self, client, language, path, settings):
         # A query string (?sent=1) não pode vazar para a URL canônica
         with override(language):
-            html = client.get(reverse("core:home") + "?sent=1").content.decode()
-        host = "http://testserver"
+            html = client.get(reverse("core:curriculo") + "?sent=1").content.decode()
+        host = settings.SITE_URL
         assert f'<link rel="canonical" href="{host}{path}">' in html
         assert f'<meta property="og:url" content="{host}{path}">' in html
-        assert f'<link rel="alternate" hreflang="pt-br" href="{host}/">' in html
-        assert f'<link rel="alternate" hreflang="en" href="{host}/en/">' in html
-        assert f'<link rel="alternate" hreflang="x-default" href="{host}/">' in html
-
-    @pytest.mark.parametrize("language", ["pt-br", "en"])
-    def test_resume_download_uses_profile_filename(self, client, language):
-        with override(language):
-            html = client.get(reverse("core:home")).content.decode()
         assert (
-            '<a href="/static/docs/curriculo.pdf" '
-            'download="davi-oliveira-profile.pdf" id="cvButton"'
-        ) in html
+            f'<link rel="alternate" hreflang="pt-br" href="{host}/curriculo/">' in html
+        )
+        assert (
+            f'<link rel="alternate" hreflang="en" href="{host}/en/curriculo/">' in html
+        )
+        assert (
+            f'<link rel="alternate" hreflang="x-default" href="{host}/curriculo/">'
+            in html
+        )
 
     def test_hero_preserves_identity_and_actions(self, client: Client):
-        html = client.get(reverse("core:home")).content.decode()
+        html = client.get(reverse("core:curriculo")).content.decode()
         hero = html.split('<section id="inicio"', 1)[1].split("</section>", 1)[0]
 
         assert 'aria-labelledby="hero-title"' in hero
@@ -99,7 +169,7 @@ class TestHomePage:
     )
     def test_hero_keeps_translated_content(self, client, language, title, accent):
         with override(language):
-            html = client.get(reverse("core:home")).content.decode()
+            html = client.get(reverse("core:curriculo")).content.decode()
         hero = html.split('<section id="inicio"', 1)[1].split("</section>", 1)[0]
 
         assert title in hero
@@ -109,21 +179,40 @@ class TestHomePage:
 
 @pytest.mark.django_db
 class TestSeoEndpoints:
-    def test_robots_txt_blocks_admin_and_points_to_sitemap(self, client: Client):
+    def test_robots_txt_blocks_admin_and_points_to_sitemap(
+        self, client: Client, settings
+    ):
         response = client.get("/robots.txt")
         assert response.status_code == 200
         assert response["Content-Type"].startswith("text/plain")
         body = response.content.decode()
         assert "Disallow: /admin/" in body
-        assert "Sitemap: http://testserver/sitemap.xml" in body
+        assert f"Sitemap: {settings.SITE_URL}/sitemap.xml" in body
 
-    def test_sitemap_lists_home_in_both_languages(self, client: Client):
+    def test_sitemap_lists_home_in_both_languages(self, client: Client, settings):
         response = client.get("/sitemap.xml")
         assert response.status_code == 200
         xml = response.content.decode()
-        assert "<loc>https://testserver/</loc>" in xml
-        assert "<loc>https://testserver/en/</loc>" in xml
+        assert f"<loc>{settings.SITE_URL}/</loc>" in xml
+        assert f"<loc>{settings.SITE_URL}/en/</loc>" in xml
         assert 'hreflang="en"' in xml
+
+    def test_sitemap_lists_curriculo_in_both_languages(self, client: Client, settings):
+        response = client.get("/sitemap.xml")
+        xml = response.content.decode()
+        assert f"<loc>{settings.SITE_URL}/curriculo/</loc>" in xml
+        assert f"<loc>{settings.SITE_URL}/en/curriculo/</loc>" in xml
+
+    def test_sitemap_domain_follows_site_url_setting(self, client: Client, settings):
+        settings.SITE_URL = "https://example.com"
+        xml = client.get("/sitemap.xml").content.decode()
+        assert "<loc>https://example.com/</loc>" in xml
+        assert "testserver" not in xml
+
+    def test_json_ld_person_uses_site_url(self, client: Client, settings):
+        html = client.get(reverse("core:curriculo")).content.decode()
+        assert '"@type": "Person"' in html
+        assert f'"url": "{settings.SITE_URL}/"' in html
 
 
 @pytest.mark.django_db
@@ -144,7 +233,7 @@ class TestLegacyRedirects:
     def test_legacy_page_redirects_permanently(self, client: Client, url_name, anchor):
         response = client.get(reverse(url_name))
         assert response.status_code == 301
-        assert response.url == reverse("core:home") + anchor
+        assert response.url == reverse("core:curriculo") + anchor
 
 
 VALID_CONTACT = {
@@ -182,30 +271,30 @@ class TestContatoView:
         ):
             response = client.post(reverse("core:contato"), VALID_CONTACT)
         assert response.status_code == 302
-        assert response.url == reverse("core:home") + "?sent=1#contatos"
+        assert response.url == reverse("core:curriculo") + "?sent=1#contatos"
         assert Contact.objects.count() == 1
 
     def test_post_valid_redirects_to_contact_section(self, client: Client):
         response = client.post(reverse("core:contato"), VALID_CONTACT)
         assert response.status_code == 302
-        assert response.url == reverse("core:home") + "?sent=1#contatos"
+        assert response.url == reverse("core:curriculo") + "?sent=1#contatos"
 
     def test_honeypot_discards_spam_silently(self, client: Client, mailoutbox):
         data = {**VALID_CONTACT, "website": "https://spam.example"}
         response = client.post(reverse("core:contato"), data)
         # O bot vê o mesmo sucesso, mas nada é salvo nem enviado
         assert response.status_code == 302
-        assert response.url == reverse("core:home") + "?sent=1#contatos"
+        assert response.url == reverse("core:curriculo") + "?sent=1#contatos"
         assert Contact.objects.count() == 0
         assert mailoutbox == []
 
     def test_honeypot_field_is_hidden_from_visitors(self, client: Client):
-        html = client.get(reverse("core:home")).content.decode()
+        html = client.get(reverse("core:curriculo")).content.decode()
         assert '<div class="hp-field" aria-hidden="true">' in html
         assert 'name="website" tabindex="-1" autocomplete="off"' in html
 
     def test_sent_flag_shows_confirmation(self, client: Client):
-        html = client.get(reverse("core:home") + "?sent=1").content.decode()
+        html = client.get(reverse("core:curriculo") + "?sent=1").content.decode()
         assert "form-success" in html
 
     def test_post_invalid_does_not_save(self, client: Client):
@@ -217,5 +306,5 @@ class TestContatoView:
         data = {"name": "", "email": "invalido", "message": ""}
         response = client.post(reverse("core:contato"), data)
         assert response.status_code == 200
-        assert "core/home.html" in [t.name for t in response.templates]
+        assert "core/curriculo.html" in [t.name for t in response.templates]
         assert response.context["form"].errors
