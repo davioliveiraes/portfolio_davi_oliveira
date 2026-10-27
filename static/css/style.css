@@ -1882,6 +1882,7 @@ body.modal-open {
 }
 
 .hub-footer {
+    padding: calc(1.5 * var(--leading)) clamp(16px, 6vw, 32px) calc(2 * var(--leading));
     font-size: 13px;
 }
 
