@@ -113,8 +113,15 @@ class TestCurriculoPage:
 
     def test_curriculo_renders_seeded_content(self, client: Client):
         html = client.get(reverse("core:curriculo")).content.decode()
-        assert "Ecommerce Control" in html
+        assert "Atalho Prancheta" in html
         assert "iBeize" in html
+        assert "Ecommerce Control" not in html
+
+    def test_hero_tech_matches_resume_platforms(self, client: Client):
+        html = client.get(reverse("core:curriculo")).content.decode()
+        tech = html.split('class="hero-tech"', 1)[1].split("</div>", 1)[0]
+        assert "<span>Databricks</span>" in tech
+        assert "Power BI" not in tech
 
     def test_private_apex_repo_is_not_linked(self, client: Client):
         html = client.get(reverse("core:curriculo")).content.decode()

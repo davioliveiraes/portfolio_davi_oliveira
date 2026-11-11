@@ -11,20 +11,27 @@ import pytest
 from apps.core.models import Certification, Experience, Project, SkillCategory
 
 
+def _undo_hiper_split(editor):
+    # Migrações anteriores à 0032 localizam a Hiper só pela empresa e esperam
+    # uma única experiência; revertê-las exige desfazer a separação antes.
+    import_module("apps.core.migrations.0032_split_hiper_experience").restore_content(
+        apps, editor
+    )
+
+
 @pytest.mark.django_db
 class TestSeededContent:
     """A migration de carga deve popular o conteúdo do portfólio."""
 
     def test_seed_populates_all_models(self):
         assert SkillCategory.objects.count() == 6
-        assert Project.objects.count() == 7
-        assert Experience.objects.count() == 5
+        assert Project.objects.count() == 6
+        assert Experience.objects.count() == 6
         assert Certification.objects.count() == 9
 
     def test_projects_follow_resume_then_portfolio_then_collections(self):
         assert list(Project.objects.values_list("title", flat=True)) == [
             "Apex Acelera | Reports",
-            "Ecommerce Control",
             "Atalho Prancheta",
             "E-commerce iBeize",
             "Portfólio Pessoal",
@@ -39,7 +46,6 @@ class TestSeededContent:
         assert by_category == {
             "empresarial": ["Apex Acelera | Reports", "E-commerce iBeize"],
             "tecnico": [
-                "Ecommerce Control",
                 "Atalho Prancheta",
                 "Projetos Python",
                 "Projetos de Ciência de Dados",
@@ -132,32 +138,67 @@ class TestExperienceHelpers:
 
     @pytest.mark.parametrize("language", ["pt-br", "en"])
     @pytest.mark.parametrize(
-        "company,count",
+        "company,role,count",
         [
-            ("Apex Acelera", 3),
-            ("iBeize", 4),
-            ("Hiper Morada Nova", 3),
-            ("Betânia Lácteos", 1),
-            ("Prisma Informática", 1),
+            ("Apex Acelera", "", 3),
+            ("iBeize", "", 4),
+            ("Hiper Morada Nova", "Assistente Administrativo", 2),
+            ("Hiper Morada Nova", "Jovem Aprendiz", 1),
+            ("Betânia Lácteos", "", 1),
+            ("Prisma Informática", "", 1),
         ],
     )
-    def test_experience_keeps_requested_details(self, company, count, language):
+    def test_experience_keeps_requested_details(self, company, role, count, language):
         with translation.override(language):
-            experience = Experience.objects.get(company=company)
+            # role vazio casa com qualquer cargo (empresas com uma só experiência)
+            experience = Experience.objects.get(company=company, role__contains=role)
             assert len(experience.details_list) == count
             assert all(not detail.startswith("•") for detail in experience.details_list)
 
-    def test_hiper_matches_resume_including_apprentice_role(self):
-        experience = Experience.objects.get(company="Hiper Morada Nova")
-        assert experience.period == "Abr 2021 a Abr 2025 · Morada Nova, CE"
-        assert experience.details_list == [
+    def test_hiper_is_split_into_two_roles_like_the_resume(self):
+        assistant, apprentice = Experience.objects.filter(company="Hiper Morada Nova")
+        assert (assistant.role, assistant.period) == (
+            "Assistente Administrativo",
+            "Abr 2022 a Abr 2025 · Morada Nova, CE",
+        )
+        assert assistant.details_list == [
             "Gerenciei o ciclo de NF-e via SysPDV, com conferência tributária e "
             "conformidade fiscal diária",
             "Desenvolvi dashboards e relatórios automatizados em Excel, "
             "transformando dados brutos em insights de negócio",
-            "Como Jovem Aprendiz, organizei boletos e processos administrativos "
-            "e ofereci suporte técnico básico",
         ]
+        assert (apprentice.role, apprentice.period) == (
+            "Jovem Aprendiz",
+            "Abr 2021 a Abr 2022 · Morada Nova, CE",
+        )
+        assert apprentice.details_list == [
+            "Organizei boletos e processos administrativos e ofereci suporte "
+            "técnico básico",
+        ]
+
+    def test_experiences_follow_resume_order(self):
+        assert list(Experience.objects.values_list("company", "role")) == [
+            ("Apex Acelera", "Gestor de Dados e Tráfego Pago"),
+            ("iBeize", "Analista de E-commerce"),
+            ("Hiper Morada Nova", "Assistente Administrativo"),
+            ("Hiper Morada Nova", "Jovem Aprendiz"),
+            ("Betânia Lácteos", "Jovem Aprendiz"),
+            ("Prisma Informática", "Estagiário de TI"),
+        ]
+
+    def test_hiper_split_is_reversible(self):
+        migration = import_module("apps.core.migrations.0032_split_hiper_experience")
+        editor = SimpleNamespace(connection=connection)
+
+        migration.restore_content(apps, editor)
+        experience = Experience.objects.get(company="Hiper Morada Nova")
+        for field, value in migration.ASSISTANT[0].items():
+            assert getattr(experience, field) == value, field
+        assert Experience.objects.get(company="Prisma Informática").order == 4
+
+        migration.apply_content(apps, editor)
+        assert Experience.objects.filter(company="Hiper Morada Nova").count() == 2
+        assert Experience.objects.get(company="Prisma Informática").order == 5
 
     def test_ibeize_and_prisma_include_requested_web_technologies(self):
         ibeize = Experience.objects.get(company="iBeize")
@@ -174,6 +215,7 @@ class TestExperienceHelpers:
             "apps.core.migrations.0025_refresh_experience_details_and_apex_image"
         )
         editor = SimpleNamespace(connection=connection)
+        _undo_hiper_split(editor)
         migration.apply_content(apps, editor)
         migration.restore_content(apps, editor)
         for company, (details, details_en) in migration.OLD_DETAILS.items():
@@ -196,6 +238,7 @@ class TestExperienceHelpers:
     def test_resume_update_is_reversible(self):
         migration = import_module("apps.core.migrations.0029_match_new_resume")
         editor = SimpleNamespace(connection=connection)
+        _undo_hiper_split(editor)
 
         migration.restore_content(apps, editor)
         assert SkillCategory.objects.count() == len(migration.OLD_CATEGORIES)
@@ -233,12 +276,26 @@ class TestExperienceHelpers:
 
         migration.apply_content(apps, editor)
         assert not Project.objects.filter(github_url__in=removed).exists()
-        assert Project.objects.count() == 7
+        assert Project.objects.count() == 6
         apex.refresh_from_db()
         assert (apex.github_url, apex.image) == (
             "",
             "images/projects/apex-reports.webp",
         )
+
+    def test_ecommerce_control_removal_is_reversible(self):
+        migration = import_module("apps.core.migrations.0031_remove_ecommerce_control")
+        editor = SimpleNamespace(connection=connection)
+
+        migration.restore_content(apps, editor)
+        project = Project.objects.get(title="Ecommerce Control")
+        assert project.order == 5
+        assert project.image == "images/projects/ecommerce-control.webp"
+        assert Project.objects.count() == 7
+
+        migration.apply_content(apps, editor)
+        assert not Project.objects.filter(title="Ecommerce Control").exists()
+        assert Project.objects.count() == 6
 
     def test_ibeize_period_is_closed(self):
         experience = Experience.objects.get(company="iBeize")
@@ -247,6 +304,30 @@ class TestExperienceHelpers:
 
     def test_current_role_comes_first(self):
         assert Experience.objects.first().company == "Apex Acelera"
+
+    def test_current_role_matches_resume(self):
+        experience = Experience.objects.get(company="Apex Acelera")
+        assert experience.role == "Gestor de Dados e Tráfego Pago"
+        with translation.override("en"):
+            assert experience.role_i18n == "Data and Paid Traffic Manager"
+
+    def test_apex_role_update_is_reversible(self):
+        migration = import_module("apps.core.migrations.0033_apex_role_matches_resume")
+        editor = SimpleNamespace(connection=connection)
+
+        migration.revert_role(apps, editor)
+        experience = Experience.objects.get(company="Apex Acelera")
+        assert (experience.role, experience.role_en) == (
+            migration.OLD_ROLE,
+            migration.OLD_ROLE_EN,
+        )
+
+        migration.apply_role(apps, editor)
+        experience.refresh_from_db()
+        assert (experience.role, experience.role_en) == (
+            migration.NEW_ROLE,
+            migration.NEW_ROLE_EN,
+        )
 
     def test_current_role_period_is_open_and_remote(self):
         experience = Experience.objects.get(company="Apex Acelera")
